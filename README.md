@@ -1,107 +1,140 @@
-# Advance E-commerce website in  Laravel 7
+# ECOMERCE DISTIBUIDORA DE LACTEOS
+
+_Frontend Y BACKEND ECOMMERCE_
 
 
-## Setup video : https://www.youtube.com/watch?v=URX5D1A5XQ4&t=19s
+## Tecnologías  🚀
 
-## Demo video :
-https://youtu.be/c5a_wrvJSJo
-
-## Full tutorial :
-https://www.youtube.com/watch?v=FdAMucaks64&list=PLIFG3IUe1Zxo8Zvju3_kJJvoKSaIP_SC_&index=1&t=44s
+_Este apartado describe los requerimientos técnicos necesarios para poner en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
 
 
-## Features :
 
-====== FRONT-END =======
+### Pre-requisitos 📋
 
-- Responsive Layout
-- Shopping Cart, Wishlist, Product Reviews
-- Coupons & Discounts
-- Product attributes: cost price, promotion price, stock, size...
-- Blog: category, tag, content, web page 
-- Module/Extension: Shipping, payment, discount, ...
-- Upload manager: banner, images,..
-- SEO support: customer URL
-- Newsletter management
-- Contact forms with the real-time notification (Laravel Pusher)
-- Related Products, Recommendations for you in our categories
-- A Product search form
-- Laravel Socialite implement(Facebook, Google & twitter) & Customer login
-- Product Share and follow from different social platform...
-- Payment integration(Paypal)
-- Order Tracking system
-- Multi-level comment system
-many more......
+_Que cosas necesitas para instalar el software y como instalarlas_
 
-======= ADMIN =======
+**COMPOSER** 
 
-- Admin roles, permission
-- Product manager
-- Media manager using unisharp laravel file manager
-- Banner manager
-- Order management
-- Category management
-- Brand management
-- Shipping Management
-- Review Management
-- Blog, Category & Tag manager
-- User Management
-- Coupon Management
-- System config: email setting, info shop, maintain status,...
-- Line Chart & Pie chart ...
-- Generate order in pdf form...
-- Real time message & notification
-- Profile Settings
-Many more....
+**LARAVEL** 7
+
+**Editor de código**  Visual studio code o un IDE configurado para trabajar con tecnologías de JavaScript, HTML,CSS y PHP
+ 
+
+### Instalación 🔧
+
+_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+
+_Pasos para clonar el repositorio_
+
+```
+abrir terminal
+```
+```
+cd c:\laragon\www
+```
+```
+git clone git@github.com:Ivan-dela-cruz/EcommerceWebApp.git 
+```
+
+```
+cd EcommerceWebApp
+```
+_Instalamos el composer_
+```
+composer install
+```
+_Una vez instalado creamos el archivo .env_
+
+```
+cp .env.example .env
+```
+_Abrimos y configuramos el archivo .env_
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ecommerce //aqui va el nombre de la base de datos
+DB_USERNAME=root //usuario de la base de datos
+DB_PASSWORD=  //contraseña de la base de datos
+```
+_Una vez configurado ejecutamos_
+
+```
+php artisan key:generate
+```
+```
+php artisan migrate --seed
+```
+_Finalmente iniciamos el servidor_
+
+```
+php artisan serve
+```
+_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+
+## Ejecutando las pruebas ⚙️
+
+_Explica como ejecutar las pruebas automatizadas para este sistema_
+
+### Analice las pruebas end-to-end 🔩
+
+_Explica que verifican estas pruebas y por qué_
+
+```
+Da un ejemplo
+```
+
+### Y las pruebas de estilo de codificación ⌨️
+
+_Explica que verifican estas pruebas y por qué_
+
+```
+Da un ejemplo
+```
+
+## Despliegue 📦
+
+_Agrega notas adicionales sobre como hacer deploy_
+
+## Construido con 🛠️
+
+_Menciona las herramientas que utilizaste para crear tu proyecto_
+
+* [Laravel](https://laravel.com/docs/7.x/installation) - Framework de desarrollo
+* [Livewire](https://laravel-livewire.com/) - El paquete para reactividad basado en php
+* [Bootstrap](https://getbootstrap.com/) - Framework del diseño
+* [JavaScript](https://www.javascript.com/) - Lenguaje base
+* [Axios](https://www.axios.com/) - Paquete de peticiones http
 
 
-======= USER DASHBOARD =======
+## Contribuyendo 🖇️
+
+Por favor lee el [CONTRIBUTING.md](https://gist.github.com/Ivan-dela-cruz) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
 
 
-- Order management
-- Review Management
-- Comment Management
-- Profile Settings
+## Versionado 📌
+
+Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu/proyecto/tags).
+
+## Autores ✒️
+
+_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
+
+* **Gilson Chariguaman** - *Backend Web Service* - [Gilson Chariguaman](https://github.com/gilson97cm)
+* **Ivan de la Cruz** - *Desarrollo Frontend and Architecture* - [Ivan-dela-cruz](https://github.com/Ivan-dela-cruz)
 
 
-## Screenshots :
-![screencapture-e-shop-loc-admin-2020-08-15-15_47_37](https://user-images.githubusercontent.com/29488275/90719413-13b82200-e2d4-11ea-8ca0-f0e5551c4c9d.png)
 
-![screencapture-e-shop-loc-admin-category-2020-08-14-19_45_55](https://user-images.githubusercontent.com/29488275/90719470-3813fe80-e2d4-11ea-8f63-e6001855a945.png)
+## Expresiones de Gratitud 🎁
 
-![screencapture-e-shop-loc-admin-product-2020-08-14-19_44_49](https://user-images.githubusercontent.com/29488275/90719534-61348f00-e2d4-11ea-8a81-409daee0ad94.png)
+* Comenta a otros sobre este proyecto 📢
+* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
+* Da las gracias públicamente 🤓.
+* etc.
 
-![screencapture-e-shop-loc-user-order-show-1-2020-08-14-18_57_06](https://user-images.githubusercontent.com/29488275/90719557-71e50500-e2d4-11ea-97cf-befb1d525643.png)
 
-![screencapture-e-shop-loc-user-profile-2020-08-14-18_58_06](https://user-images.githubusercontent.com/29488275/90719563-7a3d4000-e2d4-11ea-9e6a-56caac13b146.png)
 
-![screencapture-e-shop-loc-admin-post-2020-08-14-16_00_07](https://user-images.githubusercontent.com/29488275/90719572-81644e00-e2d4-11ea-9fe5-3325ab427f88.png)
-
-![screencapture-e-shop-loc-2020-08-14-18_19_46](https://user-images.githubusercontent.com/29488275/90719631-a1940d00-e2d4-11ea-89a3-eb36960d687d.png)
-
-![screencapture-e-shop-loc-blog-2020-08-14-18_36_21](https://user-images.githubusercontent.com/29488275/90719648-a8228480-e2d4-11ea-9c57-5ed7aef50e26.png)
-
-![screencapture-e-shop-loc-blog-detail-where-can-i-get-some-2020-08-14-18_43_01](https://user-images.githubusercontent.com/29488275/90719658-ace73880-e2d4-11ea-9cb2-13f2b3b0c4d2.png)
-
-![screencapture-e-shop-loc-product-track-2020-08-14-18_51_07](https://user-images.githubusercontent.com/29488275/90719682-bbcdeb00-e2d4-11ea-8e4e-7d6bfab1c421.png)
-
-## Set up :
-
-1. Clone the repo and cd into it
-2. composer install
-3. Rename or copy .env.example file to .env
-4. php artisan key:generate
-5. Set your database credentials in your .env file
-6. Set your Braintree credentials in your .env file if you want to use PayPal
-7. Import db file(database/e-shop.sql) into your database (mysql,sql)
-8. npm install
-9. npm run watch
-10. run command[laravel file manager]:-  php artisan storage:link
-11. Edit .env file :- remove APP_URL
-10. php artisan serve or use virtual host
-11. Visit localhost:8000 in your browser
-12. Visit /admin if you want to access the admin panel. Admin Email/Password: admin@gmail.com/1111. User Email/Password: user@gmail.com/1111
-
-<p style="text-align:center">Thank You so much for your time !!!</p>
-
+---
+⌨️ con ❤️ por [DESARROLADORES] 😊
