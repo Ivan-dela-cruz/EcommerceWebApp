@@ -15,7 +15,6 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Exception;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -58,7 +57,7 @@ class AuthController extends Controller
                 return $this->login($request);
             }
         }
-      
+
         $encriptedPass = Hash::make($request->password);
         $exist = User::where('email', $request->email)->get();
 
@@ -70,18 +69,8 @@ class AuthController extends Controller
         }
 
         try {
-
-            $customer = Customer::create([
-                'name' => $request->name ,
-                'last_name'=>$request->last_name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'photo' => 'img/user.jpg'
-                
-            ]);
-
             $user = User::create([
-                'id' => $customer->id,
+//                'id' => $customer->id,
                 'name' => $request->name ." ".$request->last_name ,
                 'username' => $request->username,
                 'email' => $request->email,
@@ -91,6 +80,21 @@ class AuthController extends Controller
                 'provider'=>$request->provider,
                 'provider_id'=>$request->external_id
             ]);
+
+            $customer = Customer::create([
+                'user_id' => $user->id,
+                'name' => $request->name ,
+                'last_name'=>$request->last_name,
+                'type_document' => $request->type_document,
+                'num_document' => $request->num_document,
+                'address' => $request->address,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'photo' => 'img/user.jpg'
+
+            ]);
+
+
 
             return $this->login($request);
         } catch (\Exception $exception) {

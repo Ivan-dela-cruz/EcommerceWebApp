@@ -6,6 +6,7 @@ use Closure;
 
 class User
 {
+
     /**
      * Handle an incoming request.
      *
