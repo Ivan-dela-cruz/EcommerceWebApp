@@ -7,8 +7,10 @@ use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\JWT;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Intervention\Image\Facades\Image;
@@ -22,6 +24,8 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $creds = $request->only(['email', 'password']);
+        Log::debug('=====================================>>>>>>>>>>>>>>>>>>>>>>>:' . $request->email ." ". $request->password);
+
 
         if (!$token = \JWTAuth::attempt($creds)) {
             return response()->json([
@@ -30,7 +34,8 @@ class AuthController extends Controller
             ], 401);
         }
         $user = Auth::user();
-        $customer = Customer::find($user->id);
+        $customer = Customer::where('user_id',$user->id)->first();
+
         $user->name = $customer->name;
         $user->last_name = $customer->last_name;
         $user->photo = $customer->photo;
@@ -59,50 +64,93 @@ class AuthController extends Controller
         }
 
         $encriptedPass = Hash::make($request->password);
-        $exist = User::where('email', $request->email)->get();
+//        $exist = User::where('email', $request->email)->get();
+//
+//        if (count($exist)>0){
+//            return response()->json([
+//                'success' => false,
+//                'message' => 'El usuario o correo  ya existe.',
+//            ],200);
+//        }
 
-        if (count($exist)>0){
+        $rules = [
+            'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|numeric|digits:10',
+            'password' => ['required', 'min:8'],
+        ];
+        $messages = [
+            'name.required' => 'Campo obligatorio.',
+            'name.regex' => 'Campo incorrecto.',
+            'last_name.required' => 'Campo obligatorio.',
+            'last_name.regex' => 'Campo incorrecto.',
+            'email.required' => 'Campo obligatorio.',
+            'email.email' => 'Campo incorrecto.',
+            'email.unique' => 'Correo en uso.',
+            'phone.required' => 'Campo obligatorio.',
+            'phone.numeric' => 'Campo incorrecto.',
+            'phone.digits' => 'Campo incorrecto.',
+            'password.required' => 'Campo obligatorio.',
+            'password.min' => 'Mínimo 8 caracteres..',
+        ];
+
+        $dataValidate = Validator::make($request->all(),$rules,$messages);
+        $errors = $dataValidate->fails();
+        $list = new Collection();
+//        dd($dataValidate->errors()->toJson());
+        if ($errors) {
+            foreach ($dataValidate->errors()->toArray() as $k => $v){
+                $item = [
+                    'input'=> $k,
+                    'value' => $v[0],
+                ];
+
+                $list->push($item);
+            }
+//            dd($list);
             return response()->json([
                 'success' => false,
-                'message' => 'El usuario o correo  ya existe.',
-            ],200);
-        }
-
-        try {
-            $user = User::create([
+                'errors' => $list
+            ]);
+        }else{
+            try {
+                $user = User::create([
 //                'id' => $customer->id,
-                'name' => $request->name ." ".$request->last_name ,
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => $encriptedPass,
-                'status' => 'active',
-                'role' => 'user',
-                'provider'=>$request->provider,
-                'provider_id'=>$request->external_id
-            ]);
+                    'name' => $request->name ." ".$request->last_name ,
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'password' => $encriptedPass,
+                    'status' => 'active',
+                    'role' => 'user',
+                    'provider'=>$request->provider,
+                    'provider_id'=>$request->external_id,
+                    'photo' => 'img/user.jpg'
+                ]);
 
-            $customer = Customer::create([
-                'user_id' => $user->id,
-                'name' => $request->name ,
-                'last_name'=>$request->last_name,
-                'type_document' => $request->type_document,
-                'num_document' => $request->num_document,
-                'address' => $request->address,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'photo' => 'img/user.jpg'
+                $customer = Customer::create([
+                    'user_id' => $user->id,
+                    'name' => $request->name ,
+                    'last_name'=>$request->last_name,
+                    'type_document' => $request->type_document,
+                    'num_document' => $request->num_document,
+                    'address' => $request->address,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+//                'photo' => 'img/user.jpg'
 
-            ]);
+                ]);
 
 
+//                Log::debug('=====================================>>>>>>>>>>>>>>>>>>>>>>>:' . $request->email ." ". $request->password);
+                return $this->login($request);
+            } catch (\Exception $exception) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $exception
+                ]);
 
-            return $this->login($request);
-        } catch (\Exception $exception) {
-            return response()->json([
-                'success' => false,
-                'message' => $exception
-            ]);
-
+            }
         }
 
 

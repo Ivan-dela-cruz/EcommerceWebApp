@@ -16,6 +16,7 @@ class Customer extends Model
         'address',
         'phone',
         'email',
+//        'photo'
     ];
     public function user()
     {
