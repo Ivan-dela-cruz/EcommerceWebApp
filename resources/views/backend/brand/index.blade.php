@@ -122,7 +122,8 @@
                     "orderable":false,
                     "targets":[3,4]
                 }
-            ]
+            ],
+            "language":data
         } );
 
         // Sweet alert

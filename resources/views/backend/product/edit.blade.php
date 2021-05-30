@@ -34,7 +34,7 @@
 
 
         <div class="form-group">
-          <label for="is_featured">Se Presenta</label><br>
+          <label for="is_featured">Visible en línea</label><br>
           <input type="checkbox" name='is_featured' id='is_featured' value='{{$product->is_featured}}' {{(($product->is_featured) ? 'checked' : '')}}> Si
         </div>
               {{-- {{$categories}} --}}
@@ -78,7 +78,7 @@
           @enderror
         </div>
         <div class="form-group">
-          <label for="size">Talla</label>
+          <label for="size">Tamaño</label>
           <select name="size[]" class="form-control selectpicker"  multiple data-live-search="true">
               <option value="">--Seleccionar--</option>
               @foreach($items as $item)
@@ -86,8 +86,8 @@
                 $data=explode(',',$item->size);
                 // dd($data);
                 @endphp
-              <option value="S"  @if( in_array( "S",$data ) ) selected @endif>Pequeña</option>
-              <option value="M"  @if( in_array( "M",$data ) ) selected @endif>Mediana</option>
+              <option value="S"  @if( in_array( "S",$data ) ) selected @endif>Pequeño</option>
+              <option value="M"  @if( in_array( "M",$data ) ) selected @endif>Mediano</option>
               <option value="L"  @if( in_array( "L",$data ) ) selected @endif>Grande</option>
               <option value="XL"  @if( in_array( "XL",$data ) ) selected @endif>Extra Grande</option>
               @endforeach
@@ -107,9 +107,11 @@
           <label for="condition">Condición</label>
           <select name="condition" class="form-control">
               <option value="">--Seleccionar--</option>
-              <option value="default" {{(($product->condition=='default')? 'selected':'')}}>Defecto</option>
-              <option value="new" {{(($product->condition=='new')? 'selected':'')}}>New</option>
-              <option value="hot" {{(($product->condition=='hot')? 'selected':'')}}>Hot</option>
+              <option value="Defecto" {{(($product->condition=='Defecto')? 'selected':'')}}>Defecto</option>
+              <option value="Nuevo" {{(($product->condition=='Nuevo')? 'selected':'')}}>Nuevo</option>
+              <option value="Oferta" {{(($product->condition=='Oferta')? 'selected':'')}}>Oferta</option>
+              <option value="Promoción" {{(($product->condition=='Promoción')? 'selected':'')}}>Promoción</option>
+             
           </select>
         </div>
 

@@ -28,18 +28,7 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-                <th>Título</th>
-                <th>Slug</th>
-                <th>Se Presenta</th>
-                <th>Categoría</th>
-                <th>Foto</th>
-                <th>Estado</th>
-                <th>Acción</th>
-            </tr>
-          </tfoot>
+         
           <tbody>
 
             @foreach($categories as $category)
@@ -52,7 +41,7 @@
                     <td>{{$category->id}}</td>
                     <td>{{$category->title}}</td>
                     <td>{{$category->slug}}</td>
-                    <td>{{(($category->is_parent==1)? 'Yes': 'No')}}</td>
+                    <td>{{(($category->is_parent==1)? 'SI': 'No')}}</td>
                     <td>
                         @foreach($parent_cats as $parent_cat)
                             {{$parent_cat->title}}
@@ -140,7 +129,8 @@
                     "orderable":false,
                     "targets":[3,4,5]
                 }
-            ]
+            ],
+            "language":data
         } );
 
         // Sweet alert

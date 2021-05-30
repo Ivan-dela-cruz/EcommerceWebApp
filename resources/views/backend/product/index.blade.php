@@ -18,13 +18,13 @@
         <table class="table table-bordered" id="product-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>S.N.</th>
-              <th>Títul0</th>
+              <th>N°</th>
+              <th>Título</th>
               <th>Categoría</th>
-              <th>Se Presenta</th>
+              <th>Visible</th>
               <th>Precio</th>
               <th>Descuento</th>
-              <th>Talla</th>
+              <th>Tamaño</th>
               <th>Condición</th>
               <th>Marca</th>
               <th>Cantidad</th>
@@ -33,23 +33,7 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-              <th>Título</th>
-              <th>Categoría</th>
-              <th>Se Presenta</th>
-              <th>Precio</th>
-              <th>Descuento</th>
-              <th>Talla</th>
-              <th>Condición</th>
-              <th>Marca</th>
-              <th>Cantidad</th>
-              <th>Foto</th>
-              <th>Estado</th>
-              <th>Acción</th>
-            </tr>
-          </tfoot>
+          
           <tbody>
 
             @foreach($products as $product)
@@ -68,9 +52,9 @@
                         @endforeach
                       </sub>
                     </td>
-                    <td>{{(($product->is_featured==1)? 'Yes': 'No')}}</td>
-                    <td>Rs. {{$product->price}} /-</td>
-                    <td>  {{$product->discount}}% OFF</td>
+                    <td>{{(($product->is_featured==1)? 'Si': 'No')}}</td>
+                    <td>$ {{$product->price}}</td>
+                    <td>  {{$product->discount}}% </td>
                     <td>{{$product->size}}</td>
                     <td>{{$product->condition}}</td>
                     <td>@foreach($brands as $brand) {{$brand->title}} @endforeach</td>
@@ -169,13 +153,14 @@
   <script>
 
       $('#product-dataTable').DataTable( {
-        "scrollX": false
-            "columnDefs":[
-                {
-                    "orderable":false,
-                    "targets":[10,11,12]
-                }
-            ]
+        "scrollX": false,
+        "columnDefs":[
+            {
+                "orderable":false,
+                "targets":[10,11,12]
+            }
+        ],
+        "language":data
         } );
 
         // Sweet alert

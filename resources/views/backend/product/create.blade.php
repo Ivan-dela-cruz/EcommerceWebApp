@@ -33,7 +33,7 @@
 
 
         <div class="form-group">
-          <label for="is_featured">Se Presenta</label><br>
+          <label for="is_featured">Visible en línea</label><br>
           <input type="checkbox" name='is_featured' id='is_featured' value='1' checked> Si
         </div>
               {{-- {{$categories}} --}}
@@ -74,11 +74,11 @@
           @enderror
         </div>
         <div class="form-group">
-          <label for="size">Talla</label>
+          <label for="size">Tamaño</label>
           <select name="size[]" class="form-control selectpicker"  multiple data-live-search="true">
               <option value="">--Seleccionar--</option>
-              <option value="S">Pequeña (S)</option>
-              <option value="M">Mediana (M)</option>
+              <option value="S">Pequeño (S)</option>
+              <option value="M">Mediano (M)</option>
               <option value="L">Grande (L)</option>
               <option value="XL">Extra Grande (XL)</option>
           </select>
@@ -100,9 +100,10 @@
           <label for="condition">Condición</label>
           <select name="condition" class="form-control">
               <option value="">--Seleccionar--</option>
-              <option value="default">Defecto</option>
-              <option value="new">New</option>
-              <option value="hot">Hot</option>
+              <option value="Defecto">Defecto</option>
+              <option value="Nuevo">Nuevo</option>
+              <option value="Oferta">Oferta</option>
+              <option value="Promoción">Promoción</option>
           </select>
         </div>
 

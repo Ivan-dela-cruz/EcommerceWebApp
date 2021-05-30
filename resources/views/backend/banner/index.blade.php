@@ -26,16 +26,7 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-                <th>Título</th>
-                <th>Slug</th>
-                <th>Foto</th>
-                <th>Estado</th>
-                <th>Acción</th>
-              </tr>
-          </tfoot>
+         
           <tbody>
             @foreach($banners as $banner)
                 <tr>
@@ -124,14 +115,14 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-
       $('#banner-dataTable').DataTable( {
             "columnDefs":[
                 {
                     "orderable":false,
                     "targets":[3,4,5]
                 }
-            ]
+            ],
+            "language":data
         } );
 
         // Sweet alert

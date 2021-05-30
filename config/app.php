@@ -168,6 +168,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         /*
          * Package Service Providers...
          */

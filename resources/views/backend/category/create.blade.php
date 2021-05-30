@@ -24,13 +24,13 @@
         </div>
 
         <div class="form-group">
-          <label for="is_parent">Se Presenta</label><br>
-          <input type="checkbox" name='is_parent' id='is_parent' value='1' checked> Si
+          <label for="is_parent">Establecer como categoría padre</label><br>
+          <input type="checkbox" name='is_parent' id='is_parent' value='1' checked>
         </div>
         {{-- {{$parent_cats}} --}}
 
         <div class="form-group d-none" id='parent_cat_div'>
-          <label for="parent_id">Categoría</label>
+          <label for="parent_id">Categoría padre</label>
           <select name="parent_id" class="form-control">
               <option value="">--Seleccionar--</option>
               @foreach($parent_cats as $key=>$parent_cat)

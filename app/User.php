@@ -40,4 +40,10 @@ class User extends Authenticatable
     public function orders(){
         return $this->hasMany('App\Models\Order');
     }
+    public function customer(){
+        return $this->belongsTo('App\Models\Customer','user_id');
+    }
+    public function supplier(){
+        return $this->belongsTo('App\Models\Supplier','user_id');
+    }
 }
