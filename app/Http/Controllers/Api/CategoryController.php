@@ -8,13 +8,13 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request)
+    public function categories(Request $request)
     {
         $categories = Category::where('status','active')->orderBy('title','ASC')->get(['id','title','summary']);
 
         return response()->json([
             'success' => true,
-            'categorias' => $categories
+            'categories' => $categories
         ], 200);
     }
 }
