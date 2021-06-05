@@ -8,15 +8,14 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function products(Request $request)
     {
-
 
         $products = Product::where('status','active')->orderBy('title','ASC')->get(['id','cat_id','condition','title','price','stock','description','photo']);
 
         return response()->json([
             'success' => true,
-            'productos' => $products
+            'products' => $products
         ], 200);
     }
 
@@ -26,11 +25,11 @@ class ProductController extends Controller
 
         $products = Product::where('status','active')
         ->where('cat_id',$id)
-        ->orderBy('nombre','ASC')->get(['id','cat_id','condition','title','price','stock','description','photo']);
+        ->orderBy('title','ASC')->get(['id','cat_id','condition','title','price','stock','description','photo']);
 
         return response()->json([
             'success' => true,
-            'productos' => $products
+            'products' => $products
         ], 200);
     }
 

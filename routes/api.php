@@ -26,10 +26,11 @@ Route::namespace('Api')->group(function () {
     Route::post('change-password','AuthController@ChangePassword')->name('change-password')->middleware('jwtAuth');
 
     //rutas para los sliders
-    Route::get('sliders','SliderController@index');
-    Route::get('categorias','CategoryController@index');
-    Route::get('productos','ProductController@index');
-    Route::get('productos/{id}','ProductController@productsByCategory');
+    Route::get('sliders','SliderController@sliders');
+    Route::get('categories','CategoryController@categories');
+
+    Route::get('products','ProductController@products');
+    Route::get('categories/{product_id}','ProductController@productsByCategory');
     Route::post('store-shop','ShopController@store')->middleware('jwtAuth');
     Route::get('orders','ShopController@getVentas')->middleware('jwtAuth');
     Route::get('detalle/{id}','ShopController@getDetalle');

@@ -24,7 +24,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $creds = $request->only(['email', 'password']);
-        Log::debug('=====================================>>>>>>>>>>>>>>>>>>>>>>>:' . $request->email ." ". $request->password);
+        Log::debug('=====================================>>>>>>>>>>>>>>>>>>>>>>>:' . $request->email . " " . $request->password);
 
 
         if (!$token = \JWTAuth::attempt($creds)) {
@@ -34,11 +34,13 @@ class AuthController extends Controller
             ], 401);
         }
         $user = Auth::user();
-        $customer = Customer::where('user_id',$user->id)->first();
+        $customer = Customer::where('user_id', $user->id)->first();
 
-        $user->name = $customer->name;
-        $user->last_name = $customer->last_name;
-        $user->photo = $customer->photo;
+        $user->name = $customer->name." ".$customer->last_name;
+        $user->dni = $customer->num_document;
+        $user->phone = $customer->phone;
+        $user->address = $customer->address;
+//        $user->photo = $user->photo;
         //LIMPIAR DATA DE USER
         unset($user["email_verified_at"]);
         unset($user["created_at"]);
@@ -55,10 +57,10 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        Log::debug('=====================================>>>>>>>>>>>>>>>>>>>>>>>:' . $request->external_id);
-        if($request->external_id != ""){
+//        Log::debug('=====================================>>>>>>>>>>>>>>>>>>>>>>>:' . $request->external_id);
+        if ($request->external_id != "") {
             $external_user = User::where('provider_id', $request->external_id)->get();
-            if (count($external_user)>0){
+            if (count($external_user) > 0) {
                 return $this->login($request);
             }
         }
@@ -76,15 +78,18 @@ class AuthController extends Controller
         $rules = [
             'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'username'  => 'required',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|numeric|digits:10',
-            'password' => ['required', 'min:8'],
+            'password' => ['required', 'min:8','confirmed'],
+            'password_confirmation' => 'required'
         ];
         $messages = [
             'name.required' => 'Campo obligatorio.',
             'name.regex' => 'Campo incorrecto.',
             'last_name.required' => 'Campo obligatorio.',
             'last_name.regex' => 'Campo incorrecto.',
+            'username.required' => 'Campo obligatorio.',
             'email.required' => 'Campo obligatorio.',
             'email.email' => 'Campo incorrecto.',
             'email.unique' => 'Correo en uso.',
@@ -92,17 +97,19 @@ class AuthController extends Controller
             'phone.numeric' => 'Campo incorrecto.',
             'phone.digits' => 'Campo incorrecto.',
             'password.required' => 'Campo obligatorio.',
-            'password.min' => 'Mínimo 8 caracteres..',
+            'password_confirmation.required' => 'Campo obligatorio.',
+            'password.confirmed' => 'No se ha confirmado la contraseña.',
+            'password.min' => 'Mínimo 8 caracteres.',
         ];
 
-        $dataValidate = Validator::make($request->all(),$rules,$messages);
+        $dataValidate = Validator::make($request->all(), $rules, $messages);
         $errors = $dataValidate->fails();
         $list = new Collection();
 //        dd($dataValidate->errors()->toJson());
         if ($errors) {
-            foreach ($dataValidate->errors()->toArray() as $k => $v){
+            foreach ($dataValidate->errors()->toArray() as $k => $v) {
                 $item = [
-                    'input'=> $k,
+                    'input' => $k,
                     'value' => $v[0],
                 ];
 
@@ -113,46 +120,34 @@ class AuthController extends Controller
                 'success' => false,
                 'errors' => $list
             ]);
-        }else{
-            try {
-                $user = User::create([
+        } else {
+            $user = User::create([
 //                'id' => $customer->id,
-                    'name' => $request->name ." ".$request->last_name ,
-                    'username' => $request->username,
-                    'email' => $request->email,
-                    'password' => $encriptedPass,
-                    'status' => 'active',
-                    'role' => 'user',
-                    'provider'=>$request->provider,
-                    'provider_id'=>$request->external_id,
-                    'photo' => 'img/user.jpg'
-                ]);
+                'name' => $request->name . " " . $request->last_name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => $encriptedPass,
+                'status' => 'active',
+                'role' => 'user',
+                'provider' => $request->provider,
+                'provider_id' => $request->external_id,
+                'photo' => 'img/user.jpg'
+            ]);
 
-                $customer = Customer::create([
-                    'user_id' => $user->id,
-                    'name' => $request->name ,
-                    'last_name'=>$request->last_name,
-                    'type_document' => $request->type_document,
-                    'num_document' => $request->num_document,
-                    'address' => $request->address,
-                    'email' => $request->email,
-                    'phone' => $request->phone,
+            $customer = Customer::create([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'last_name' => $request->last_name,
+                'type_document' => $request->type_document,
+                'num_document' => $request->num_document,
+                'address' => $request->address,
+                'email' => $request->email,
+                'phone' => $request->phone,
 //                'photo' => 'img/user.jpg'
 
-                ]);
-
-
-//                Log::debug('=====================================>>>>>>>>>>>>>>>>>>>>>>>:' . $request->email ." ". $request->password);
-                return $this->login($request);
-            } catch (\Exception $exception) {
-                return response()->json([
-                    'success' => false,
-                    'message' => $exception
-                ]);
-
-            }
+            ]);
+            return $this->login($request);
         }
-
 
     }
 
@@ -175,13 +170,13 @@ class AuthController extends Controller
     public function profileUser(Request $request)
     {
         $user = User::find(Auth::user()->id);
-        $aux = Customer::where('id', '<>',$user->id)
-            ->where('num_document',$request->ci)->get();
-        if(count($aux) > 0){
+        $aux = Customer::where('id', '<>', $user->id)
+            ->where('num_document', $request->ci)->get();
+        if (count($aux) > 0) {
             return response()->json([
                 'success' => false,
                 'message' => 'La cédula ya esta en uso.',
-            ],200);
+            ], 200);
         }
 
         $user = User::find(Auth::user()->id);
@@ -214,7 +209,7 @@ class AuthController extends Controller
     {
         try {
             $user = User::find(Auth::user()->id);
-            $profile = Customer::where('id', $user->id)->first();
+            $profile = Customer::where('user_id', $user->id)->first();
             if (is_null($user)) {
                 return response()->json([
                     'success' => false,

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class SliderController extends Controller
 {
-    public function index(Request $request)
+    public function sliders(Request $request)
     {
         $sliders = Banner::where('status','active')->orderBy('title','ASC')->get(['id','title','description','photo']);
 
