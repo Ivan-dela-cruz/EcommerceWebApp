@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Shipping;
 use App\User;
+use Illuminate\Support\Collection;
 use PDF;
 use Notification;
 use Helper;
@@ -94,6 +95,7 @@ class OrderController extends Controller
         $order_data['user_id']=$request->user()->id;
         $order_data['shipping_id']=$request->shipping;
         $shipping=Shipping::where('id',$order_data['shipping_id'])->pluck('price');
+//        dd($shipping);
         // return session('coupon')['value'];
         $order_data['sub_total']=Helper::totalCartPrice();
         $order_data['quantity']=Helper::cartCount();
@@ -144,11 +146,47 @@ class OrderController extends Controller
             session()->forget('cart');
             session()->forget('coupon');
         }
-        Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
-
-        // dd($users);        
-        request()->session()->flash('success','Your product successfully placed in order');
+      $cart =  Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
+        request()->session()->flash('success','Su producto se puso en orden con éxito');
+        $order->url_file = "docs/orden-" . $order->id . '.pdf';
+        $order->save();
+        $this->savePdfStorage($order->id);
         return redirect()->route('home');
+    }
+
+    public function savePdfStorage($id)
+    {
+        $order = Order::find($id);
+        $details = Cart::where('order_id',$order->id)->get();
+
+//        dd($details);
+
+        $list = new Collection();
+
+        foreach ($details as $data) {
+            $item = [
+                'id' => $data->id,
+                'product_id' => $data->product_id,
+                'product_name' => $data->product->title,
+                'product_description' => $data->product->summary,
+                'order_id' => $data->order_id,
+                'user_id' => $data->user_id,
+                'price' => $data->price,
+                'status' => $data->status,
+                'quantity' => $data->quantity,
+                'amount' => $data->amount,
+            ];
+
+            $list->push($item);
+        }
+//        dd($list);
+        $client = $order->user;
+
+        $pdf = \PDF::loadView('pdf.order', ['order' => $order, 'details' => $list,'client' => $client]);
+
+        $nombrePdf = 'orden-' . $id . '.pdf';
+        $path = public_path('docs/');
+        $pdf->save($path . '/' . $nombrePdf);
     }
 
     /**
@@ -250,17 +288,17 @@ class OrderController extends Controller
             elseif($order->status=="process"){
                 request()->session()->flash('success','Your order is under processing please wait.');
                 return redirect()->route('home');
-    
+
             }
             elseif($order->status=="delivered"){
                 request()->session()->flash('success','Your order is successfully delivered.');
                 return redirect()->route('home');
-    
+
             }
             else{
                 request()->session()->flash('error','Your order canceled. please try again');
                 return redirect()->route('home');
-    
+
             }
         }
         else{

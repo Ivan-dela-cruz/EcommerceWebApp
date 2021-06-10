@@ -4,7 +4,9 @@
 
 @section('main-content')
 <div class="card">
-<h5 class="card-header">Pedido       <a href="{{route('order.pdf',$order->id)}}" class=" btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i> Generar PDF</a>
+    <h5 class="card-header">Pedido
+        <a href="{{asset($order->url_file)}}" target="_blank" class=" btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i> Descargar PDF</a>
+        {{--<a href="{{route('order.pdf',$order->id)}}" class=" btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i> Generar PDF</a>--}}
   </h5>
   <div class="card-body">
     @if($order)
@@ -83,7 +85,7 @@
                     </tr>
                     <tr>
                       @php
-                          $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->pluck('price');
+                          $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->value('price');
                       @endphp
                         <td>Costo de envío</td>
                         <td> : $ {{number_format($shipping_charge[0],2)}}</td>

@@ -29,11 +29,15 @@ Route::namespace('Api')->group(function () {
     Route::get('sliders','SliderController@sliders');
     Route::get('categories','CategoryController@categories');
 
+    Route::get('orders','ShopController@getOrders')->middleware('jwtAuth');
+    Route::get('detail-order/{id}','ShopController@getDetail')->middleware('jwtAuth');
+    Route::post('store-shop','ShopController@store')->middleware('jwtAuth');
+
+
     Route::get('products','ProductController@products');
     Route::get('categories/{product_id}','ProductController@productsByCategory');
-    Route::post('store-shop','ShopController@store')->middleware('jwtAuth');
-    Route::get('orders','ShopController@getVentas')->middleware('jwtAuth');
-    Route::get('detalle/{id}','ShopController@getDetalle');
+
+
     Route::post('send-payment','ShopController@registerPayment')->middleware('jwtAuth');
 
 });

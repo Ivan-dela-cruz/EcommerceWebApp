@@ -85,6 +85,7 @@ class Helper{
 
         if(Auth::check()){
             if($user_id=="") $user_id=auth()->user()->id;
+          $cart =  Cart::where('user_id',$user_id)->where('order_id',null)->get();
             return Cart::where('user_id',$user_id)->where('order_id',null)->sum('quantity');
         }
         else{
