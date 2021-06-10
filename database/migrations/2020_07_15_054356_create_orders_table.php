@@ -35,6 +35,7 @@ class CreateOrdersTable extends Migration
             $table->string('post_code')->nullable();
             $table->text('address1');
             $table->text('address2')->nullable();
+            $table->string('url_file')->nullable();
             $table->timestamps();
         });
     }

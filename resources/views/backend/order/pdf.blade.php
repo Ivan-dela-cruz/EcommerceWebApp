@@ -71,13 +71,13 @@
 </style>
   <div class="invoice-header">
     <div class="float-left site-logo">
-      <img src="{{asset('backend/img/logo.png')}}" alt="">
+      <img src="{{public_path('backend/img/logo.png')}}" alt="">
     </div>
     <div class="float-right site-address">
-      <h4>{{env('APP_NAME')}}</h4>
-      <p>{{env('APP_ADDRESS')}}</p>
-      <p>Phone: <a href="tel:{{env('APP_PHONE')}}">{{env('APP_PHONE')}}</a></p>
-      <p>Email: <a href="mailto:{{env('APP_EMAIL')}}">{{env('APP_EMAIL')}}</a></p>
+{{--      <h4>{{env('APP_NAME')}}</h4>--}}
+{{--      <p>{{env('APP_ADDRESS')}}</p>--}}
+{{--      <p>Phone: <a href="tel:{{env('APP_PHONE')}}">{{env('APP_PHONE')}}</a></p>--}}
+{{--      <p>Email: <a href="mailto:{{env('APP_EMAIL')}}">{{env('APP_EMAIL')}}</a></p>--}}
     </div>
     <div class="clearfix"></div>
   </div>
@@ -149,7 +149,7 @@
         <tr>
           <th scope="col" class="empty"></th>
           @php
-            $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->pluck('price');
+            $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->value('price');
           @endphp
           <th scope="col" class="text-right ">Shipping:</th>
           <th><span>${{number_format($shipping_charge[0],2)}}</span></th>
