@@ -102,7 +102,7 @@
 											<!-- Size -->
 											@if($product_detail->size)
 												<div class="size mt-4">
-													<h4>Talla</h4>
+													<h4>Tamaño</h4>
 													<ul>
 														@php
 															$sizes=explode(',',$product_detail->size);
