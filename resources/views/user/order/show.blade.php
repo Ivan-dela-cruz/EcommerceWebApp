@@ -89,7 +89,7 @@
                     </tr>
                     <tr>
                         <td>Total Amount</td>
-                        <td> : $ {{number_format($order->total_amount,2)}}</td>
+                        <td> : @if(is_null( $shipping_charge) $ 0 @else$ {{number_format($order->total_amount,2)}} @enfif) </td>
                     </tr>
                     <tr>
                       <td>Payment Method</td>
