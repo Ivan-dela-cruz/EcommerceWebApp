@@ -86,7 +86,7 @@
                       @endphp
                         <td>Shipping Charge</td>
                           <td> :
-                            @if(is_null($shipping_charge)  
+                            @if(is_null($shipping_charge)) 
                             $ 0
                             @else
                             $ {{number_format($shipping_charge[0],2)}}
@@ -98,7 +98,7 @@
                     <tr>
                         <td>Total Amount</td>
                         <td> : 
-                          @if(is_null($shipping_charge) 
+                          @if(is_null($shipping_charge))
                             $ 0 
                           @else
                           $ {{number_format($order->total_amount,2)}} 
