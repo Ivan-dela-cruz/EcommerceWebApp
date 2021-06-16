@@ -220,7 +220,12 @@
                 <td colspan="2"></td>
                 <td>Costo de envío</td>
                 <td><strong>$ </strong>
-                    {{-- {{number_format($shipping_charge[0],2)}} --}}
+                    @if(is_null($shipping_charge))
+                        0
+                    @else
+                     {{number_format($shipping_charge[0],2)}} 
+                    @endif
+                   
                     
                 </td>
             </tr>
