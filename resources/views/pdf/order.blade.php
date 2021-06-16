@@ -219,7 +219,10 @@
             <tr>
                 <td colspan="2"></td>
                 <td>Costo de envío</td>
-                <td><strong>$ </strong>{{number_format($shipping_charge[0],2)}}</td>
+                <td><strong>$ </strong>
+                    {{-- {{number_format($shipping_charge[0],2)}} --}}
+                    
+                </td>
             </tr>
 
             <tr>
