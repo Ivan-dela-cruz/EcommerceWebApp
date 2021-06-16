@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title','E-SHOP || HOME PAGE')
+@section('title','Aspralnues')
 @section('main-content')
 <!-- Slider Area -->
 <section class="hero-slider">
@@ -115,7 +115,7 @@
                                     // dd($categories);
                                 @endphp
                                 @if($categories)
-                                <button class="btn" style="background:black"data-filter="*">
+                                <button class="btn" style="background:#06AB53"data-filter="*">
                                     Todos los Productos
                                 </button>
                                     @foreach($categories as $key=>$cat)
