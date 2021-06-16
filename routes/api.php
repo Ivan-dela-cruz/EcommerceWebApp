@@ -40,4 +40,7 @@ Route::namespace('Api')->group(function () {
 
     Route::post('send-payment','ShopController@registerPayment')->middleware('jwtAuth');
 
+    Route::get('suppliers','MilkRecordController@suppliersByMilkiRecords')->middleware('jwtAuth');
+    Route::post('milk-record','MilkRecordController@milkRecorder')->middleware('jwtAuth');
+
 });
