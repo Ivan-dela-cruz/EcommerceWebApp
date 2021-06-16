@@ -135,11 +135,11 @@
             <br>Parroquia Belisario Quevedo, barrio La Compania-Ecuador
             <br>Telefono: 0958772874
             <br>Email: aspralnues@gmail.com
+            <br>
+            <br>{{$order->order_number}}
         </p>
     </div>
-    <div id="fact">
-        <p>{{$order->order_number}}</p>
-    </div>
+
 </header>
 <br>
 <section>

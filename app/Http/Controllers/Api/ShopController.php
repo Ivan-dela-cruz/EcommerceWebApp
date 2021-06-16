@@ -18,6 +18,7 @@ use App\Notifications\NotifyAdmin;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Log;
@@ -206,25 +207,70 @@ class ShopController extends Controller
         $pdf->save($path . '/' . $nombrePdf);
     }
 
-    public function registerPayment(Request $request)
-    {
+    public function registerPayment(Request $request){
+        $user = User::find(Auth::user()->id);
+        $order = Order::find($request->order_id);
 
-        $size = $_FILES['files1']['size'];
-        $target1 = basename($_FILES['files1']['name']);
-        $filename = $target1;
-        $filepath = public_path('facturas/payments/');
+        $rules = [
+            'order_id' => 'required',
+            'ticket_url' => 'required'
+        ];
+        $messages = [
+            'order_id' => 'Error al identificar la reservacion',
+            'ticket_url.required' => 'Para registrar su pago debe subir el ticket.',
+//            'ticket_url.string' => 'El ticket debe estar en formato: .jpg,.jpeg ó .png.'
+        ];
 
-        $order = Venta::find($request->order_id);
-        $order->update([
-            'url_image' => 'facturas/payments/' . $filename,
-            'estado' => 'Confirmado'
-        ]);
 
-        move_uploaded_file($_FILES['files1']['tmp_name'], $filepath . $filename);
+        $dataValidate = Validator::make($request->all(), $rules, $messages);
 
-        return response()->json([
-            'success' => true,
-        ], 200);
+        $errors = $dataValidate->fails();
+        $list = new Collection();
+//        dd($dataValidate->errors()->toJson());
+        if ($errors) {
+            foreach ($dataValidate->errors()->toArray() as $k => $v) {
+                $item = [
+                    'input' => $k,
+                    'value' => $v[0],
+                ];
+
+                $list->push($item);
+            }
+//            dd($list);
+            return response()->json([
+                'success' => false,
+                'errors' => $list
+            ]);
+        } else {
+
+            $url_ticket = null;
+
+            $data = [
+                'payment_status' => 'paid',
+                'ticket_url' => $this->uploadImage($request, $url_ticket)
+            ];
+
+            $order->update($data);
+
+            return response()->json([
+                'success' => true,
+                'code' => 'SUCCESS_REQUEST'
+            ]);
+        }
     }
+
+    public function uploadImage(Request $request, $temp_image)
+    {
+        $url_file = "images/reservations/tickets/";
+        if ($request->ticket_url) {
+            $foto = time() . '.jpg';
+            file_put_contents('images/reservations/tickets/' . $foto, base64_decode($request->ticket_url));
+            return $url_file . $foto;
+
+        } else {
+            return $temp_image;
+        }
+    }
+
 
 }

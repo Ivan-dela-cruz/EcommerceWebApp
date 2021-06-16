@@ -45,7 +45,7 @@ class MilkRecordController extends Controller
                 'last_name' => $v->last_name,
                 'email' => $v->email,
                 'phone' => $v->phone,
-                'url_image' => $v->url_image,
+                'url_image' => $v->photo,
             ];
             $list->push($item);
         }
