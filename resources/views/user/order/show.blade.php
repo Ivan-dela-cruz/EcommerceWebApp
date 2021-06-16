@@ -85,14 +85,25 @@
                           $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->value('price');
                       @endphp
                         <td>Shipping Charge</td>
-                        <td> : $ {{number_format($shipping_charge[0],2)}}</td>
+                          <td> :
+                            @if(is_null($shipping_charge)  
+                            $ 0
+                            @else
+                            $ {{number_format($shipping_charge[0],2)}}
+                            @endif 
+                          </td>
+                          
+                        </td>
                     </tr>
                     <tr>
                         <td>Total Amount</td>
-                        <td> : @if(is_null( $shipping_charge) $ 0 
+                        <td> : 
+                          @if(is_null($shipping_charge) 
+                            $ 0 
                           @else
                           $ {{number_format($order->total_amount,2)}} 
-                          @endif) </td>
+                          @endif 
+                        </td>
                     </tr>
                     <tr>
                       <td>Payment Method</td>
