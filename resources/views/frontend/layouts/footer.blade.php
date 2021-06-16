@@ -9,13 +9,13 @@
 						<!-- Single Widget -->
 						<div class="single-footer about">
 							<div class="logo">
-								<a href="index.html"><img src="{{asset('backend/img/logo2.png')}}" alt="#"></a>
+								<a href="index.html"><img style="height: 100px;" src="{{asset('images/logoverde.png')}}" alt="#"></a>
 							</div>
 							@php
 								$settings=DB::table('settings')->get();
 							@endphp
 							<p class="text">@foreach($settings as $data) {{$data->short_des}} @endforeach</p>
-							<p class="call">¿Tienes alguna pregunta? Llámanos 24/7<span><a href="tel:123456789">@foreach($settings as $data) {{$data->phone}} @endforeach</a></span></p>
+							<p class="call">¿Tienes alguna pregunta? Llámanos 24/7<span><a href="#">@foreach($settings as $data) {{$data->phone}} @endforeach</a></span></p>
 						</div>
 						<!-- End Single Widget -->
 					</div>
@@ -25,8 +25,8 @@
 							<h4>Información</h4>
 							<ul>
 								<li><a href="{{route('about-us')}}">Acerca de Nosotros</a></li>
-								<li><a href="#">Preguntas Frecuentes</a></li>
-								<li><a href="#">Términos y Condiciones</a></li>
+								<li><a href="#">Productos</a></li>
+								<li><a href="#">Blog</a></li>
 								<li><a href="{{route('contact')}}">Contacta con nosotros</a></li>
 								<li><a href="#">Ayuda</a></li>
 							</ul>
@@ -38,11 +38,11 @@
 						<div class="single-footer links">
 							<h4>Servicio al Cliente</h4>
 							<ul>
-								<li><a href="#">Métodos de pago</a></li>
-								<li><a href="#">Devolución de Dinero</a></li>
-								<li><a href="#">Devoluciones</a></li>
-								<li><a href="#">Transporte</a></li>
-								<li><a href="#">Política de Privacidad</a></li>
+								<li><a href="#">Varios 1</a></li>
+								<li><a href="#">Varios 2</a></li>
+								<li><a href="#">Varios 3</a></li>
+								<li><a href="#">Varios 4</a></li>
+								<li><a href="#">Varios 5</a></li>
 							</ul>
 						</div>
 						<!-- End Single Widget -->
@@ -74,7 +74,7 @@
 					<div class="row">
 						<div class="col-lg-6 col-12">
 							<div class="left">
-								<p>Copyright © {{date('Y')}} <a href="https://github.com/Prajwal100" target="_blank">Ecommerce</a>  -  All Rights Reserved.</p>
+								<p>Copyright © {{date('Y')}} <a href="#" target="_blank">Ecommerce</a>  -  All Rights Reserved.</p>
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">

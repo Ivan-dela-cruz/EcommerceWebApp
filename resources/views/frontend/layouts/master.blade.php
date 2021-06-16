@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="es">
 <head>
 	@include('frontend.layouts.head')	
 </head>
@@ -21,7 +21,7 @@
 	@include('frontend.layouts.header')
 	<!--/ End Header -->
 	@yield('main-content')
-	
+	{{--  --}}
 	@include('frontend.layouts.footer')
 
 </body>
