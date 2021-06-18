@@ -5,44 +5,35 @@
 		<div class="footer-top section">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-5 col-md-6 col-12">
-						<!-- Single Widget -->
+					@php
+						$settings=DB::table('settings')->get();
+					@endphp
+					<div class="col-lg-3 col-md-3 col-12">
 						<div class="single-footer about">
 							<div class="logo">
-								<a href="index.html"><img style="height: 100px;" src="{{asset('images/logoverde.png')}}" alt="#"></a>
+								<a href="index.html"><img style="height: 130px;" src="{{asset('images/logoverde.png')}}" alt="#"></a>
 							</div>
-							@php
-								$settings=DB::table('settings')->get();
-							@endphp
-							<p class="text">@foreach($settings as $data) {{$data->short_des}} @endforeach</p>
 							<p class="call">¿Tienes alguna pregunta? Llámanos 24/7<span><a href="#">@foreach($settings as $data) {{$data->phone}} @endforeach</a></span></p>
 						</div>
-						<!-- End Single Widget -->
 					</div>
-					<div class="col-lg-2 col-md-6 col-12">
+					<div class="col-lg-3 col-md-3 col-12">
 						<!-- Single Widget -->
-						<div class="single-footer links">
-							<h4>Información</h4>
-							<ul>
-								<li><a href="{{route('about-us')}}">Acerca de Nosotros</a></li>
-								<li><a href="#">Productos</a></li>
-								<li><a href="#">Blog</a></li>
-								<li><a href="{{route('contact')}}">Contacta con nosotros</a></li>
-								<li><a href="#">Ayuda</a></li>
-							</ul>
+						<div class="single-footer about">
+							
+							<p class="text">@foreach($settings as $data) {!! $data->short_des !!} @endforeach</p>
+							
 						</div>
 						<!-- End Single Widget -->
 					</div>
-					<div class="col-lg-2 col-md-6 col-12">
-						<!-- Single Widget -->
+					<div class="col-lg-3 col-md-6 col-12">
 						<div class="single-footer links">
-							<h4>Servicio al Cliente</h4>
+							<h4>Sitio Web</h4>
 							<ul>
-								<li><a href="#">Varios 1</a></li>
-								<li><a href="#">Varios 2</a></li>
-								<li><a href="#">Varios 3</a></li>
-								<li><a href="#">Varios 4</a></li>
-								<li><a href="#">Varios 5</a></li>
+								<li><a href="{{route('about-us')}}">Acerca de Nosotros</a></li>
+								<li><a href="{{ route('product-grids') }}">Productos</a></li>
+								<li><a href="{{ route('blog') }}">Nuestro Blog</a></li>
+								<li><a href="{{route('contact')}}">Contactos</a></li>
+								<li><a href="{{ route('admin') }}">Administrador</a></li>
 							</ul>
 						</div>
 						<!-- End Single Widget -->
@@ -59,8 +50,7 @@
 									<li>@foreach($settings as $data) {{$data->phone}} @endforeach</li>
 								</ul>
 							</div>
-							<!-- End Single Widget -->
-							<div class="sharethis-inline-follow-buttons"></div>
+							
 						</div>
 						<!-- End Single Widget -->
 					</div>
@@ -74,7 +64,7 @@
 					<div class="row">
 						<div class="col-lg-6 col-12">
 							<div class="left">
-								<p>Copyright © {{date('Y')}} <a href="#" target="_blank">Ecommerce</a>  -  All Rights Reserved.</p>
+								<p>Copyright © {{date('Y')}} <a href="#" target="_blank">Aspralnues</a>  - Todos los derechos estan reservados.</p>
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">

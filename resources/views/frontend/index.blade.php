@@ -43,7 +43,7 @@
                     <div class="carousel-caption d-none d-md-block text-left">
                         <h1 class="wow fadeInDown">{{$banner->title}}</h1>
                         <p>{!! html_entity_decode($banner->description) !!}</p>
-                        <a class="btn btn-lg ws-btn wow fadeInUpBig" href="{{route('product-grids')}}" role="button">Shop Now<i class="far fa-arrow-alt-circle-right"></i></i></a>
+                        <a class="btn btn-lg ws-btn wow fadeInUpBig" href="{{route('product-grids')}}" role="button">Compra Ahora<i class="far fa-arrow-alt-circle-right"></i></i></a>
                     </div>
                 </div>
             @endforeach
@@ -149,7 +149,7 @@
                                                 @elseif($product->condition=='hot')
                                                     <span class="hot">Hot</span>
                                                 @else
-                                                    <span class="price-dec">{{$product->discount}}% Off</span>
+                                                    <span class="price-dec">{{$product->discount}}% Desc</span>
                                                 @endif
 
 
@@ -160,7 +160,7 @@
                                                     <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}" ><i class=" ti-heart "></i><span>Añadir a la lista de deseos</span></a>
                                                 </div>
                                                 <div class="product-action-2">
-                                                    <a title="Add to cart" href="{{route('add-to-cart',$product->slug)}}">Add to cart</a>
+                                                    <a title="Agregar al carrito" href="{{route('add-to-cart',$product->slug)}}">Agregar al carrito</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -209,7 +209,7 @@
                             <div class="content">
                                 <p>{{$data->cat_info['title']}}</p>
                                 <h3>{{$data->title}} <br>Up to<span> {{$data->discount}}%</span></h3>
-                                <a href="{{route('product-detail',$data->slug)}}">Shop Now</a>
+                                <a href="{{route('product-detail',$data->slug)}}">Comprar Ahora</a>
                             </div>
                         </div>
                     </div>
@@ -251,10 +251,10 @@
                                 <div class="button-head">
                                     <div class="product-action">
                                         <a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                        <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}" ><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                        <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}" ><i class=" ti-heart "></i><span>Agregar a la lista</span></a>
                                     </div>
                                     <div class="product-action-2">
-                                        <a href="{{route('add-to-cart',$product->slug)}}">Add to cart</a>
+                                        <a href="{{route('add-to-cart',$product->slug)}}">Agregar al carrito</a>
                                     </div>
                                 </div>
                             </div>
@@ -287,7 +287,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="shop-section-title">
-                            <h1>Latest Items</h1>
+                            <h1>Últimos Artículos</h1>
                         </div>
                     </div>
                 </div>
@@ -375,7 +375,9 @@
                 </div>
             </div>
         </div>
+        <div hidden>  {{\Carbon\Carbon::setLocale('es')}} </div>
         <div class="row">
+            
             @if($posts)
                 @foreach($posts as $post)
                     <div class="col-lg-4 col-md-6 col-12">
@@ -383,9 +385,9 @@
                         <div class="shop-single-blog">
                             <img src="{{$post->photo}}" alt="{{$post->photo}}">
                             <div class="content">
-                                <p class="date">{{$post->created_at->format('d M , Y. D')}}</p>
+                                <p class="date">Publicado {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</p>
                                 <a href="{{route('blog.detail',$post->slug)}}" class="title">{{$post->title}}</a>
-                                <a href="{{route('blog.detail',$post->slug)}}" class="more-btn">Continue Reading</a>
+                                <a href="{{route('blog.detail',$post->slug)}}" class="more-btn">Continuar  leyendo</a>
                             </div>
                         </div>
                         <!-- End Single Blog  -->
@@ -398,7 +400,8 @@
 </section>
 <!-- End Shop Blog  -->
 
-<!-- Start Shop Services Area -->
+{{-- 
+    <!-- Start Shop Services Area -->
 <section class="shop-services section home">
     <div class="container">
         <div class="row">
@@ -406,8 +409,8 @@
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="ti-rocket"></i>
-                    <h4>Free shiping</h4>
-                    <p>Orders over $100</p>
+                    <h4>Costos de Envio</h4>
+                    <p>Para Ordenes Mayores a  $100</p>
                 </div>
                 <!-- End Single Service -->
             </div>
@@ -415,8 +418,8 @@
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="ti-reload"></i>
-                    <h4>Free Return</h4>
-                    <p>Within 30 days returns</p>
+                    <h4>Actualización </h4>
+                    <p>Conoce nuestros Productos </p>
                 </div>
                 <!-- End Single Service -->
             </div>
@@ -424,17 +427,16 @@
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="ti-lock"></i>
-                    <h4>Sucure Payment</h4>
-                    <p>100% secure payment</p>
+                    <h4>Pagos Seguros</h4>
+                    <p>Pagos 100% Seguros</p>
                 </div>
-                <!-- End Single Service -->
             </div>
             <div class="col-lg-3 col-md-6 col-12">
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="ti-tag"></i>
-                    <h4>Best Peice</h4>
-                    <p>Guaranteed price</p>
+                    <h4>Mejores Precios</h4>
+                    <p>Precios garantizado</p>
                 </div>
                 <!-- End Single Service -->
             </div>
@@ -442,6 +444,7 @@
     </div>
 </section>
 <!-- End Shop Services Area -->
+    --}}
 
 @include('frontend.layouts.newsletter')
 
@@ -561,7 +564,7 @@
                                                 <!--/ End Input Order -->
                                             </div>
                                             <div class="add-to-cart">
-                                                <button type="submit" class="btn">Add to cart</button>
+                                                <button type="submit" class="btn">Agregar al carrito</button>
                                                 <a href="{{route('add-to-wishlist',$product->slug)}}" class="btn min"><i class="ti-heart"></i></a>
                                             </div>
                                         </form>

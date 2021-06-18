@@ -62,29 +62,29 @@
         <div class="row">
           <div class="col-lg-6 col-lx-4">
             <div class="order-info">
-              <h4 class="text-center pb-4">ORDER INFORMATION</h4>
+              <h4 class="text-center pb-4">Información de la orden</h4>
               <table class="table">
                     <tr class="">
-                        <td>Order Number</td>
+                        <td>Número</td>
                         <td> : {{$order->order_number}}</td>
                     </tr>
                     <tr>
-                        <td>Order Date</td>
+                        <td>Fecha</td>
                         <td> : {{$order->created_at->format('D d M, Y')}} at {{$order->created_at->format('g : i a')}} </td>
                     </tr>
                     <tr>
-                        <td>Quantity</td>
+                        <td>Cantidad</td>
                         <td> : {{$order->quantity}}</td>
                     </tr>
                     <tr>
-                        <td>Order Status</td>
+                        <td>Estado</td>
                         <td> : {{$order->status}}</td>
                     </tr>
                     <tr>
                       @php
                           $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->value('price');
                       @endphp
-                        <td>Shipping Charge</td>
+                        <td>Cargo</td>
                           <td> :
                             @if(is_null($shipping_charge)) 
                             $ 0
@@ -96,7 +96,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Total Amount</td>
+                        <td>Total </td>
                         <td> : 
                           @if(is_null($shipping_charge))
                             $ 0 
@@ -106,7 +106,7 @@
                         </td>
                     </tr>
                     <tr>
-                      <td>Payment Method</td>
+                      <td>Método de pago</td>
                       <td> : @if($order->payment_method=='cod') Cash on Delivery @else Paypal @endif</td>
                     </tr>
                     <tr>

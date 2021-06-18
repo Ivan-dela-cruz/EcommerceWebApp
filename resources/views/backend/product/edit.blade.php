@@ -94,7 +94,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="brand_id">Marca</label>
+          <label for="brand_id">Plataformas</label>
           <select name="brand_id" class="form-control">
               <option value="">--Seleccionar--</option>
              @foreach($brands as $brand)

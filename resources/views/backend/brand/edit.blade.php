@@ -1,9 +1,9 @@
 @extends('backend.layouts.master')
-@section('title','E-SHOP || Brand Edit')
+@section('title','Aspralnues || Editar')
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Editar Marca</h5>
+    <h5 class="card-header">Editar Plataforma</h5>
     <div class="card-body">
       <form method="post" action="{{route('brand.update',$brand->id)}}">
         @csrf

@@ -85,7 +85,7 @@
         </div>
 
         <div class="form-group">
-          <label for="brand_id">Marca</label>
+          <label for="brand_id">Plataforma</label>
           {{-- {{$brands}} --}}
 
           <select name="brand_id" class="form-control">

@@ -1,9 +1,9 @@
 @extends('backend.layouts.master')
-@section('title','E-SHOP || Brand Create')
+@section('title','Aspralnues || Crear')
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Agregar Marca</h5>
+    <h5 class="card-header">Agregar Plataforma</h5>
     <div class="card-body">
       <form method="post" action="{{route('brand.store')}}">
         {{csrf_field()}}
