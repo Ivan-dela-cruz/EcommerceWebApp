@@ -711,7 +711,7 @@ Version:1.0
 	text-align: center;
 	font-size: 18px;
 	color: #fff;
-	background: #0A5220;
+	background: #04AA6B;
 	position: absolute;
 	right: -2px;
 	top: -1px;
@@ -745,7 +745,7 @@ Version:1.0
 	border:none;
 }
 .header.shop .header-inner {
-	background: #0A5220;
+	background: #04AA6B;
 }
 .header.shop.v3 .header-inner {
 	background: transparent;
@@ -1090,7 +1090,7 @@ Version:1.0
 	padding: 7px;
 	border-radius: 5px;
 	transform: scaleY(0);
-	box-shadow: 0px 4px 7px #0A5220;
+	box-shadow: 0px 4px 7px #04AA6B;
 	padding: 0;
 	border-radius: 0;
 }
@@ -1110,7 +1110,7 @@ Version:1.0
 	border-radius: 3px;
 	border: none;
 	background: #fff;
-	color: #0A5220;
+	color: #04AA6B;
 	border-radius: 0;
 }
 .header .search-form button {
@@ -1126,7 +1126,7 @@ Version:1.0
 	border-radius: 0;
 	border-left: 1px solid #eee;
 	font-size: 15px;
-	color: #0A5220;
+	color: #04AA6B;
 	-webkit-transition: all 0.4s ease;
 	-moz-transition: all 0.4s ease;
 	transition: all 0.4s ease;
@@ -1212,14 +1212,7 @@ Version:1.0
 	background: #fff;
 	overflow: hidden;
 }
-.hero-slider .single-slider {
-	height: auto;
-	background-image: url('https://via.placeholder.com/1900x700');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-    height: 510px;
-}
+
 .hero-slider .text-inner {
 	
 }
@@ -1567,14 +1560,14 @@ Version:1.0
 	text-transform: capitalize;
 }
 .small-banner .single-banner a {
-	color: #0A5220;
+	color: #04AA6B;
 	margin-top: 22px;
 	display: block;
 	font-size: 12px;
 	font-weight:500;
 	display: inline-block;
 	text-transform:uppercase;
-	border-bottom:2px solid #0A5220;
+	border-bottom:2px solid #04AA6B;
 }
 .small-banner .single-banner a:hover{
 	color:#F7941D;
@@ -1635,7 +1628,7 @@ Version:1.0
 	padding: .375rem .75rem;
 	font-size: 13px;
 	border-radius: .25rem;
-	background: #0A5220;
+	background: #04AA6B;
 	color: #fff !important;
 	padding: 10px 27px;
 	border-radius: 30px;
@@ -3864,7 +3857,7 @@ Version:1.0
 	margin-top:40px;
 }
 .about-us .about-content .button .btn{
-	background:#0A5220;
+	background:#04AA6B;
 	color:#fff;
 	margin-right:15px;
 }
@@ -3877,7 +3870,7 @@ Version:1.0
 	color:#fff;
 }
 .about-us .about-content .button .btn.primary:hover{
-	background:#0A5220;
+	background:#04AA6B;
 	color:#fff;
 }
 .about-us .about-content .button .btn:last-child{
@@ -4112,7 +4105,7 @@ Version:1.0
 	text-shadow: none;
 	font-size: 14px;
 	border: none;
-	color: #0A5220;
+	color: #04AA6B;
 	background: transparent;
 	padding: 0 70px 0 20px;
 	-webkit-transition: all 0.4s ease;
@@ -4134,7 +4127,7 @@ Version:1.0
 	border: none;
 	font-size: 14px;
 	color: #fff;
-	background: #0A5220;
+	background: #04AA6B;
 	-webkit-transition: all 0.4s ease;
 	-moz-transition: all 0.4s ease;
 	transition: all 0.4s ease;
