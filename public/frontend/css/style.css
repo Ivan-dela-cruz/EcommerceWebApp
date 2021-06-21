@@ -1544,10 +1544,10 @@ Version:1.0
 	padding-left: 35px;
 }
 .small-banner .single-banner h3 {
-	font-size: 22px;
-	font-weight: 700;
+	font-size: 42px;
+	font-weight: 900;
 	text-transform: capitalize;
-	color: #333;
+	color: #fff;
 }
 .small-banner .single-banner h3 span{
 	color:#F7941D;
@@ -1560,14 +1560,14 @@ Version:1.0
 	text-transform: capitalize;
 }
 .small-banner .single-banner a {
-	color: #04AA6B;
+	color: #fff;
 	margin-top: 22px;
 	display: block;
-	font-size: 12px;
-	font-weight:500;
+	font-size: 16px;
+	font-weight:700;
 	display: inline-block;
-	text-transform:uppercase;
-	border-bottom:2px solid #04AA6B;
+	
+	border-bottom:2px solid #fff;
 }
 .small-banner .single-banner a:hover{
 	color:#F7941D;

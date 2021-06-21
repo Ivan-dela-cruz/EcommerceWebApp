@@ -83,7 +83,7 @@
                     @endif
                     <div class="content">
                         <h3>{{$cat->title}}</h3>
-                        <a href="{{route('product-cat',$cat->slug)}}">Descubrir</a>
+                        <a href="{{route('product-cat',$cat->slug)}}">Ir al catálogo</a>
                     </div>
                 </div>
             </div>
@@ -212,7 +212,7 @@
                     <img src="{{$photo[0]}}" alt="{{$photo[0]}}">
                     <div class="content">
                         <p>{{$data->cat_info['title']}}</p>
-                        <h3>{{$data->title}} <br>Up to<span> {{$data->discount}}%</span></h3>
+                        <h3>{{$data->title}} <br><span> {{$data->discount}}%</span> <span style="text-transform: lowercase;"> de ahorro</span> </h3>
                         <a href="{{route('product-detail',$data->slug)}}">Comprar Ahora</a>
                     </div>
                 </div>
