@@ -25,6 +25,7 @@ class CreateWishlistsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('SET NULL');
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('SET NULL');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

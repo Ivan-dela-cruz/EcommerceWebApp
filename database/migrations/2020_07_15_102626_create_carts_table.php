@@ -26,6 +26,7 @@ class CreateCartsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('SET NULL');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -23,6 +23,7 @@ class CreateMessagesTable extends Migration
             $table->longText('message');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

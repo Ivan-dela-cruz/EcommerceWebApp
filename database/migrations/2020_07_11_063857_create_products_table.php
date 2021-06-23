@@ -34,6 +34,7 @@ class CreateProductsTable extends Migration
             $table->foreign('cat_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->foreign('child_cat_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

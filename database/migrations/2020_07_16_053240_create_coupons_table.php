@@ -20,6 +20,7 @@ class CreateCouponsTable extends Migration
             $table->decimal('value',20,2);
             $table->enum('status',['active','inactive'])->default('inactive');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

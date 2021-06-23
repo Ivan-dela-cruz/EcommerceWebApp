@@ -4,23 +4,23 @@
 
 @section('main-content')
 <div class="card">
-  <h5 class="card-header">Comment Edit</h5>
+  <h5 class="card-header">Editar Comentario</h5>
   <div class="card-body">
     <form action="{{route('comment.update',$comment->id)}}" method="POST">
       @csrf
       @method('PATCH')
       <div class="form-group">
-        <label for="name">By:</label>
+        <label for="name">Por:</label>
         <input type="text" disabled class="form-control" value="{{$comment->user_info->name}}">
       </div>
       <div class="form-group">
-        <label for="comment">comment</label>
+        <label for="comment">Comentario</label>
       <textarea name="comment" id="" cols="20" rows="10" class="form-control">{{$comment->comment}}</textarea>
       </div>
       <div class="form-group">
-        <label for="status">Status :</label>
+        <label for="status">Estado :</label>
         <select name="status" id="" class="form-control">
-          <option value="">--Select Status--</option>
+          <option value="">--Seleccionar--</option>
           <option value="active" {{(($comment->status=='active')? 'selected' : '')}}>Active</option>
           <option value="inactive" {{(($comment->status=='inactive')? 'selected' : '')}}>Inactive</option>
         </select>

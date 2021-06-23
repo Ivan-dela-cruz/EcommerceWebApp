@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Settings;
 use App\User;
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
@@ -36,10 +37,14 @@ class AuthController extends Controller
         $user = Auth::user();
         $customer = Customer::where('user_id', $user->id)->first();
 
-        $user->name = $customer->name." ".$customer->last_name;
-        $user->dni = $customer->num_document;
-        $user->phone = $customer->phone;
-        $user->address = $customer->address;
+        if (isset($customer)) {
+            $user->name = $customer->name . " " . $customer->last_name;
+            $user->dni = $customer->num_document;
+            $user->phone = $customer->phone;
+            $user->address = $customer->address;
+        }
+
+
 //        $user->photo = $user->photo;
         //LIMPIAR DATA DE USER
         unset($user["email_verified_at"]);
@@ -66,22 +71,15 @@ class AuthController extends Controller
         }
 
         $encriptedPass = Hash::make($request->password);
-//        $exist = User::where('email', $request->email)->get();
-//
-//        if (count($exist)>0){
-//            return response()->json([
-//                'success' => false,
-//                'message' => 'El usuario o correo  ya existe.',
-//            ],200);
-//        }
 
         $rules = [
             'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
-            'username'  => 'required',
+            'username' => 'required',
+            'address' => 'required',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|numeric|digits:10',
-            'password' => ['required', 'min:8','confirmed'],
+            'password' => ['required', 'min:8', 'confirmed'],
             'password_confirmation' => 'required'
         ];
         $messages = [
@@ -94,6 +92,7 @@ class AuthController extends Controller
             'email.email' => 'Campo incorrecto.',
             'email.unique' => 'Correo en uso.',
             'phone.required' => 'Campo obligatorio.',
+            'address.required' => 'Campo obligatorio.',
             'phone.numeric' => 'Campo incorrecto.',
             'phone.digits' => 'Campo incorrecto.',
             'password.required' => 'Campo obligatorio.',
@@ -167,49 +166,115 @@ class AuthController extends Controller
         }
     }
 
-    public function profileUser(Request $request)
+    public function updateProfile(Request $request)
     {
         $user = User::find(Auth::user()->id);
-        $aux = Customer::where('id', '<>', $user->id)
-            ->where('num_document', $request->ci)->get();
-        if (count($aux) > 0) {
+        $data = [];
+
+        $customer = Customer::where('user_id', $user->id)->first();
+        if(isset($customer)){
+            $rules = [
+                'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+                'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+                'phone' => 'required|numeric|digits:10',
+                'address' => 'required'
+            ];
+            $messages = [
+                'name.required' => 'Campo obligatorio.',
+                'name.regex' => 'Campo incorrecto.',
+                'last_name.required' => 'Campo obligatorio.',
+                'last_name.regex' => 'Campo incorrecto.',
+                'phone.required' => 'Campo obligatorio.',
+                'phone.numeric' => 'Campo incorrecto.',
+                'phone.digits' => 'Campo incorrecto.',
+                'address.required' => 'Campo obligatorio.'
+            ];
+        }else{
+            $rules = [
+                'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+                'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            ];
+            $messages = [
+                'name.required' => 'Campo obligatorio.',
+                'name.regex' => 'Campo incorrecto.',
+                'last_name.required' => 'Campo obligatorio.',
+                'last_name.regex' => 'Campo incorrecto.',
+            ];
+        }
+
+
+        $dataValidate = Validator::make($request->all(), $rules, $messages);
+
+        $errors = $dataValidate->fails();
+        $list = new Collection();
+//        dd($dataValidate->errors()->toJson());
+        if ($errors) {
+            foreach ($dataValidate->errors()->toArray() as $k => $v) {
+                $item = [
+                    'input' => $k,
+                    'value' => $v[0],
+                ];
+
+                $list->push($item);
+            }
+//            dd($list);
             return response()->json([
                 'success' => false,
-                'message' => 'La cédula ya esta en uso.',
+                'errors' => $list
+            ]);
+        } else {
+            $temp_image = $user->photo;
+            $data_user = [
+                'name' => $request->name . " " . $request->last_name,
+            ];
+            $user->update($data_user);
+
+            if ($request->url_image) {
+                if ($user->photo != $request->url_image) {
+                    $user->photo = $this->uploadImage($request, $temp_image);
+                }
+            } else {
+                $user->photo = $temp_image;
+            }
+                $user->save();
+
+//            $customer = Customer::where('user_id', $user->id)->first();
+            if (isset($customer)) {
+                $customer->name = $request->name;
+                $customer->last_name = $request->last_name;
+                $customer->phone = $request->phone;
+                $customer->address = $request->address;
+                $customer->save();
+            }
+
+            $data = [
+                'id' => $user->id,
+                'name' => isset($customer) ? $customer->name . ' ' . $customer->last_name : $user->name,
+                'email' => $user->email,
+                'phone' => isset($customer) ? $customer->phone : 'N/D',
+                'photo' => $user->photo,
+                'address' => isset($customer) ? $customer->address : 'N/D'
+            ];
+
+            return response()->json([
+                'success' => true,
+                'user' => $data
             ], 200);
         }
 
-        $user = User::find(Auth::user()->id);
-        $customer = Customer::where('id', $user->id)->first();
-        $img_temp = $customer->photo;
-
-        $customer->name = $request->name;
-        $customer->num_document = $request->ci;
-        $customer->phone = $request->phone;
-        $customer->address = $request->address;
-
-        if ($request->photo) {
-            if ($customer->photo != $request->photo) {
-                $this->destroyFile($customer->photo);
-                $customer->photo = $this->UploadImage($request, $img_temp);
-            }
-        }
-
-        $customer->save();
-
-        return response()->json([
-            'success' => true,
-            // 'photo' => $user->photo,
-            //'name' => $user->name,
-            //'last_name' => $user->last_name
-        ], 200);
     }
 
     public function getProfile(Request $request)
     {
+        $profile = [];
         try {
             $user = User::find(Auth::user()->id);
-            $profile = Customer::where('user_id', $user->id)->first();
+            $customer = Customer::where('user_id', $user->id)->first();
+            if (isset($customer)) {
+                $profile = $customer;
+            } else {
+                $profile = Settings::first(['id', 'address', 'phone']);
+            }
             if (is_null($user)) {
                 return response()->json([
                     'success' => false,
@@ -237,33 +302,83 @@ class AuthController extends Controller
         }
     }
 
-    public function ChangePassword(Request $request)
+//    public function ChangePassword(Request $request)
+//    {
+//        try {
+//            $user = User::find(Auth::user()->id);
+//            if (is_null($user)) {
+//                return response()->json([
+//                    'success' => false,
+//                    'code' => 'USER_NOT_FOUND',
+//                    'status' => 404,
+//                ], 404);
+//            } else {
+//                $user->password = $this->generatePassword($request->password);
+//                $user->update();
+//                return response()->json([
+//                    'success' => true,
+//                    'code' => 'PASSWORD_CHANGED',
+//                    'status' => 200,
+//                    'user' => $user,
+//                ], 200);
+//            }
+//        } catch (Exception $e) {
+//            return response()->json([
+//                'success' => false,
+//                'code' => 'ERROR_CHANGE_PASSWORD',
+//                'status' => 500,
+//            ], 500);
+//        }
+//
+//    }
+
+    public function changePassword(Request $request)
     {
-        try {
-            $user = User::find(Auth::user()->id);
-            if (is_null($user)) {
-                return response()->json([
-                    'success' => false,
-                    'code' => 'USER_NOT_FOUND',
-                    'status' => 404,
-                ], 404);
-            } else {
-                $user->password = $this->generatePassword($request->password);
-                $user->update();
-                return response()->json([
-                    'success' => true,
-                    'code' => 'PASSWORD_CHANGED',
-                    'status' => 200,
-                    'user' => $user,
-                ], 200);
+
+        $user = User::find(Auth::user()->id);
+
+        $rules = [
+            'password' => 'required|confirmed|min:8',
+            'password_confirmation' => 'required'
+        ];
+
+        $messages = [
+            'password.required' => 'Campo obligatorio.',
+            'password.min' => 'Contraseña demasiado corta.',
+            'password_confirmation.required' => 'Campo obligatorio.',
+            'password.confirmed' => 'No se ha confirmado la contraseña.'
+        ];
+
+        $dataValidate = Validator::make($request->all(), $rules, $messages);
+
+        $errors = $dataValidate->fails();
+        $list = new Collection();
+//        dd($dataValidate->errors()->toJson());
+        if ($errors) {
+            foreach ($dataValidate->errors()->toArray() as $k => $v) {
+                $item = [
+                    'input' => $k,
+                    'value' => $v[0],
+                ];
+                $list->push($item);
             }
-        } catch (Exception $e) {
+
             return response()->json([
                 'success' => false,
-                'code' => 'ERROR_CHANGE_PASSWORD',
-                'status' => 500,
-            ], 500);
+                'errors' => $list
+            ]);
+        } else {
+            $user->password = Hash::make($request->password);
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'code' => 'PASSWORD_CHANGED',
+                'status' => 200,
+                'user' => $user,
+            ], 200);
         }
+
 
     }
 
@@ -272,7 +387,6 @@ class AuthController extends Controller
         $user_password = Hash::make($password);
         return $user_password;
     }
-
 
     public function UploadImage(Request $request, $temp_img)
     {
@@ -285,9 +399,9 @@ class AuthController extends Controller
             }
         }
 
-        if ($request->photo && $request->photo != $temp_img) {
+        if ($request->url_image && $request->url_image != $temp_img) {
             $foto = time() . '.jpg';
-            file_put_contents('img/users/' . $foto, base64_decode($request->photo));
+            file_put_contents('img/users/' . $foto, base64_decode($request->url_image));
             return $url_file . $foto;
 
         } else {

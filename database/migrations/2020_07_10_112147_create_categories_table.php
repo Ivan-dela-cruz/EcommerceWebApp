@@ -26,6 +26,7 @@ class CreateCategoriesTable extends Migration
             $table->foreign('parent_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->foreign('added_by')->references('id')->on('users')->onDelete('SET NULL');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

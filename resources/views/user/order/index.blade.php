@@ -9,7 +9,7 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Order Lists</h6>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Lista de Pedidos</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -18,34 +18,34 @@
           <thead>
             <tr>
               <th>S.N.</th>
-              <th>Order No.</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Quantity</th>
-              <th>Charge</th>
-              <th>Total Amount</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th>Pedido No.</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Cantidad</th>
+              <th>Cargo</th>
+              <th>Total</th>
+              <th>Estado</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
               <th>S.N.</th>
-              <th>Order No.</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Quantity</th>
-              <th>Charge</th>
-              <th>Total Amount</th>
-              <th>Status</th>
-              <th>Action</th>
+                <th>Pedido No.</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Cantidad</th>
+                <th>Cargo</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acción</th>
               </tr>
           </tfoot>
           <tbody>
-            @foreach($orders as $order)  
+            @foreach($orders as $order)
             @php
                 $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->pluck('price');
-            @endphp  
+            @endphp
                 <tr>
                     <td>{{$order->id}}</td>
                     <td>{{$order->order_number}}</td>
@@ -68,18 +68,18 @@
                     <td>
                         <a href="{{route('user.order.show',$order->id)}}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
                         <form method="POST" action="{{route('user.order.delete',[$order->id])}}">
-                          @csrf 
+                          @csrf
                           @method('delete')
                               <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
         <span style="float:right">{{$orders->links()}}</span>
         @else
-          <h6 class="text-center">No orders found!!! Please order some products</h6>
+          <h6 class="text-center">No se encontraron pedidos !!! Por favor pida algunos productos</h6>
         @endif
       </div>
     </div>
@@ -106,7 +106,7 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
+
       $('#order-dataTable').DataTable( {
             "columnDefs":[
                 {
@@ -119,7 +119,7 @@
         // Sweet alert
 
         function deleteData(id){
-            
+
         }
   </script>
   <script>
@@ -135,8 +135,8 @@
               // alert(dataID);
               e.preventDefault();
               swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this data!",
+                    title: "¿Estas seguro?",
+                    text: "¡Una vez eliminados, no podrá recuperar estos datos!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -145,7 +145,7 @@
                     if (willDelete) {
                        form.submit();
                     } else {
-                        swal("Your data is safe!");
+                        swal("¡Tus datos están seguros!");
                     }
                 });
           })

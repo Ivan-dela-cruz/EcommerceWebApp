@@ -21,9 +21,9 @@ Route::namespace('Api')->group(function () {
     Route::post('login', 'AuthController@login');
     Route::post('register', 'AuthController@register');
     Route::get('logout', 'AuthController@logout');
-    Route::post('save-profile-user', 'AuthController@profileUser')->name('save-profile-user')->middleware('jwtAuth');
+    Route::post('save-profile-user', 'AuthController@updateProfile')->name('save-profile-user')->middleware('jwtAuth');
     Route::get('get-profile','AuthController@getProfile')->name('profile')->middleware('jwtAuth');
-    Route::post('change-password','AuthController@ChangePassword')->name('change-password')->middleware('jwtAuth');
+    Route::post('change-password','AuthController@changePassword')->name('change-password')->middleware('jwtAuth');
 
     //rutas para los sliders
     Route::get('sliders','SliderController@sliders');

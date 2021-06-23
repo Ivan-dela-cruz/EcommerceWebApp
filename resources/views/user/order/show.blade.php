@@ -12,14 +12,14 @@
       <thead>
         <tr>
             <th>S.N.</th>
-            <th>Order No.</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Quantity</th>
-            <th>Charge</th>
-            <th>Total Amount</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>Pedido No.</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Cantidad</th>
+            <th>Cargo</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Acción</th>
         </tr>
       </thead>
       <tbody>
@@ -62,14 +62,14 @@
         <div class="row">
           <div class="col-lg-6 col-lx-4">
             <div class="order-info">
-              <h4 class="text-center pb-4">Información de la orden</h4>
+              <h4 class="text-center pb-4">INFORMACIÓN DEL PEDIDO</h4>
               <table class="table">
                     <tr class="">
-                        <td>Número</td>
+                        <td>Número de Pedido</td>
                         <td> : {{$order->order_number}}</td>
                     </tr>
                     <tr>
-                        <td>Fecha</td>
+                        <td>Fecha de Pedido</td>
                         <td> : {{$order->created_at->format('D d M, Y')}} at {{$order->created_at->format('g : i a')}} </td>
                     </tr>
                     <tr>
@@ -77,32 +77,32 @@
                         <td> : {{$order->quantity}}</td>
                     </tr>
                     <tr>
-                        <td>Estado</td>
+                        <td>Estado de Pedido</td>
                         <td> : {{$order->status}}</td>
                     </tr>
                     <tr>
                       @php
                           $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->value('price');
                       @endphp
-                        <td>Cargo</td>
+                        <td>Costo de envío</td>
                           <td> :
-                            @if(is_null($shipping_charge)) 
+                            @if(is_null($shipping_charge))
                             $ 0
                             @else
                             $ {{number_format($shipping_charge[0],2)}}
-                            @endif 
+                            @endif
                           </td>
-                          
+
                         </td>
                     </tr>
                     <tr>
-                        <td>Total </td>
-                        <td> : 
+                        <td>Total</td>
+                        <td> :
                           @if(is_null($shipping_charge))
-                            $ 0 
+                            $ 0
                           @else
-                          $ {{number_format($order->total_amount,2)}} 
-                          @endif 
+                          $ {{number_format($order->total_amount,2)}}
+                          @endif
                         </td>
                     </tr>
                     <tr>
@@ -110,7 +110,7 @@
                       <td> : @if($order->payment_method=='cod') Cash on Delivery @else Paypal @endif</td>
                     </tr>
                     <tr>
-                        <td>Payment Status</td>
+                        <td>Estado de Pago</td>
                         <td> : {{$order->payment_status}}</td>
                     </tr>
               </table>
@@ -119,30 +119,30 @@
 
           <div class="col-lg-6 col-lx-4">
             <div class="shipping-info">
-              <h4 class="text-center pb-4">SHIPPING INFORMATION</h4>
+              <h4 class="text-center pb-4">INFORMACIÓN DE ENVÍO</h4>
               <table class="table">
                     <tr class="">
-                        <td>Full Name</td>
+                        <td>Nombre Completo</td>
                         <td> : {{$order->first_name}} {{$order->last_name}}</td>
                     </tr>
                     <tr>
-                        <td>Email</td>
+                        <td>Correo</td>
                         <td> : {{$order->email}}</td>
                     </tr>
                     <tr>
-                        <td>Phone No.</td>
+                        <td>Teléfono</td>
                         <td> : {{$order->phone}}</td>
                     </tr>
                     <tr>
-                        <td>Address</td>
+                        <td>Dirección</td>
                         <td> : {{$order->address1}}, {{$order->address2}}</td>
                     </tr>
                     <tr>
-                        <td>Country</td>
+                        <td>País</td>
                         <td> : {{$order->country}}</td>
                     </tr>
                     <tr>
-                        <td>Post Code</td>
+                        <td>Código Postal</td>
                         <td> : {{$order->post_code}}</td>
                     </tr>
               </table>
