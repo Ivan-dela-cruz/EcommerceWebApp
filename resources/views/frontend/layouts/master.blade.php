@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-	@include('frontend.layouts.head')	
+	@include('frontend.layouts.head')
 </head>
+
 <body class="js">
-	
+
 	<!-- Preloader -->
 	<div class="preloader">
 		<div class="preloader-inner">
@@ -15,7 +17,7 @@
 		</div>
 	</div>
 	<!-- End Preloader -->
-	
+
 	@include('frontend.layouts.notification')
 	<!-- Header -->
 	@include('frontend.layouts.header')
@@ -25,4 +27,5 @@
 	@include('frontend.layouts.footer')
 
 </body>
+
 </html>

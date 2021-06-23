@@ -106,7 +106,7 @@
                         </td>
                     </tr>
                     <tr>
-                      <td>Método de Pago</td>
+                      <td>Método de pago</td>
                       <td> : @if($order->payment_method=='cod') Cash on Delivery @else Paypal @endif</td>
                     </tr>
                     <tr>

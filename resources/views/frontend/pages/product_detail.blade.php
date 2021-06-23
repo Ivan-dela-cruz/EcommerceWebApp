@@ -14,7 +14,7 @@
 	<meta property="og:image" content="{{$product_detail->photo}}">
 	<meta property="og:description" content="{{$product_detail->description}}">
 @endsection
-@section('title','E-SHOP || PRODUCT DETAIL')
+@section('title','Aspralnues || Detalle Producto')
 @section('main-content')
 
 		<!-- Breadcrumbs -->
@@ -25,7 +25,7 @@
 						<div class="bread-inner">
 							<ul class="bread-list">
 								<li><a href="{{route('home')}}">Inicio<i class="ti-arrow-right"></i></a></li>
-								<li class="active"><a href="">tienda</a></li>
+								<li class="active"><a href="">Tienda</a></li>
 							</ul>
 						</div>
 					</div>
@@ -109,7 +109,25 @@
 															// dd($sizes);
 														@endphp
 														@foreach($sizes as $size)
-														<li><a href="#" class="one">{{$size}}</a></li>
+														<li>
+															<a href="#" class="one">
+																@switch($size)
+																	@case("S")
+																		Pequeño
+																		@break
+																	@case("M")
+																		Mediano
+																		@break
+																	@case("L")
+																		Grande
+																		@break
+																	@case("XL")
+																		Extra Grande
+																		@break
+																@endswitch
+																
+															</a>
+														</li>
 														@endforeach
 													</ul>
 												</div>

@@ -1,6 +1,6 @@
 
 <!-- Start Shop Newsletter  -->
-<section class="shop-newsletter section">
+<section style="margin-top:-130px;" class="shop-newsletter section">
     <div class="container">
         <div class="inner-top">
             <div class="row">
