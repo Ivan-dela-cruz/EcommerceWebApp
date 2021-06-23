@@ -24,6 +24,7 @@ class CreatePostCommentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('SET NULL');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('SET NULL');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

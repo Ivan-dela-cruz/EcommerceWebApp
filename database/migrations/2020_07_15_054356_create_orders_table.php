@@ -38,6 +38,7 @@ class CreateOrdersTable extends Migration
             $table->string('url_file')->nullable();
             $table->string('ticket_url')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

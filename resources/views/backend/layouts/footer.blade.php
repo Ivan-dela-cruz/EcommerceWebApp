@@ -55,7 +55,11 @@
   <!-- Page level custom scripts -->
   {{-- <script src="{{asset('backend/js/demo/chart-area-demo.js')}}"></script> --}}
   {{-- <script src="{{asset('backend/js/demo/chart-pie-demo.js')}}"></script> --}}
-  <script type="text/javascript" src="{{ asset('backend/languages.json') }}"></script> 
+  <script type="text/javascript" src="{{ asset('backend/languages.json') }}"></script>
+      @livewireScripts
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+      </script>
+      <x-livewire-alert::scripts />
   @stack('scripts')
 
   <script>

@@ -30,6 +30,7 @@ class CreatePostsTable extends Migration
             $table->foreign('post_tag_id')->references('id')->on('post_tags')->onDelete('SET NULL');
             $table->foreign('added_by')->references('id')->on('users')->onDelete('SET NULL');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

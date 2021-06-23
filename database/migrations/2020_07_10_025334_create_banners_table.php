@@ -21,6 +21,7 @@ class CreateBannersTable extends Migration
             $table->text('description')->nullable();
             $table->enum('status',['active','inactive'])->default('inactive');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

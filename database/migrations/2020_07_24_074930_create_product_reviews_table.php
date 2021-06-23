@@ -23,6 +23,7 @@ class CreateProductReviewsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('SET NULL');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('SET NULL');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

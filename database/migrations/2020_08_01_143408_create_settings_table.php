@@ -23,6 +23,7 @@ class CreateSettingsTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

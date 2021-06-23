@@ -182,7 +182,7 @@
         </div>
     </li>
 
-   
+
       <!-- Comments -->
       <li class="nav-item">
         <a class="nav-link" href="{{route('comment.index')}}">
@@ -190,8 +190,8 @@
             <span>Comentarios</span>
         </a>
       </li>
-    
-      
+
+
 
 
     <!-- Divider -->
@@ -206,8 +206,14 @@
           <i class="fas fa-table"></i>
           <span>Cupones</span></a>
     </li>
-   
-    
+
+    <!-- Suppliers -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('suppliers.index')}}">
+            <i class="fas fa-users"></i>
+            <span>Proveedores</span></a>
+    </li>
+
      <!-- Users -->
      <li class="nav-item">
         <a class="nav-link" href="{{route('users.index')}}">
