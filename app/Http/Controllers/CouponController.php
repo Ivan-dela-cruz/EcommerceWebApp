@@ -45,7 +45,7 @@ class CouponController extends Controller
         $data=$request->all();
         $status=Coupon::create($data);
         if($status){
-            request()->session()->flash('success','Coupon Successfully added');
+            request()->session()->flash('success','Cupón registrado con exíto');
         }
         else{
             request()->session()->flash('error','Please try again!!');
@@ -97,16 +97,16 @@ class CouponController extends Controller
             'status'=>'required|in:active,inactive'
         ]);
         $data=$request->all();
-        
+
         $status=$coupon->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Coupon Successfully updated');
+            request()->session()->flash('success','Cupón actualizado con exíto');
         }
         else{
             request()->session()->flash('error','Please try again!!');
         }
         return redirect()->route('coupon.index');
-        
+
     }
 
     /**
@@ -121,7 +121,7 @@ class CouponController extends Controller
         if($coupon){
             $status=$coupon->delete();
             if($status){
-                request()->session()->flash('success','Coupon successfully deleted');
+                request()->session()->flash('success','Cupón eliminado con exíto');
             }
             else{
                 request()->session()->flash('error','Error, Please try again');
@@ -150,7 +150,7 @@ class CouponController extends Controller
                 'code'=>$coupon->code,
                 'value'=>$coupon->discount($total_price)
             ]);
-            request()->session()->flash('success','Coupon successfully applied');
+            request()->session()->flash('success','Cupón aplicado con exito');
             return redirect()->back();
         }
     }
