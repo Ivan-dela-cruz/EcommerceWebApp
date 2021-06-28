@@ -81,10 +81,10 @@ class ProductController extends Controller
         // return $data;
         $status=Product::create($data);
         if($status){
-            request()->session()->flash('success','Product Successfully added');
+            request()->session()->flash('success','Producto agregado exitosamente');
         }
         else{
-            request()->session()->flash('error','Please try again!!');
+            request()->session()->flash('error','¡¡Inténtalo de nuevo!!');
         }
         return redirect()->route('product.index');
 
@@ -155,13 +155,14 @@ class ProductController extends Controller
         else{
             $data['size']='';
         }
+//        dd($data);
         // return $data;
         $status=$product->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Product Successfully updated');
+            request()->session()->flash('success','Producto actualizado con éxito');
         }
         else{
-            request()->session()->flash('error','Please try again!!');
+            request()->session()->flash('error','¡¡Inténtalo de nuevo!!');
         }
         return redirect()->route('product.index');
     }
@@ -176,12 +177,12 @@ class ProductController extends Controller
     {
         $product=Product::findOrFail($id);
         $status=$product->delete();
-        
+
         if($status){
-            request()->session()->flash('success','Product successfully deleted');
+            request()->session()->flash('success','Producto eliminado con éxito');
         }
         else{
-            request()->session()->flash('error','Error while deleting product');
+            request()->session()->flash('error','Error al eliminar el producto');
         }
         return redirect()->route('product.index');
     }

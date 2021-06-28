@@ -172,6 +172,18 @@
 
                                             <li class="{{Request::path()=='contact' ? 'active' : ''}}"><a
                                                     href="{{route('contact')}}">Contacto</a></li>
+
+                                            @if (Route::has('login'))
+                                                @auth
+                                                    <li class=""><a
+                                                            href="{{route('admin')}}">{{\Illuminate\Support\Facades\Auth::user()->name}}</a></li>
+                                                    @else
+                                                    <li class="{{Request::path()=='user/login' ? 'active' : ''}}"><a
+                                                            href="{{route('login.form')}}">Iniciar Sesión</a></li>
+                                                    <li class="{{Request::path()=='user/register' ? 'active' : ''}}"><a
+                                                            href="{{route('register.form')}}">Registrarse</a></li>
+                                                @endauth
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

@@ -64,7 +64,7 @@
 
         <div class="form-group">
           <label for="price" class="col-form-label">Precio <span class="text-danger">*</span></label>
-          <input id="price" type="number" name="price" placeholder="Ingrese el precio"  value="{{$product->price}}" class="form-control">
+          <input id="price" type="text" name="price" placeholder="Ingrese el precio"  value="{{number_format($product->price,2,".","")}}" class="form-control">
           @error('price')
           <span class="text-danger">{{$message}}</span>
           @enderror
@@ -86,10 +86,8 @@
                 $data=explode(',',$item->size);
                 // dd($data);
                 @endphp
-              <option value="S"  @if( in_array( "S",$data ) ) selected @endif>Pequeño</option>
-              <option value="M"  @if( in_array( "M",$data ) ) selected @endif>Mediano</option>
-              <option value="L"  @if( in_array( "L",$data ) ) selected @endif>Grande</option>
-              <option value="XL"  @if( in_array( "XL",$data ) ) selected @endif>Extra Grande</option>
+              <option value="P"  @if( in_array( "P",$data ) ) selected @endif>Pequeño (P)</option>
+              <option value="G"  @if( in_array( "G",$data ) ) selected @endif>Grande (G)</option>
               @endforeach
           </select>
         </div>
@@ -111,7 +109,7 @@
               <option value="Nuevo" {{(($product->condition=='Nuevo')? 'selected':'')}}>Nuevo</option>
               <option value="Oferta" {{(($product->condition=='Oferta')? 'selected':'')}}>Oferta</option>
               <option value="Promoción" {{(($product->condition=='Promoción')? 'selected':'')}}>Promoción</option>
-             
+
           </select>
         </div>
 

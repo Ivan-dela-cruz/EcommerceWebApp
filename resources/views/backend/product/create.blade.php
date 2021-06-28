@@ -60,7 +60,7 @@
 
         <div class="form-group">
           <label for="price" class="col-form-label">Precio <span class="text-danger">*</span></label>
-          <input id="price" type="number" name="price" placeholder="Ingrese el precio"  value="{{old('price')}}" class="form-control">
+          <input id="price" type="text" name="price" placeholder="Ingrese el precio"  value="{{old('price')}}" class="form-control">
           @error('price')
           <span class="text-danger">{{$message}}</span>
           @enderror
@@ -77,10 +77,8 @@
           <label for="size">Tamaño</label>
           <select name="size[]" class="form-control selectpicker"  multiple data-live-search="true">
               <option value="">--Seleccionar--</option>
-              <option value="S">Pequeño (S)</option>
-              <option value="M">Mediano (M)</option>
-              <option value="L">Grande (L)</option>
-              <option value="XL">Extra Grande (XL)</option>
+              <option value="P">Pequeño (P)</option>
+              <option value="G">Grande (G)</option>
           </select>
         </div>
 

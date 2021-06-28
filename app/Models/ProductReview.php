@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductReview extends Model
 {
+    use SoftDeletes;
     protected $fillable=['user_id','product_id','rate','review','status'];
 
     public function user_info(){
@@ -18,5 +20,5 @@ class ProductReview extends Model
     public static function getAllUserReview(){
         return ProductReview::where('user_id',auth()->user()->id)->with('user_info')->paginate(10);
     }
-    
+
 }
