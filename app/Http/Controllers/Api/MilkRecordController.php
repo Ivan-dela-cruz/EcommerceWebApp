@@ -62,7 +62,7 @@ class MilkRecordController extends Controller
 
     public function milkRecorder(Request $request)
     {
-        Log::debug('TIME ====>>'.$request->time_milk_record);
+        Log::debug('TIME ====>>' . $request->time_milk_record);
         $now = Carbon::now("America/Guayaquil");
         $date = $now->format('Y-m-d');
         $time = $now->format('H:i:s');
@@ -77,7 +77,7 @@ class MilkRecordController extends Controller
             $income->year = $year;
             $income->date = $date;
             $income->hour = $time;
-            $income->total_liters = 0;
+//            $income->total_liters = 0;
 //            $income->price = 0;
 
             //$income->status = $request->status;
@@ -93,14 +93,17 @@ class MilkRecordController extends Controller
         $milk_record->supplier_id = $supplier->id;
         $milk_record->total_liters = $request->total_liters;
         $milk_record->price = $request->price;
-        $milk_record->sub_total =$request->total_liters * $request->price;
+        $milk_record->sub_total = $request->total_liters * $request->price;
         $milk_record->year = $year;
         $milk_record->date = $date;
         $milk_record->hour = $time;
         $milk_record->save();
 
         ///TOTAL DE LITROS SUMATORIA
+        $total_price = MilkRecord::where('income__id', $income->id)->sum('sub_total');
+//        Log::debug("TOTAL_PRICE =====>>>>>" . $total_price);
         $income->total_liters = $income->total_liters + $request->total_liters;
+        $income->total_price = $total_price;
         $income->save();
         return $this->suppliersByMilkiRecords($request);
     }

@@ -20,4 +20,8 @@ class MilkRecord extends Model
         'hour',
         'status',
     ];
+
+    public function supplier(){
+        return $this->belongsTo(Supplier::class, 'supplier_id');
+}
 }

@@ -22,4 +22,8 @@ class Income extends Model
         'status_milk_record',
         'status',
     ];
+
+    public function milkRecord(){
+        return $this->hasMany(MilkRecord::class,'income_id');
+    }
 }

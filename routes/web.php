@@ -101,6 +101,8 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     })->name('file-manager');
     // suppliers route
     Route::resource('suppliers','SuppliersController');
+    //milk record route
+    Route::resource('milk-record','MilkRecordController');
 
     // user route
     Route::resource('users','UsersController');
