@@ -208,13 +208,30 @@
     </li>
 
     <!-- Suppliers -->
+
+
     <li class="nav-item">
-        <a class="nav-link" href="{{route('suppliers.index')}}">
-            <i class="fas fa-users"></i>
-            <span>Proveedores</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#supplierCollapse" aria-expanded="true" aria-controls="supplierCollapse">
+            <i class="fa fa-box-tissue"></i>
+            <span>Proveedores</span>
+        </a>
+        <div id="supplierCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Opciones de Proveedores:</h6>
+                <a class="collapse-item" href="{{route('suppliers.index')}}">Lista de Proveedores</a>
+                <a class="collapse-item" href="{{route('suppliers.create')}}">Agregar Proveedor</a>
+            </div>
+        </div>
     </li>
 
-     <!-- Users -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('milk-record.index')}}">
+            <i class="fas fa-table"></i>
+            <span>Registro de Leche</span></a>
+    </li>
+
+
+    <!-- Users -->
      <li class="nav-item">
         <a class="nav-link" href="{{route('users.index')}}">
             <i class="fas fa-users"></i>
