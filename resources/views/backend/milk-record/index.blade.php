@@ -43,7 +43,7 @@
                                 <td>{{\Carbon\Carbon::parse($data->date)->format('Y-m-d')}}</td>
                                 <td>{{\Carbon\Carbon::parse($data->hour)->format('H:i:s')}}</td>
                                 <td>{{$data->total_liters}}</td>
-                                <td>{{$data->total_price}}</td>
+                                <td>$&nbsp;{{number_format($data->total_price,2)}}</td>
                                 <td>
                                     <a href="{{route('milk-record.show',$data->id)}}" class="btn btn-primary btn-sm" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Detalle" data-placement="bottom"><i class="fas fa-eye"></i></a>
                                 </td>

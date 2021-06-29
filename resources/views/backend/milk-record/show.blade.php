@@ -21,7 +21,7 @@
                    </div>
                    <div class="col-md-6">
                        <h6><strong>Total de Litros:</strong>&nbsp;{{$income->total_liters}}</h6>
-                       <h6><strong>Precio Total:</strong>&nbsp;{{number_format($income->total_price,2)}}</h6>
+                       <h6><strong>Precio Total:</strong>&nbsp;$&nbsp;{{number_format($income->total_price,2)}}</h6>
                    </div>
                </div>
             </div>
@@ -45,7 +45,7 @@
                         <th>Total</th>
                         <td>{{number_format($income->total_liters)}}</td>
                         <th>&nbsp;</th>
-                        <td>{{number_format($income->total_price,2)}}</td>
+                        <td>$&nbsp;{{number_format($income->total_price,2)}}</td>
                     </tr>
                     </tfoot>
                     <tbody>
