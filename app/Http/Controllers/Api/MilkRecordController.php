@@ -100,7 +100,7 @@ class MilkRecordController extends Controller
         $milk_record->save();
 
         ///TOTAL DE LITROS SUMATORIA
-        $total_price = MilkRecord::where('income__id', $income->id)->sum('sub_total');
+        $total_price = MilkRecord::where('income_id', $income->id)->sum('sub_total');
 //        Log::debug("TOTAL_PRICE =====>>>>>" . $total_price);
         $income->total_liters = $income->total_liters + $request->total_liters;
         $income->total_price = $total_price;
