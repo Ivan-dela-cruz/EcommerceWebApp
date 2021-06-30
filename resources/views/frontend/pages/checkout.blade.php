@@ -74,9 +74,13 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>País<span>*</span></label>
-                                    <select name="country" id="country">
-                                        <option value="EC">Ecuador</option>
+                                    <select name="country" >
+                                        <option value="EC" selected>Ecuador</option>
                                     </select>
+                                    {{--
+                                        <input type="text" name="country" placeholder="" value="ECUADOR">
+                                        
+                                        --}}
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
@@ -164,7 +168,7 @@
                                 <div class="checkbox">
                                     {{-- <label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label> --}}
                                     <form-group>
-                                        <input name="payment_method" type="radio" value="cod"> <label> Cancelar al Repartidor</label><br>
+                                        <input name="payment_method" type="radio" checked value="cod"> <label> Cancelar al Repartidor</label><br>
                                         {{-- <input name="payment_method" type="radio" value="paypal"> <label> PayPal</label> --}}
                                     </form-group>
 

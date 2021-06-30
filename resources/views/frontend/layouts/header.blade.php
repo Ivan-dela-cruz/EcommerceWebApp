@@ -49,18 +49,20 @@
                     <div class="right-bar">
                         <!-- Search Form -->
                         <div class="sinlge-bar shopping">
-                            @php
-                            $total_prod=0;
-                            $total_amount=0;
-                            @endphp
-                            @if(session('wishlist'))
-                            @foreach(session('wishlist') as $wishlist_items)
-                            @php
-                            $total_prod+=$wishlist_items['quantity'];
-                            $total_amount+=$wishlist_items['amount'];
-                            @endphp
-                            @endforeach
-                            @endif
+                            <p hidden>
+                                @php
+                                $total_prod=0;
+                                $total_amount=0;
+                                @endphp
+                                @if(session('wishlist'))
+                                @foreach(session('wishlist') as $wishlist_items)
+                                @php
+                                $total_prod+=$wishlist_items['quantity'];
+                                $total_amount+=$wishlist_items['amount'];
+                                @endphp
+                                @endforeach
+                                @endif
+                            </p>
                             <a href="{{route('wishlist')}}" class="single-icon"><i class="fa fa-heart-o"></i> <span
                                     class="total-count">{{Helper::wishlistCount()}}</span></a>
                             <!-- Shopping Item -->
