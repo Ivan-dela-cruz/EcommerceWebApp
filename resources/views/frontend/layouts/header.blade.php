@@ -48,7 +48,8 @@
                 <div class="col-lg-2 col-md-3 col-12">
                     <div class="right-bar">
                         <!-- Search Form -->
-                        <div class="sinlge-bar shopping">
+                        {{-- 
+                            <div class="sinlge-bar shopping">
                             <p hidden>
                                 @php
                                 $total_prod=0;
@@ -103,8 +104,9 @@
                             @endauth
                             <!--/ End Shopping Item -->
                         </div>
+                        --}}
                         <div class="sinlge-bar">
-                            <a href="{{route('wishlist')}}" class="single-icon"><i class="fa fa-heart-o"
+                            <a href="{{route('wishlist')}}" class="single-icon"><i class="fa  fa-shopping-cart"
                                     aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar shopping">
