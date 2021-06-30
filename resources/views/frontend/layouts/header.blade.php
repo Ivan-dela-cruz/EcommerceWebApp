@@ -73,11 +73,13 @@
                                     <a href="{{route('wishlist')}}">Ver Listado</a>
                                 </div>
                                 <ul class="shopping-list">
-                                    {{Helper::getAllProductFromCart()}}
-                                    @foreach(Helper::getAllProductFromWishlist() as $data)
-                                    @php
-                                    $photo=explode(',',$data->product['photo']);
-                                    @endphp
+                                    <p hidden>
+                                        {{Helper::getAllProductFromCart()}}
+                                        @foreach(Helper::getAllProductFromWishlist() as $data)
+                                        @php
+                                        $photo=explode(',',$data->product['photo']);
+                                        @endphp
+                                    </p>
                                     <li>
                                         <a href="{{route('wishlist-delete',$data->id)}}" class="remove"
                                             title="Remove this item"><i class="fa fa-remove"></i></a>
