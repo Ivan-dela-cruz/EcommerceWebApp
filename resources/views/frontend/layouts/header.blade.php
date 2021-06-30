@@ -106,7 +106,7 @@
                         </div>
                         --}}
                         <div class="sinlge-bar">
-                            <a href="{{route('wishlist')}}" class="single-icon"><i style="color:#424242" class="fa  fa-shopping-basket"
+                            <a href="{{route('wishlist')}}" class="single-icon"><i  class="fa  fa-shopping-basket"
                                     aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar shopping">
