@@ -9,28 +9,24 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Lista de Productos</h6>
-      <a href="{{route('product.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Agregar Producto</a>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Stock de productos</h6>
+      <a href="{{route('product.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Crear Nuevo Producto</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
         @if(count($products)>0)
-        <table class="table table-bordered" id="product-dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered table-striped" id="product-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
               <th>N°</th>
               <th>Título</th>
               <th>Categoría</th>
-              <th>Visible</th>
               <th>Precio</th>
               <th>Descuento</th>
               <th>Tamaño</th>
-              <th>Condición</th>
               <th>Plataforma</th>
               <th>Cantidad</th>
-              <th>Foto</th>
               <th>Estado</th>
-              <th>Acción</th>
             </tr>
           </thead>
           
@@ -52,30 +48,24 @@
                         @endforeach
                       </sub>
                     </td>
-                    <td>{{(($product->is_featured==1)? 'Si': 'No')}}</td>
                     <td>$ {{$product->price}}</td>
                     <td>  {{$product->discount}}% </td>
-                    <td>{{$product->size}}</td>
-                    <td>{{$product->condition}}</td>
+                    <td>
+                      @if ($product->size == "P")
+                          Pequeño
+                      @else
+                          Grande
+                      @endif
+                    </td>
                     <td>@foreach($brands as $brand) {{$brand->title}} @endforeach</td>
                     <td>
-                      @if($product->stock>0)
+                      @if($product->stock>10)
                       <span class="badge badge-primary">{{$product->stock}}</span>
                       @else
                       <span class="badge badge-danger">{{$product->stock}}</span>
                       @endif
                     </td>
-                    <td>
-                        @if($product->photo)
-                            @php
-                              $photo=explode(',',$product->photo);
-                              // dd($photo);
-                            @endphp
-                            <img src="{{$photo[0]}}" class="img-fluid zoom" style="max-width:80px" alt="{{$product->photo}}">
-                        @else
-                            <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
-                        @endif
-                    </td>
+                    
                     <td>
                         @if($product->status=='active')
                             <span class="badge badge-success">{{$product->status}}</span>
@@ -83,34 +73,7 @@
                             <span class="badge badge-warning">{{$product->status}}</span>
                         @endif
                     </td>
-                    <td>
-                        <a href="{{route('product.edit',$product->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                    <form method="POST" action="{{route('product.destroy',[$product->id])}}">
-                      @csrf
-                      @method('delete')
-                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$product->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </form>
-                    </td>
-                    {{-- Delete Modal --}}
-                    {{-- <div class="modal fade" id="delModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="#delModal{{$user->id}}Label" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="#delModal{{$user->id}}Label">Delete user</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <form method="post" action="{{ route('categorys.destroy',$user->id) }}">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger" style="margin:auto; text-align:center">Parmanent delete user</button>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                    </div> --}}
+                    
                 </tr>
             @endforeach
           </tbody>
@@ -154,12 +117,6 @@
 
       $('#product-dataTable').DataTable( {
         "scrollX": false,
-        "columnDefs":[
-            {
-                "orderable":false,
-                "targets":[10,11,12]
-            }
-        ],
         "language":data
         } );
 
