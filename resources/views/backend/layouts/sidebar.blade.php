@@ -225,11 +225,19 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{route('milk-record.index')}}">
-            <i class="fas fa-table"></i>
-            <span>Registro de Leche</span></a>
-    </li>
-
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#productCollapse" aria-expanded="true" aria-controls="productCollapse">
+        <i class="fas fa-cubes"></i>
+        <span>Inventarios</span>
+      </a>
+      <div id="productCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Opciones de Inventarios:</h6>
+          <a class="collapse-item" href="{{route('inventory-products')}}">Productos</a>
+          <a class="collapse-item" href="{{route('inventory-orders')}}">Ordenes</a>
+          <a class="collapse-item" href="{{route('milk-record.index')}}">Registros de Leche</a>
+        </div>
+      </div>
+  </li>
 
     <!-- Users -->
      <li class="nav-item">
