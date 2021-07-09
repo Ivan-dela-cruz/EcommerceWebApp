@@ -38,10 +38,10 @@ class AdminController extends Controller
         $data=$request->all();
         $status=$user->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Successfully updated your profile');
+            request()->session()->flash('success','Su perfil ha sido actualizado con éxito');
         }
         else{
-            request()->session()->flash('error','Please try again!');
+            request()->session()->flash('error','¡Inténtalo de nuevo!');
         }
         return redirect()->back();
     }
@@ -68,10 +68,10 @@ class AdminController extends Controller
         // return $settings;
         $status=$settings->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Setting successfully updated');
+            request()->session()->flash('success','Configuración actualizada correctamente');
         }
         else{
-            request()->session()->flash('error','Please try again');
+            request()->session()->flash('error','¡Inténtalo de nuevo!');
         }
         return redirect()->route('admin');
     }
@@ -86,27 +86,27 @@ class AdminController extends Controller
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);
-   
+
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-   
-        return redirect()->route('admin')->with('success','Password successfully changed');
+
+        return redirect()->route('admin')->with('success','Contraseña cambiada correctamente');
     }
 
     // Pie chart
     public function userPieChart(Request $request){
         // dd($request->all());
         $data = User::select(\DB::raw("COUNT(*) as count"), \DB::raw("DAYNAME(created_at) as day_name"), \DB::raw("DAY(created_at) as day"))
-        ->where('created_at', '>', Carbon::today()->subDay(6))
-        ->groupBy('day_name','day')
-        ->orderBy('day')
-        ->get();
-     $array[] = ['Name', 'Number'];
-     foreach($data as $key => $value)
-     {
-       $array[++$key] = [$value->day_name, $value->count];
-     }
-    //  return $data;
-     return view('backend.index')->with('course', json_encode($array));
+            ->where('created_at', '>', Carbon::today()->subDay(6))
+            ->groupBy('day_name','day')
+            ->orderBy('day')
+            ->get();
+        $array[] = ['Name', 'Number'];
+        foreach($data as $key => $value)
+        {
+            $array[++$key] = [$value->day_name, $value->count];
+        }
+        //  return $data;
+        return view('backend.index')->with('course', json_encode($array));
     }
 
     // public function activity(){

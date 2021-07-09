@@ -37,14 +37,14 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,
-        [
-            'name'=>'string|required|max:30',
-            'email'=>'string|required|unique:users',
-            'password'=>'string|required',
-            'role'=>'required|in:admin,user',
-            'status'=>'required|in:active,inactive',
-            'photo'=>'nullable|string',
-        ]);
+            [
+                'name'=>'string|required|max:30',
+                'email'=>'string|required|unique:users',
+                'password'=>'string|required',
+                'role'=>'required|in:admin,user',
+                'status'=>'required|in:active,inactive',
+                'photo'=>'nullable|string',
+            ]);
         // dd($request->all());
         $data=$request->all();
         $data['password']=Hash::make($request->password);
@@ -52,10 +52,10 @@ class UsersController extends Controller
         $status=User::create($data);
         // dd($status);
         if($status){
-            request()->session()->flash('success','Successfully added user');
+            request()->session()->flash('success','Usuario agregado exitosamente');
         }
         else{
-            request()->session()->flash('error','Error occurred while adding user');
+            request()->session()->flash('error','Se produjo un error al agregar el usuario');
         }
         return redirect()->route('users.index');
 
@@ -95,23 +95,23 @@ class UsersController extends Controller
     {
         $user=User::findOrFail($id);
         $this->validate($request,
-        [
-            'name'=>'string|required|max:30',
-            'email'=>'string|required',
-            'role'=>'required|in:admin,user',
-            'status'=>'required|in:active,inactive',
-            'photo'=>'nullable|string',
-        ]);
+            [
+                'name'=>'string|required|max:30',
+                'email'=>'string|required',
+                'role'=>'required|in:admin,user',
+                'status'=>'required|in:active,inactive',
+                'photo'=>'nullable|string',
+            ]);
         // dd($request->all());
         $data=$request->all();
         // dd($data);
-        
+
         $status=$user->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Successfully updated');
+            request()->session()->flash('success','Actualizado exitosamente');
         }
         else{
-            request()->session()->flash('error','Error occured while updating');
+            request()->session()->flash('error','Ocurrió un error al actualizar');
         }
         return redirect()->route('users.index');
 
@@ -128,10 +128,10 @@ class UsersController extends Controller
         $delete=User::findorFail($id);
         $status=$delete->delete();
         if($status){
-            request()->session()->flash('success','User Successfully deleted');
+            request()->session()->flash('success','Usuario eliminado correctamente');
         }
         else{
-            request()->session()->flash('error','There is an error while deleting users');
+            request()->session()->flash('error','Hay un error al eliminar usuarios.');
         }
         return redirect()->route('users.index');
     }

@@ -49,10 +49,10 @@ class PostTagController extends Controller
         $data['slug']=$slug;
         $status=PostTag::create($data);
         if($status){
-            request()->session()->flash('success','Post Tag Successfully added');
+            request()->session()->flash('success','Etiqueta de publicación agregada con éxito');
         }
         else{
-            request()->session()->flash('error','Please try again!!');
+            request()->session()->flash('error','Inténtalo de nuevo');
         }
         return redirect()->route('post-tag.index');
     }
@@ -90,18 +90,18 @@ class PostTagController extends Controller
     public function update(Request $request, $id)
     {
         $postTag=PostTag::findOrFail($id);
-         // return $request->all();
-         $this->validate($request,[
+        // return $request->all();
+        $this->validate($request,[
             'title'=>'string|required',
             'status'=>'required|in:active,inactive'
         ]);
         $data=$request->all();
         $status=$postTag->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Post Tag Successfully updated');
+            request()->session()->flash('success','Etiqueta de publicación actualizada correctamente');
         }
         else{
-            request()->session()->flash('error','Please try again!!');
+            request()->session()->flash('error','Inténtalo de nuevo');
         }
         return redirect()->route('post-tag.index');
     }
@@ -115,14 +115,14 @@ class PostTagController extends Controller
     public function destroy($id)
     {
         $postTag=PostTag::findOrFail($id);
-       
+
         $status=$postTag->delete();
-        
+
         if($status){
-            request()->session()->flash('success','Post Tag successfully deleted');
+            request()->session()->flash('success','Etiqueta de publicación eliminada correctamente');
         }
         else{
-            request()->session()->flash('error','Error while deleting post tag');
+            request()->session()->flash('error','Error al eliminar la etiqueta de la publicación');
         }
         return redirect()->route('post-tag.index');
     }
