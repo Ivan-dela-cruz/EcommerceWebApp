@@ -7,7 +7,6 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Shipping;
 use App\User;
-use Illuminate\Support\Collection;
 use PDF;
 use Notification;
 use Helper;
@@ -95,7 +94,6 @@ class OrderController extends Controller
         $order_data['user_id']=$request->user()->id;
         $order_data['shipping_id']=$request->shipping;
         $shipping=Shipping::where('id',$order_data['shipping_id'])->pluck('price');
-//        dd($shipping);
         // return session('coupon')['value'];
         $order_data['sub_total']=Helper::totalCartPrice();
         $order_data['quantity']=Helper::cartCount();
@@ -131,8 +129,8 @@ class OrderController extends Controller
         $order->fill($order_data);
         $status=$order->save();
         if($order)
-        // dd($order->id);
-        $users=User::where('role','admin')->first();
+            // dd($order->id);
+            $users=User::where('role','admin')->first();
         $details=[
             'title'=>'New order created',
             'actionURL'=>route('order.show',$order->id),
@@ -146,47 +144,11 @@ class OrderController extends Controller
             session()->forget('cart');
             session()->forget('coupon');
         }
-      $cart =  Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
+        Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
+
+        // dd($users);
         request()->session()->flash('success','Su producto se puso en orden con éxito');
-        $order->url_file = "docs/orden-" . $order->id . '.pdf';
-        $order->save();
-        $this->savePdfStorage($order->id);
         return redirect()->route('home');
-    }
-
-    public function savePdfStorage($id)
-    {
-        $order = Order::find($id);
-        $details = Cart::where('order_id',$order->id)->get();
-
-//        dd($details);
-
-        $list = new Collection();
-
-        foreach ($details as $data) {
-            $item = [
-                'id' => $data->id,
-                'product_id' => $data->product_id,
-                'product_name' => $data->product->title,
-                'product_description' => $data->product->summary,
-                'order_id' => $data->order_id,
-                'user_id' => $data->user_id,
-                'price' => $data->price,
-                'status' => $data->status,
-                'quantity' => $data->quantity,
-                'amount' => $data->amount,
-            ];
-
-            $list->push($item);
-        }
-//        dd($list);
-        $client = $order->user;
-
-        $pdf = \PDF::loadView('pdf.order', ['order' => $order, 'details' => $list,'client' => $client]);
-
-        $nombrePdf = 'orden-' . $id . '.pdf';
-        $path = public_path('docs/');
-        $pdf->save($path . '/' . $nombrePdf);
     }
 
     /**
@@ -239,10 +201,10 @@ class OrderController extends Controller
         }
         $status=$order->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Successfully updated order');
+            request()->session()->flash('success','Pedido actualizado con éxito');
         }
         else{
-            request()->session()->flash('error','Error while updating order');
+            request()->session()->flash('error','Error al actualizar el pedido');
         }
         return redirect()->route('order.index');
     }
@@ -259,15 +221,15 @@ class OrderController extends Controller
         if($order){
             $status=$order->delete();
             if($status){
-                request()->session()->flash('success','Order Successfully deleted');
+                request()->session()->flash('success','Pedido eliminado correctamente');
             }
             else{
-                request()->session()->flash('error','Order can not deleted');
+                request()->session()->flash('error','El pedido no se puede eliminar');
             }
             return redirect()->route('order.index');
         }
         else{
-            request()->session()->flash('error','Order can not found');
+            request()->session()->flash('error','No se puede encontrar el pedido');
             return redirect()->back();
         }
     }
@@ -281,12 +243,12 @@ class OrderController extends Controller
         $order=Order::where('user_id',auth()->user()->id)->where('order_number',$request->order_number)->first();
         if($order){
             if($order->status=="new"){
-            request()->session()->flash('success','Your order has been placed. please wait.');
-            return redirect()->route('home');
+                request()->session()->flash('success','Su orden ha sido puesta. espere por favor.');
+                return redirect()->route('home');
 
             }
             elseif($order->status=="process"){
-                request()->session()->flash('success','Your order is under processing please wait.');
+                request()->session()->flash('success','Su pedido está en proceso por favor espere.');
                 return redirect()->route('home');
 
             }
@@ -296,13 +258,13 @@ class OrderController extends Controller
 
             }
             else{
-                request()->session()->flash('error','Your order canceled. please try again');
+                request()->session()->flash('error','Tu orden cancelada. Inténtalo de nuevo');
                 return redirect()->route('home');
 
             }
         }
         else{
-            request()->session()->flash('error','Invalid order numer please try again');
+            request()->session()->flash('error','Número de pedido no válido, inténtelo de nuevo');
             return back();
         }
     }
@@ -310,28 +272,22 @@ class OrderController extends Controller
     // PDF generate
     public function pdf(Request $request){
         $order=Order::getAllOrder($request->id);
-        // return $order;
         $file_name=$order->order_number.'-'.$order->first_name.'.pdf';
-        // return $file_name;
         $pdf=PDF::loadview('backend.order.pdf',compact('order'));
         return $pdf->download($file_name);
     }
     // Income chart
     public function incomeChart(Request $request){
         $year=\Carbon\Carbon::now()->year;
-        // dd($year);
         $items=Order::with(['cart_info'])->whereYear('created_at',$year)->where('status','delivered')->get()
             ->groupBy(function($d){
                 return \Carbon\Carbon::parse($d->created_at)->format('m');
             });
-            // dd($items);
         $result=[];
         foreach($items as $month=>$item_collections){
             foreach($item_collections as $item){
                 $amount=$item->cart_info->sum('amount');
-                // dd($amount);
                 $m=intval($month);
-                // return $m;
                 isset($result[$m]) ? $result[$m] += $amount :$result[$m]=$amount;
             }
         }

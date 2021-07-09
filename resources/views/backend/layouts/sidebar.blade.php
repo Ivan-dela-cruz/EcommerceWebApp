@@ -125,7 +125,7 @@
     <li class="nav-item">
         <a class="nav-link" href="{{route('review.index')}}">
             <i class="fas fa-comments"></i>
-            <span>Críticas</span></a>
+            <span>Comentarios de Productos</span></a>
     </li>
 
 

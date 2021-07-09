@@ -10,7 +10,7 @@
         </div>
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary float-left">Detalle de Recolección de Leche</h6>
-            {{--            <a href="{{route('coupon.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Agregar Cupón</a>--}}
+            <a href="{{route('milk-record.index')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Regresa"><i class="fas fa-caret-left"></i> Regresar</a>
         </div>
         <div class="card-body">
             <div class="container">

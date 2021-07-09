@@ -47,6 +47,12 @@ class CategoryController extends Controller
             'status'=>'required|in:active,inactive',
             'is_parent'=>'sometimes|in:1',
             'parent_id'=>'nullable|exists:categories,id',
+        ],[
+            'title.required' => 'Campo obligatorio.',
+            'title.string' => 'Campo incorrecto.',
+            'summary.string' => 'Campo incorrecto.',
+            'photo.string' => 'Campo incorrecto.',
+            'status.string' => 'Campo incorrecto.',
         ]);
         $data= $request->all();
         $slug=Str::slug($request->title);
@@ -56,17 +62,15 @@ class CategoryController extends Controller
         }
         $data['slug']=$slug;
         $data['is_parent']=$request->input('is_parent',0);
-        // return $data;   
+        // return $data;
         $status=Category::create($data);
         if($status){
-            request()->session()->flash('success','Categoría agregada exitosamente');
+            request()->session()->flash('success','Category successfully added');
         }
         else{
-            request()->session()->flash('error','Ocurrio un error, Por favor intentelo otra vez!');
+            request()->session()->flash('error','Error occurred, Please try again!');
         }
         return redirect()->route('category.index');
-
-
     }
 
     /**
@@ -102,7 +106,6 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request->all();
         $category=Category::findOrFail($id);
         $this->validate($request,[
             'title'=>'string|required',
@@ -117,10 +120,10 @@ class CategoryController extends Controller
         // return $data;
         $status=$category->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Categoría actualizada satisfactoriamente');
+            request()->session()->flash('success','Category successfully updated');
         }
         else{
-            request()->session()->flash('error','Ocurrio un error, Por favor intentelo otra vez!');
+            request()->session()->flash('error','Error occurred, Please try again!');
         }
         return redirect()->route('category.index');
     }
@@ -135,17 +138,16 @@ class CategoryController extends Controller
     {
         $category=Category::findOrFail($id);
         $child_cat_id=Category::where('parent_id',$id)->pluck('id');
-        // return $child_cat_id;
         $status=$category->delete();
-        
+
         if($status){
             if(count($child_cat_id)>0){
                 Category::shiftChild($child_cat_id);
             }
-            request()->session()->flash('success','Categoría eliminada satisfactoriamente');
+            request()->session()->flash('success','Category successfully deleted');
         }
         else{
-            request()->session()->flash('error','Error mientras se  eliminaba el registro');
+            request()->session()->flash('error','Error while deleting category');
         }
         return redirect()->route('category.index');
     }

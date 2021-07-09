@@ -50,7 +50,7 @@ class MessageController extends Controller
         // return $request->all();
 
         $message=Message::create($request->all());
-            // return $message;
+        // return $message;
         $data=array();
         $data['url']=route('message.show',$message->id);
         $data['date']=$message->created_at->format('F d, Y h:i A');
@@ -60,7 +60,7 @@ class MessageController extends Controller
         $data['message']=$message->message;
         $data['subject']=$message->subject;
         $data['photo']=Auth()->user()->photo;
-        // return $data;    
+        // return $data;
         event(new MessageSent($data));
         exit();
     }
@@ -118,10 +118,10 @@ class MessageController extends Controller
         $message=Message::find($id);
         $status=$message->delete();
         if($status){
-            request()->session()->flash('success','Successfully deleted message');
+            request()->session()->flash('success','Mensaje eliminado correctamente');
         }
         else{
-            request()->session()->flash('error','Error occurred please try again');
+            request()->session()->flash('error','Se produjo un error, inténtelo de nuevo.');
         }
         return back();
     }

@@ -73,7 +73,7 @@
                     </table>
 {{--                    <span style="float:right">{{$incomes->links()}}</span>--}}
                 @else
-                    <h6 class="text-center">No se encontraron cupones !!!</h6>
+                    <h6 class="text-center">No se encontraron registros !!!</h6>
                 @endif
             </div>
         </div>

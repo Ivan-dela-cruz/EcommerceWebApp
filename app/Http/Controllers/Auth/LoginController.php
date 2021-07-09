@@ -50,7 +50,7 @@ class LoginController extends Controller
         // dd($provider);
      return Socialite::driver($provider)->redirect();
     }
- 
+
     public function Callback($provider)
     {
         $userSocial =   Socialite::driver($provider)->stateless()->user();
@@ -58,7 +58,7 @@ class LoginController extends Controller
         // dd($users);
         if($users){
             Auth::login($users);
-            return redirect('/')->with('success','You are login from '.$provider);
+            return redirect('/')->with('success','Usted está ingresando desde '.$provider);
         }else{
             $user = User::create([
                 'name'          => $userSocial->getName(),

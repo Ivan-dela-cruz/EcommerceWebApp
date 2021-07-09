@@ -44,7 +44,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
         $this->validate($request,[
             'title'=>'string|required',
             'summary'=>'string|required',
@@ -57,7 +56,7 @@ class ProductController extends Controller
             'child_cat_id'=>'nullable|exists:categories,id',
             'is_featured'=>'sometimes|in:1',
             'status'=>'required|in:active,inactive',
-            'condition'=>'required|in:Defecto,Nuevo,Oferta,Promoción',
+            'condition'=>'required|in:default,new,hot',
             'price'=>'required|numeric',
             'discount'=>'nullable|numeric'
         ]);
@@ -77,14 +76,12 @@ class ProductController extends Controller
         else{
             $data['size']='';
         }
-        // return $size;
-        // return $data;
         $status=Product::create($data);
         if($status){
             request()->session()->flash('success','Producto agregado exitosamente');
         }
         else{
-            request()->session()->flash('error','¡¡Inténtalo de nuevo!!');
+            request()->session()->flash('error','Inténtalo de nuevo');
         }
         return redirect()->route('product.index');
 
@@ -115,8 +112,8 @@ class ProductController extends Controller
         $items=Product::where('id',$id)->get();
         // return $items;
         return view('backend.product.edit')->with('product',$product)
-                    ->with('brands',$brand)
-                    ->with('categories',$category)->with('items',$items);
+            ->with('brands',$brand)
+            ->with('categories',$category)->with('items',$items);
     }
 
     /**
@@ -141,7 +138,7 @@ class ProductController extends Controller
             'is_featured'=>'sometimes|in:1',
             'brand_id'=>'nullable|exists:brands,id',
             'status'=>'required|in:active,inactive',
-            'condition'=>'required|in:Defecto,Nuevo,Oferta,Promoción',
+            'condition'=>'required|in:default,new,hot',
             'price'=>'required|numeric',
             'discount'=>'nullable|numeric'
         ]);
@@ -155,14 +152,12 @@ class ProductController extends Controller
         else{
             $data['size']='';
         }
-//        dd($data);
-        // return $data;
         $status=$product->fill($data)->save();
         if($status){
             request()->session()->flash('success','Producto actualizado con éxito');
         }
         else{
-            request()->session()->flash('error','¡¡Inténtalo de nuevo!!');
+            request()->session()->flash('error','Inténtalo de nuevo');
         }
         return redirect()->route('product.index');
     }
@@ -177,9 +172,8 @@ class ProductController extends Controller
     {
         $product=Product::findOrFail($id);
         $status=$product->delete();
-
         if($status){
-            request()->session()->flash('success','Producto eliminado con éxito');
+            request()->session()->flash('success','Producto eliminado correctamente');
         }
         else{
             request()->session()->flash('error','Error al eliminar el producto');

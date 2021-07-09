@@ -41,16 +41,16 @@
                     <td>{{(($data->created_at)? $data->created_at->diffForHumans() : '')}}</td>
                     <td>
                         <span
-                            class="badge badge-{{$data->status === 1 ? 'success' : 'danger'}}">{{$data->status === 1 ? 'activo' : 'inactivo'}}</span>
+                            class="badge badge-{{$data->status === 1 ? 'success' : 'danger'}}">{{$data->status === 1 ? 'Activo' : 'Inactivo'}}</span>
                     </td>
                     <td>
                         <a href="{{route('suppliers.edit',$data->id)}}" class="btn btn-primary btn-sm float-left mr-1"
-                           style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit"
+                           style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Editar"
                            data-placement="bottom"><i class="fas fa-edit"></i></a>
 
                         <button class="btn btn-danger btn-sm"  type="button" wire:click="delete({{$data->id}})" style="height:30px;
                                     width:30px;border-radius:50%"
-                                data-toggle="tooltip" data-placement="bottom" title="Delete"><i
+                                data-toggle="tooltip" data-placement="bottom" title="Eliminar"><i
                                 class="fas fa-trash-alt"></i></button>
                     </td>
                     {{-- Delete Modal --}}

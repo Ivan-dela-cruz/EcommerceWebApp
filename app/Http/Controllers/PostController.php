@@ -77,10 +77,10 @@ class PostController extends Controller
 
         $status=Post::create($data);
         if($status){
-            request()->session()->flash('success','Post Successfully added');
+            request()->session()->flash('success','Publicación agregada con éxito');
         }
         else{
-            request()->session()->flash('error','Please try again!!');
+            request()->session()->flash('error','Inténtalo de nuevo');
         }
         return redirect()->route('post.index');
     }
@@ -121,8 +121,8 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post=Post::findOrFail($id);
-         // return $request->all();
-         $this->validate($request,[
+        // return $request->all();
+        $this->validate($request,[
             'title'=>'string|required',
             'quote'=>'string|nullable',
             'summary'=>'string|required',
@@ -147,10 +147,10 @@ class PostController extends Controller
 
         $status=$post->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Post Successfully updated');
+            request()->session()->flash('success','Publicación actualizada correctamente');
         }
         else{
-            request()->session()->flash('error','Please try again!!');
+            request()->session()->flash('error','Inténtalo de nuevo');
         }
         return redirect()->route('post.index');
     }
@@ -164,14 +164,14 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post=Post::findOrFail($id);
-       
+
         $status=$post->delete();
-        
+
         if($status){
-            request()->session()->flash('success','Post successfully deleted');
+            request()->session()->flash('success','Publicación eliminada correctamente');
         }
         else{
-            request()->session()->flash('error','Error while deleting post ');
+            request()->session()->flash('error','Error while deleting post');
         }
         return redirect()->route('post.index');
     }

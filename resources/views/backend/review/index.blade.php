@@ -9,7 +9,7 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Review Lists</h6>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Listas de Comentarios</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -18,30 +18,30 @@
           <thead>
             <tr>
               <th>S.N.</th>
-              <th>Review By</th>
-              <th>Product Title</th>
-              <th>Review</th>
-              <th>Rate</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th>Autor</th>
+              <th>Producto</th>
+              <th>Comentario</th>
+              <th>Rating</th>
+              <th>Fecha</th>
+              <th>Estatus</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
               <th>S.N.</th>
-              <th>Review By</th>
-              <th>Product Title</th>
-              <th>Review</th>
-              <th>Rate</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Action</th>
+                <th>Autor</th>
+                <th>Producto</th>
+                <th>Comentario</th>
+                <th>Rating</th>
+                <th>Fecha</th>
+                <th>Estatus</th>
+                <th>Acción</th>
               </tr>
           </tfoot>
           <tbody>
-            @foreach($reviews as $review)  
-              @php 
+            @foreach($reviews as $review)
+              @php
               $title=DB::table('products')->select('title')->where('id',$review->product_id)->get();
               @endphp
                 <tr>
@@ -54,7 +54,7 @@
                           @for($i=1; $i<=5;$i++)
                           @if($review->rate >=$i)
                             <li style="float:left;color:#F7941D;"><i class="fa fa-star"></i></li>
-                          @else 
+                          @else
                             <li style="float:left;color:#F7941D;"><i class="far fa-star"></i></li>
                           @endif
                         @endfor
@@ -63,26 +63,26 @@
                     <td>{{$review->created_at->format('M d D, Y g: i a')}}</td>
                     <td>
                         @if($review->status=='active')
-                          <span class="badge badge-success">{{$review->status}}</span>
+                            <span class="badge badge-success">Activo</span>
                         @else
-                          <span class="badge badge-warning">{{$review->status}}</span>
+                            <span class="badge badge-warning">Inactivo</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('review.edit',$review->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                        <a href="{{route('review.edit',$review->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Editar" data-placement="bottom"><i class="fas fa-edit"></i></a>
                         <form method="POST" action="{{route('review.destroy',[$review->id])}}">
-                          @csrf 
+                          @csrf
                           @method('delete')
-                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$review->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$review->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
         <span style="float:right">{{$reviews->links()}}</span>
         @else
-          <h6 class="text-center">No reviews found!!!</h6>
+          <h6 class="text-center">Sin Comentarios</h6>
         @endif
       </div>
     </div>
@@ -109,7 +109,7 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
+
       $('#order-dataTable').DataTable( {
             "columnDefs":[
                 {
@@ -122,7 +122,7 @@
         // Sweet alert
 
         function deleteData(id){
-            
+
         }
   </script>
   <script>

@@ -36,20 +36,20 @@
             <td>${{number_format($order->total_amount,2)}}</td>
             <td>
                 @if($order->status=='new')
-                  <span class="badge badge-primary">{{$order->status}}</span>
+                    <span class="badge badge-primary">Nueva</span>
                 @elseif($order->status=='process')
-                  <span class="badge badge-warning">{{$order->status}}</span>
+                    <span class="badge badge-warning">En proceso</span>
                 @elseif($order->status=='delivered')
-                  <span class="badge badge-success">{{$order->status}}</span>
+                    <span class="badge badge-success">Etregada</span>
                 @else
-                  <span class="badge badge-danger">{{$order->status}}</span>
+                    <span class="badge badge-danger">Cancelada</span>
                 @endif
             </td>
             <td>
                 <form method="POST" action="{{route('order.destroy',[$order->id])}}">
                   @csrf
                   @method('delete')
-                      <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                      <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
                 </form>
             </td>
 
@@ -98,11 +98,7 @@
                     <tr>
                         <td>Total</td>
                         <td> :
-                          @if(is_null($shipping_charge))
-                            $ 0
-                          @else
                           $ {{number_format($order->total_amount,2)}}
-                          @endif
                         </td>
                     </tr>
                     <tr>

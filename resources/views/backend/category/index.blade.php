@@ -10,7 +10,7 @@
      </div>
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary float-left">Lista de Categorías</h6>
-      <a href="{{route('category.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Agregar Categorías</a>
+      <a href="{{route('category.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" ><i class="fas fa-plus"></i> Agregar Categorías</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -28,7 +28,7 @@
               <th>Acción</th>
             </tr>
           </thead>
-         
+
           <tbody>
 
             @foreach($categories as $category)
@@ -56,17 +56,17 @@
                     </td>
                     <td>
                         @if($category->status=='active')
-                            <span class="badge badge-success">{{$category->status}}</span>
+                            <span class="badge badge-success">Activo</span>
                         @else
-                            <span class="badge badge-warning">{{$category->status}}</span>
+                            <span class="badge badge-warning">Inactivo</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('category.edit',$category->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                        <a href="{{route('category.edit',$category->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Editar" data-placement="bottom"><i class="fas fa-edit"></i></a>
                     <form method="POST" action="{{route('category.destroy',[$category->id])}}">
                       @csrf
                       @method('delete')
-                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$category->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$category->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                     {{-- Delete Modal --}}

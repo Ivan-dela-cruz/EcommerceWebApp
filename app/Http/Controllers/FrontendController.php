@@ -33,11 +33,11 @@ class FrontendController extends Controller
         $category=Category::where('status','active')->where('is_parent',1)->orderBy('title','ASC')->get();
         // return $category;
         return view('frontend.index')
-                ->with('featured',$featured)
-                ->with('posts',$posts)
-                ->with('banners',$banners)
-                ->with('product_lists',$products)
-                ->with('category_lists',$category);
+            ->with('featured',$featured)
+            ->with('posts',$posts)
+            ->with('banners',$banners)
+            ->with('product_lists',$products)
+            ->with('category_lists',$category);
     }
 
     public function aboutUs(){
@@ -151,63 +151,63 @@ class FrontendController extends Controller
         return view('frontend.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
     }
     public function productFilter(Request $request){
-            $data= $request->all();
-            // return $data;
-            $showURL="";
-            if(!empty($data['show'])){
-                $showURL .='&show='.$data['show'];
-            }
+        $data= $request->all();
+        // return $data;
+        $showURL="";
+        if(!empty($data['show'])){
+            $showURL .='&show='.$data['show'];
+        }
 
-            $sortByURL='';
-            if(!empty($data['sortBy'])){
-                $sortByURL .='&sortBy='.$data['sortBy'];
-            }
+        $sortByURL='';
+        if(!empty($data['sortBy'])){
+            $sortByURL .='&sortBy='.$data['sortBy'];
+        }
 
-            $catURL="";
-            if(!empty($data['category'])){
-                foreach($data['category'] as $category){
-                    if(empty($catURL)){
-                        $catURL .='&category='.$category;
-                    }
-                    else{
-                        $catURL .=','.$category;
-                    }
+        $catURL="";
+        if(!empty($data['category'])){
+            foreach($data['category'] as $category){
+                if(empty($catURL)){
+                    $catURL .='&category='.$category;
+                }
+                else{
+                    $catURL .=','.$category;
                 }
             }
+        }
 
-            $brandURL="";
-            if(!empty($data['brand'])){
-                foreach($data['brand'] as $brand){
-                    if(empty($brandURL)){
-                        $brandURL .='&brand='.$brand;
-                    }
-                    else{
-                        $brandURL .=','.$brand;
-                    }
+        $brandURL="";
+        if(!empty($data['brand'])){
+            foreach($data['brand'] as $brand){
+                if(empty($brandURL)){
+                    $brandURL .='&brand='.$brand;
+                }
+                else{
+                    $brandURL .=','.$brand;
                 }
             }
-            // return $brandURL;
+        }
+        // return $brandURL;
 
-            $priceRangeURL="";
-            if(!empty($data['price_range'])){
-                $priceRangeURL .='&price='.$data['price_range'];
-            }
-            if(request()->is('e-shop.loc/product-grids')){
-                return redirect()->route('product-grids',$catURL.$brandURL.$priceRangeURL.$showURL.$sortByURL);
-            }
-            else{
-                return redirect()->route('product-lists',$catURL.$brandURL.$priceRangeURL.$showURL.$sortByURL);
-            }
+        $priceRangeURL="";
+        if(!empty($data['price_range'])){
+            $priceRangeURL .='&price='.$data['price_range'];
+        }
+        if(request()->is('e-shop.loc/product-grids')){
+            return redirect()->route('product-grids',$catURL.$brandURL.$priceRangeURL.$showURL.$sortByURL);
+        }
+        else{
+            return redirect()->route('product-lists',$catURL.$brandURL.$priceRangeURL.$showURL.$sortByURL);
+        }
     }
     public function productSearch(Request $request){
         $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
         $products=Product::orwhere('title','like','%'.$request->search.'%')
-                    ->orwhere('slug','like','%'.$request->search.'%')
-                    ->orwhere('description','like','%'.$request->search.'%')
-                    ->orwhere('summary','like','%'.$request->search.'%')
-                    ->orwhere('price','like','%'.$request->search.'%')
-                    ->orderBy('id','DESC')
-                    ->paginate('9');
+            ->orwhere('slug','like','%'.$request->search.'%')
+            ->orwhere('description','like','%'.$request->search.'%')
+            ->orwhere('summary','like','%'.$request->search.'%')
+            ->orwhere('price','like','%'.$request->search.'%')
+            ->orderBy('id','DESC')
+            ->paginate('9');
         return view('frontend.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
     }
 
@@ -327,7 +327,7 @@ class FrontendController extends Controller
             }
         }
         // return $tagURL;
-            // return $catURL;
+        // return $catURL;
         return redirect()->route('blog',$catURL.$tagURL);
     }
 
@@ -357,7 +357,7 @@ class FrontendController extends Controller
             return redirect()->route('home');
         }
         else{
-            request()->session()->flash('error','Correo electrónico y contraseña no válidos, inténtelo nuevamente.');
+            request()->session()->flash('error','¡Correo electrónico y contraseña no válidos, inténtelo de nuevo.!');
             return redirect()->back();
         }
     }
@@ -365,7 +365,7 @@ class FrontendController extends Controller
     public function logout(){
         Session::forget('user');
         Auth::logout();
-        request()->session()->flash('success','Logout successfully');
+        request()->session()->flash('success','Cerrar sesión correctamente');
         return back();
     }
 
@@ -384,11 +384,11 @@ class FrontendController extends Controller
         $check=$this->create($data);
         Session::put('user',$data['email']);
         if($check){
-            request()->session()->flash('success','Successfully registered');
+            request()->session()->flash('success','Registrado exitosamente');
             return redirect()->route('home');
         }
         else{
-            request()->session()->flash('error','Please try again!');
+            request()->session()->flash('error','¡Inténtalo de nuevo!');
             return back();
         }
     }
@@ -398,7 +398,7 @@ class FrontendController extends Controller
             'email'=>$data['email'],
             'password'=>Hash::make($data['password']),
             'status'=>'active'
-            ]);
+        ]);
     }
     // Reset password
     public function showResetForm(){
@@ -407,20 +407,20 @@ class FrontendController extends Controller
 
     public function subscribe(Request $request){
         if(! Newsletter::isSubscribed($request->email)){
-                Newsletter::subscribePending($request->email);
-                if(Newsletter::lastActionSucceeded()){
-                    request()->session()->flash('success','Subscribed! Please check your email');
-                    return redirect()->route('home');
-                }
-                else{
-                    Newsletter::getLastError();
-                    return back()->with('error','Something went wrong! please try again');
-                }
+            Newsletter::subscribePending($request->email);
+            if(Newsletter::lastActionSucceeded()){
+                request()->session()->flash('success','¡Suscribir! Por favor revise su correo electrónico');
+                return redirect()->route('home');
             }
             else{
-                request()->session()->flash('error','Already Subscribed');
-                return back();
+                Newsletter::getLastError();
+                return back()->with('error','¡Algo salió mal! Inténtalo de nuevo');
             }
+        }
+        else{
+            request()->session()->flash('error','Ya suscrito');
+            return back();
+        }
     }
 
 }
