@@ -41,7 +41,7 @@
     <div class="col-md-6 form-group">
         <label for="inputTitle" class="col-form-label">Dirección</label>
         <input id="inputTitle" type="text"
-               placeholder="Ingrese la direccipon"
+               placeholder="Ingrese la dirección"
                wire:model="address"
                class="form-control">
         @error('address')

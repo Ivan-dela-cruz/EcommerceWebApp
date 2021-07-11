@@ -43,7 +43,7 @@ class BrandController extends Controller
         $slug=Str::slug($request->title);
         $count=Brand::where('slug',$slug)->count();
         if($count>0){
-            $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
+            $slug=$slug.'-'.date('ymdis').'-'.rand(0,999999);
         }
         $data['slug']=$slug;
         // return $data;

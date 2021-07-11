@@ -57,7 +57,7 @@
                 </label>
             </div>
             <div class="form-group mb-3">
-                <button class="btn btn-success" type="submit">Update</button>
+                <button class="btn btn-success" type="submit">Actualizar</button>
             </div>
         </form>
     </div>

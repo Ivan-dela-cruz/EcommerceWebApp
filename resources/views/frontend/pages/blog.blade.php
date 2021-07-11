@@ -43,14 +43,14 @@
                                                     @if($data->name)
                                                         {{$data->name}}
                                                     @else
-                                                        Anonymous
+                                                        Anonímo
                                                     @endif
                                                 @endforeach
                                             </span>
                                         </p>
                                         <a href="{{route('blog.detail',$post->slug)}}" class="title">{{$post->title}}</a>
                                         <p>{!! html_entity_decode($post->summary) !!}</p>
-                                        <a href="{{route('blog.detail',$post->slug)}}" class="more-btn">Continue Reading</a>
+                                        <a href="{{route('blog.detail',$post->slug)}}" class="more-btn">Continuar Leyendo</a>
                                     </div>
                                 </div>
                                 <!-- End Single Blog  -->

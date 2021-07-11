@@ -26,17 +26,7 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-                <th>Autor</th>
-                <th>Publicación</th>
-                <th>Mensaje</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Acción</th>
-            </tr>
-          </tfoot>
+         <p hidden> {{\Carbon\Carbon::setLocale('es')  }}</p>
           <tbody>
             @foreach($comments as $comment)
             {{-- {{$comment}}   --}}
@@ -48,7 +38,7 @@
                     <td>{{$comment->user_info['name']}}</td>
                     <td>@foreach($title as $data){{ $data->title}} @endforeach</td>
                     <td>{{$comment->comment}}</td>
-                    <td>{{$comment->created_at->format('M d D, Y g: i a')}}</td>
+                    <td>{{\Carbon\Carbon::parse($comment->created_at)->isoFormat('ll')}}</td>
                     <td>
                         @if($comment->status=='active')
                             <span class="badge badge-success">Activo</span>
@@ -104,7 +94,8 @@
                     "orderable":false,
                     "targets":[5,6]
                 }
-            ]
+            ],
+            "language":data
         } );
 
         // Sweet alert
