@@ -27,7 +27,7 @@
               <th>Acción</th>
             </tr>
           </thead>
-          {{\Carbon\Carbon::setLocale('es')  }}
+          <p hidden>{{\Carbon\Carbon::setLocale('es')  }}</p>
           <tbody>
             @foreach($reviews as $review)
               @php
@@ -106,7 +106,7 @@
                     "targets":[5,6]
                 }
             ],
-            language":data
+            "language":data
         } );
 
         // Sweet alert
