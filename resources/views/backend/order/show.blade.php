@@ -37,15 +37,15 @@
             <td>@foreach($shipping_charge as $data) $ {{number_format($data,2)}} @endforeach</td>
             <td>${{number_format($order->total_amount,2)}}</td>
             <td>
-                @if($order->status=='new')
-                  <span class="badge badge-primary">{{$order->status}}</span>
-                @elseif($order->status=='process')
-                  <span class="badge badge-warning">{{$order->status}}</span>
-                @elseif($order->status=='delivered')
-                  <span class="badge badge-success">{{$order->status}}</span>
-                @else
-                  <span class="badge badge-danger">{{$order->status}}</span>
-                @endif
+              @if($order->status=='new')
+                   <span class="badge badge-primary">Nueva</span>
+              @elseif($order->status=='process')
+                  <span class="badge badge-warning">En proceso</span>
+              @elseif($order->status=='delivered')
+                  <span class="badge badge-success">Etregada</span>
+              @else
+                  <span class="badge badge-danger">Cancelada</span>
+              @endif
             </td>
             <td>
                 <a href="{{route('order.edit',$order->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
@@ -59,13 +59,13 @@
         </tr>
       </tbody>
     </table>
-
     <section class="confirmation_part section_padding">
       <div class="order_boxes">
         <div class="row">
           <div class="col-lg-6 col-lx-4">
             <div class="order-info">
               <h4 class="text-center pb-4">INFORMACIÓN DEL PEDIDO</h4>
+            
               <table class="table">
                     <tr class="">
                         <td>Número de pedido</td>
@@ -73,7 +73,7 @@
                     </tr>
                     <tr>
                         <td>Fecha de pedido</td>
-                        <td> : {{$order->created_at->format('D d M, Y')}} at {{$order->created_at->format('g : i a')}} </td>
+                        <td> : {{\Carbon\Carbon::parse($order->created_at)->isoFormat('llll')}} </td>
                     </tr>
                     <tr>
                         <td>Cantidad</td>
@@ -81,7 +81,17 @@
                     </tr>
                     <tr>
                         <td>Estado de pedido</td>
-                        <td> : {{$order->status}}</td>
+                        <td> : 
+                          @if($order->status=='new')
+                            <span class="badge badge-primary">Nueva</span>
+                        @elseif($order->status=='process')
+                            <span class="badge badge-warning">En proceso</span>
+                        @elseif($order->status=='delivered')
+                            <span class="badge badge-success">Etregada</span>
+                        @else
+                            <span class="badge badge-danger">Cancelada</span>
+                        @endif
+                        </td>
                     </tr>
                     <tr>
                       @php
@@ -106,11 +116,11 @@
                     </tr>
                     <tr>
                         <td>Método de pago</td>
-                        <td> : @if($order->payment_method=='cod') Cash on Delivery @else Paypal @endif</td>
+                        <td> : @if($order->payment_method=='cod') Pago al Repartidor @else NA @endif</td>
                     </tr>
                     <tr>
                         <td>Estado de pago</td>
-                        <td> : {{$order->payment_status}}</td>
+                        <td> : {{$order->payment_status == 'paid' ? 'Pagado' : 'Pendiente'}}</td>
                     </tr>
               </table>
             </div>

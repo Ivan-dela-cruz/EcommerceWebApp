@@ -136,7 +136,7 @@
   {
       var data = google.visualization.arrayToDataTable(analytics);
       var options = {
-          title : 'Last 7 Days registered user'
+          title : 'Usuario registrado de los últimos 7 días'
       };
       var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
       chart.draw(data, options);

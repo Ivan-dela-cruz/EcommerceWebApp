@@ -189,8 +189,8 @@
                                                 </a>
                                                 <div class="button-head">
                                                     <div class="product-action">
-                                                        <a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class=" ti-eye"></i><span>Compra Rápida</span></a>
-                                                        <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}" class="wishlist" data-id="{{$product->id}}"><i class=" ti-heart "></i><span>Añadir a la lista de deseos</span></a>
+                                                        <a data-toggle="modal" data-target="#{{$product->id}}" href="#"><i class=" ti-eye"></i><span>Vista Rápida</span></a>
+                                                        <a href="{{route('add-to-wishlist',$product->slug)}}" class="wishlist" data-id="{{$product->id}}"><i class=" ti-heart "></i><span>Añadir a la lista de deseos</span></a>
                                                     </div>
                                                     <div class="product-action-2">
                                                         <a title="Añadir al Carrito" href="{{route('add-to-cart',$product->slug)}}">Añadir al Carrito</a>

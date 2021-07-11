@@ -161,7 +161,7 @@
 												<label>Ordernar por :</label>
 												<select class='sortBy' name='sortBy' onchange="this.form.submit();">
 													<option value="">Default</option>
-													<option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Nomobre</option>
+													<option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Nombre</option>
 													<option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Precio</option>
 													<option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Categoría</option>
 													<option value="brand" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='brand') selected @endif>Marca</option>
@@ -195,8 +195,8 @@
 															</a>
 															<div class="button-head">
 																<div class="product-action">
-																	<a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class=" ti-eye"></i><span>Compra Rápida</span></a>
-																	<a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}" class="wishlist" data-id="{{$product->id}}"><i class=" ti-heart "></i><span>Añadir a la lista de deseos</span></a>
+																	<a data-toggle="modal" data-target="#{{$product->id}}"  href="#"><i class=" ti-eye"></i><span>Vista Rápida</span></a>
+																	<a href="{{route('add-to-wishlist',$product->slug)}}" class="wishlist" data-id="{{$product->id}}"><i class=" ti-heart "></i><span>Añadir a la lista de deseos</span></a>
 																</div>
 																<div class="product-action-2">
 																	<a title="Añadir al Carrito" href="{{route('add-to-cart',$product->slug)}}">Añadir al Carrito</a>

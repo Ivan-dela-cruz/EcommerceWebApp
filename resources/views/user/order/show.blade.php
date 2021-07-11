@@ -56,7 +56,6 @@
         </tr>
       </tbody>
     </table>
-
     <section class="confirmation_part section_padding">
       <div class="order_boxes">
         <div class="row">
@@ -70,7 +69,7 @@
                     </tr>
                     <tr>
                         <td>Fecha de Pedido</td>
-                        <td> : {{$order->created_at->format('D d M, Y')}} at {{$order->created_at->format('g : i a')}} </td>
+                        <td> : {{\Carbon\Carbon::parse($order->created_at)->isoFormat('llll')}} </td>
                     </tr>
                     <tr>
                         <td>Cantidad</td>
@@ -78,7 +77,17 @@
                     </tr>
                     <tr>
                         <td>Estado de Pedido</td>
-                        <td> : {{$order->status}}</td>
+                        <td> : 
+                          @if($order->status=='new')
+                              <span class="badge badge-primary">Nueva</span>
+                          @elseif($order->status=='process')
+                              <span class="badge badge-warning">En proceso</span>
+                          @elseif($order->status=='delivered')
+                              <span class="badge badge-success">Etregada</span>
+                          @else
+                              <span class="badge badge-danger">Cancelada</span>
+                          @endif
+                        </td>
                     </tr>
                     <tr>
                       @php
@@ -103,12 +112,12 @@
                     </tr>
                     <tr>
                       <td>Método de pago</td>
-                      <td> : @if($order->payment_method=='cod') Cash on Delivery @else Paypal @endif</td>
-                    </tr>
-                    <tr>
-                        <td>Estado de Pago</td>
-                        <td> : {{$order->payment_status}}</td>
-                    </tr>
+                      <td> : @if($order->payment_method=='cod') Pago al Repartidor @else NA @endif</td>
+                  </tr>
+                  <tr>
+                      <td>Estado de pago</td>
+                      <td> : {{$order->payment_status == 'paid' ? 'Pagado' : 'Pendiente'}}</td>
+                  </tr>
               </table>
             </div>
           </div>

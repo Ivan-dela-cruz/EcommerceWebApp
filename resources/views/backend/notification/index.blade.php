@@ -24,14 +24,14 @@
 
         <tr class="@if($notification->unread()) bg-light border-left-light @else border-left-success @endif">
           <td scope="row">{{$loop->index +1}}</td>
-          <td>{{$notification->created_at->format('F d, Y h:i A')}}</td>
+          <td>{{\Carbon\Carbon::parse($notification->created_at)->isoFormat('llll')}}</td>
           <td>{{$notification->data['title']}}</td>
           <td>
-            <a href="{{route('admin.notification', $notification->id) }}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
+            <a href="{{route('admin.notification', $notification->id) }}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Ver" data-placement="bottom"><i class="fas fa-eye"></i></a>
             <form method="POST" action="{{ route('notification.delete', $notification->id) }}">
               @csrf
               @method('delete')
-                  <button class="btn btn-danger btn-sm dltBtn" data-id={{$notification->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                  <button class="btn btn-danger btn-sm dltBtn" data-id={{$notification->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
             </form>
           </td>
         </tr>
@@ -65,7 +65,8 @@
                     "orderable":false,
                     "targets":[3]
                 }
-            ]
+            ],
+            "language": data
         } );
 
         // Sweet alert

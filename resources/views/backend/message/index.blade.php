@@ -26,13 +26,13 @@
           <td scope="row">{{$loop->index +1}}</td>
           <td>{{$message->name}} {{$message->read_at}}</td>
           <td>{{$message->subject}}</td>
-          <td>{{$message->created_at->format('F d, Y h:i A')}}</td>
+          <td>{{\Carbon\Carbon::parse($message->created_at)->isoFormat('llll')}}</td>
           <td>
-            <a href="{{route('message.show',$message->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
+            <a href="{{route('message.show',$message->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Ver" data-placement="bottom"><i class="fas fa-eye"></i></a>
             <form method="POST" action="{{route('message.destroy',[$message->id])}}">
               @csrf
               @method('delete')
-                  <button class="btn btn-danger btn-sm dltBtn" data-id={{$message->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                  <button class="btn btn-danger btn-sm dltBtn" data-id={{$message->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
             </form>
           </td>
         </tr>
@@ -80,7 +80,8 @@
                     "orderable":false,
                     "targets":[4]
                 }
-            ]
+            ],
+            "language" : data
         } );
 
         // Sweet alert

@@ -350,9 +350,9 @@
                                         </a>
                                         <div class="button-head">
                                             <div class="product-action">
-                                                <a data-toggle="modal" data-target="#modelExample" title="Quick View" href="#"><i class=" ti-eye"></i><span>Compra Rápida</span></a>
-                                                <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Añadir a la lista de deseos</span></a>
-                                                <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                <a data-toggle="modal" data-target="#modelExample" href="#"><i class=" ti-eye"></i><span>Compra Rápida</span></a>
+                                                <a  href="#"><i class=" ti-heart "></i><span>Añadir a la lista de deseos</span></a>
+                                                <a  href="#"><i class="ti-bar-chart-alt"></i><span>Añadir a comparar</span></a>
                                             </div>
                                             <div class="product-action-2">
                                                 <a title="Añadir al Carrito" href="#">Añadir al Carrito</a>

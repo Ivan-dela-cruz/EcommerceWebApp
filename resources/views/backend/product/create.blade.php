@@ -77,7 +77,7 @@
           <label for="size">Tamaño</label>
           <select name="size[]" class="form-control selectpicker"  multiple data-live-search="true">
               <option value="">--Seleccionar--</option>
-              <option value="P">Pequeño (P)</option>
+              <option value="P" selected >Pequeño (P)</option>
               <option value="G">Grande (G)</option>
           </select>
         </div>
