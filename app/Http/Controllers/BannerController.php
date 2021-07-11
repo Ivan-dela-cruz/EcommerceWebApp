@@ -47,8 +47,9 @@ class BannerController extends Controller
         $slug=Str::slug($request->title);
         $count=Banner::where('slug',$slug)->count();
         if($count>0){
-            $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
+            $slug=$slug.'-'.date('ymdis').'-'.rand(0,999999);
         }
+        $data['caption']=$request->caption=='on'?1:0;
         $data['slug']=$slug;
         // return $slug;
         $status=Banner::create($data);
@@ -101,14 +102,8 @@ class BannerController extends Controller
             'status'=>'required|in:active,inactive',
         ]);
         $data=$request->all();
-        // $slug=Str::slug($request->title);
-        // $count=Banner::where('slug',$slug)->count();
-        // if($count>0){
-        //     $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
-        // }
-        // $data['slug']=$slug;
-        // return $slug;
-        $status=$banner->fill($data)->save();
+        $data['caption']=$request->caption=='on'?1:0;
+        $status=$banner->update($data);
         if($status){
             request()->session()->flash('success','Banner actualizado correctamente');
         }

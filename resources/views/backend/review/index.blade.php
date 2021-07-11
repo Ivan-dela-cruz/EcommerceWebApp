@@ -27,18 +27,7 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-                <th>Autor</th>
-                <th>Producto</th>
-                <th>Comentario</th>
-                <th>Rating</th>
-                <th>Fecha</th>
-                <th>Estatus</th>
-                <th>Acción</th>
-              </tr>
-          </tfoot>
+          {{\Carbon\Carbon::setLocale('es')  }}
           <tbody>
             @foreach($reviews as $review)
               @php
@@ -60,7 +49,7 @@
                         @endfor
                      </ul>
                     </td>
-                    <td>{{$review->created_at->format('M d D, Y g: i a')}}</td>
+                    <td>{{\Carbon\Carbon::parse($review->created_at)->isoFormat('ll')}}</td>
                     <td>
                         @if($review->status=='active')
                             <span class="badge badge-success">Activo</span>
