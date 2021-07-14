@@ -20,15 +20,17 @@ class Create extends Component
     {
 
         $this->Validate([
-            'name' => 'required',
-            'last_name' => 'required',
-            'type_document' => 'required',
-            'num_document' => 'required',
+            'name' => 'required||regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'last_name' => 'required||regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'type_document' => 'required|string',
+            'num_document' => 'required|digits:10',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|numeric|digits:10',
             'email' => 'required|unique:users,email|unique:suppliers,email',
 //            'photo' => 'required',
-        ], [
+        ]);
+/*
+, [
             'name.required' => 'Campo obligatorio.',
             'last_name.required' => 'Campo obligatorio.',
             'type_document.required' => 'Campo obligatorio.',
@@ -38,8 +40,8 @@ class Create extends Component
             'email.required' => 'Campo obligatorio.',
             'email.unique' => 'El correo ya existe',
 //            'photo.required' => 'Campo obligatorio.',
-        ]);
-
+        ]
+*/
         $data_user = [
             'name' => $this->name,
             'email' => $this->email,

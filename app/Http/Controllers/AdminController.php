@@ -60,7 +60,7 @@ class AdminController extends Controller
             'logo'=>'required',
             'address'=>'required|string',
             'email'=>'required|email',
-            'phone'=>'required|string',
+            'phone'=>'required|numeric|digits:10',
         ]);
         $data=$request->all();
         // return $data;
