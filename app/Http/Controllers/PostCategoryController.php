@@ -38,7 +38,7 @@ class PostCategoryController extends Controller
     {
         // return $request->all();
         $this->validate($request,[
-            'title'=>'string|required',
+            'title'=>'string|required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'status'=>'required|in:active,inactive'
         ]);
         $data=$request->all();
@@ -93,7 +93,7 @@ class PostCategoryController extends Controller
         $postCategory=PostCategory::findOrFail($id);
         // return $request->all();
         $this->validate($request,[
-            'title'=>'string|required',
+            'title'=>'string|required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'status'=>'required|in:active,inactive'
         ]);
         $data=$request->all();

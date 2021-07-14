@@ -38,15 +38,17 @@ class Edit extends Component
 
     public function update(){
         $this->Validate([
-            'name' => 'required',
-            'last_name' => 'required',
-            'type_document' => 'required',
-            'num_document' => 'required',
+            'name' => 'required||regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'last_name' => 'required||regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'type_document' => 'required|string',
+            'num_document' => 'required|digits:10',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|numeric|digits:10',
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->user_id), Rule::unique('suppliers')->ignore($this->supplier_id)],
 //            'photo' => 'required',
-        ],[
+        ]);
+        /*
+        ,[
             'name.required' => 'Campo obligatorio.',
             'last_name.required' => 'Campo obligatorio.',
             'type_document.required' => 'Campo obligatorio.',
@@ -55,7 +57,8 @@ class Edit extends Component
             'phone.required' => 'Campo obligatorio.',
             'email.required' => 'Campo obligatorio.',
 //            'photo.required' => 'Campo obligatorio.',
-        ]);
+        ]
+        */
 
         $data_user = [
             'name' => $this->name,

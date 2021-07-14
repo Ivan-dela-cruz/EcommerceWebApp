@@ -37,7 +37,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'title'=>'string|required',
+            'title'=>'string|required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
         ]);
         $data=$request->all();
         $slug=Str::slug($request->title);
@@ -95,7 +95,7 @@ class BrandController extends Controller
     {
         $brand=Brand::find($id);
         $this->validate($request,[
-            'title'=>'string|required',
+            'title'=>'string|required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
         ]);
         $data=$request->all();
 
