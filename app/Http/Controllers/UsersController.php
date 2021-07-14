@@ -38,8 +38,8 @@ class UsersController extends Controller
     {
         $this->validate($request,
             [
-                'name'=>'string|required|max:30',
-                'email'=>'string|required|unique:users',
+                'name'=>'string|required|max:255|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+                'email'=>'string|required|unique:users|email',
                 'password'=>'string|required',
                 'role'=>'required|in:admin,user',
                 'status'=>'required|in:active,inactive',
@@ -96,8 +96,8 @@ class UsersController extends Controller
         $user=User::findOrFail($id);
         $this->validate($request,
             [
-                'name'=>'string|required|max:30',
-                'email'=>'string|required',
+                'name'=>'string|required|max:30|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+                'email'=>'string|required|email',
                 'role'=>'required|in:admin,user',
                 'status'=>'required|in:active,inactive',
                 'photo'=>'nullable|string',

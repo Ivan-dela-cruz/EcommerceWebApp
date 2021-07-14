@@ -38,8 +38,8 @@ class ShippingController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'type'=>'string|required',
-            'price'=>'nullable|numeric',
+            'type'=>'string|required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'price'=>'required|nullable|numeric',
             'status'=>'required|in:active,inactive'
         ]);
         $data=$request->all();
@@ -91,8 +91,8 @@ class ShippingController extends Controller
     {
         $shipping=Shipping::find($id);
         $this->validate($request,[
-            'type'=>'string|required',
-            'price'=>'nullable|numeric',
+            'type'=>'string|required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'price'=>'required|nullable|numeric',
             'status'=>'required|in:active,inactive'
         ]);
         $data=$request->all();

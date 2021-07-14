@@ -41,18 +41,12 @@ class CategoryController extends Controller
     {
         // return $request->all();
         $this->validate($request,[
-            'title'=>'string|required',
+            'title'=>'string|required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'summary'=>'string|nullable',
             'photo'=>'string|nullable',
             'status'=>'required|in:active,inactive',
             'is_parent'=>'sometimes|in:1',
             'parent_id'=>'nullable|exists:categories,id',
-        ],[
-            'title.required' => 'Campo obligatorio.',
-            'title.string' => 'Campo incorrecto.',
-            'summary.string' => 'Campo incorrecto.',
-            'photo.string' => 'Campo incorrecto.',
-            'status.string' => 'Campo incorrecto.',
         ]);
         $data= $request->all();
         $slug=Str::slug($request->title);
@@ -108,7 +102,7 @@ class CategoryController extends Controller
     {
         $category=Category::findOrFail($id);
         $this->validate($request,[
-            'title'=>'string|required',
+            'title'=>'string|required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'summary'=>'string|nullable',
             'photo'=>'string|nullable',
             'status'=>'required|in:active,inactive',
