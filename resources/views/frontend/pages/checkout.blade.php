@@ -177,11 +177,7 @@
                         </div>
                         <!--/ End Order Widget -->
                         <!-- Payment Method Widget -->
-                        <div class="single-widget payement">
-                            <div class="content">
-                                <img src="{{('backend/img/payment-method.png')}}" alt="#">
-                            </div>
-                        </div>
+                        
                         <!--/ End Payment Method Widget -->
                         <!-- Button Widget -->
                         <div class="single-widget get-button">
