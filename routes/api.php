@@ -29,7 +29,7 @@ Route::namespace('Api')->group(function () {
     Route::get('sliders','SliderController@sliders');
     Route::get('categories','CategoryController@categories');
 
-    Route::get('orders','ShopController@getOrders')->middleware('jwtAuth');
+    Route::get('orders/{status?}','ShopController@getOrders')->middleware('jwtAuth');
     Route::get('detail-order/{id}','ShopController@getDetail')->middleware('jwtAuth');
     Route::post('store-shop','ShopController@store')->middleware('jwtAuth');
 
