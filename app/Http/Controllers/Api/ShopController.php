@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller
 {
+
+    public $payment_status;
     public function store(Request $request)
     {
         try {
@@ -112,26 +114,38 @@ class ShopController extends Controller
 
     }
 
-    public function getOrders()
+    public function getOrders($status = '')
     {
-
+        $this->payment_status = $status;
         $user = Auth::user();
-        $orders = Order::where('user_id',$user->id)->get();
+        $orders = Order::where('user_id',$user->id)
+            ->where(function ($query){
+                $query->when($this->payment_status != '', function ($q) {
+                    $q->where('payment_status', $this->payment_status);
+                });
+            })
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
-//        $user = User::find(Auth::user()->id);
-//        $customer = Persona::find($user->id);
-//
-//        $ventas = Venta::join('personas', 'ventas.idcliente', '=', 'personas.id')
-//            ->join('users', 'ventas.idusuario', '=', 'users.id')
-//            ->select('ventas.id', 'ventas.tipo_comprobante', 'ventas.serie_comprobante',
-//                'ventas.num_comprobante', 'ventas.fecha_hora', 'ventas.impuesto', 'ventas.total',
-//                'ventas.estado', 'personas.nombre', 'users.usuario', 'ventas.idcliente', 'ventas.url_file')
-//            ->where('ventas.idcliente', $customer->id)
-//            ->orderBy('ventas.id', 'desc')->get();
+        $list = new Collection();
+
+        foreach ($orders as $data) {
+            $item = [
+                'id' => $data->id,
+                'order_number' => $data->order_number,
+                'user_id' => $data->user_id,
+                'sub_total' => number_format($data->sub_total,"2",".",""),
+                'total_amount' => number_format($data->total_amount,"2",".",""),
+                'payment_status' => $data->payment_status,
+                'url_file' => $data->url_file,
+                'created_at' => $data->created_at,
+            ];
+            $list->push($item);
+        }
 
         return response()->json([
             'success' => true,
-            'orders' => $orders
+            'orders' => $list
         ], 200);
     }
 
@@ -150,10 +164,10 @@ class ShopController extends Controller
                 'product_description' => $data->product->summary,
                 'order_id' => $data->order_id,
                 'user_id' => $data->user_id,
-                'price' => $data->price,
+                'price' => number_format($data->price, "2",".",""),
                 'status' => $data->status,
                 'quantity' => $data->quantity,
-                'amount' => $data->amount,
+                'amount' => number_format($data->amount, "2",".",""),
             ];
 
             $list->push($item);
