@@ -47,7 +47,7 @@
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="{{route('login')}}">Volver al inicio de sesións!</a>
+                    <a class="small" href="{{route('login')}}">Volver al inicio de sesión!</a>
                   </div>
                 </div>
               </div>
