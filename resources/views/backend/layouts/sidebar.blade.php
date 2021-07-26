@@ -220,6 +220,7 @@
                 <h6 class="collapse-header">Opciones de Proveedores:</h6>
                 <a class="collapse-item" href="{{route('suppliers.index')}}">Lista de Proveedores</a>
                 <a class="collapse-item" href="{{route('suppliers.create')}}">Agregar Proveedor</a>
+                <a class="collapse-item" href="{{route('payment-index')}}">Pago a Proveedor</a>
             </div>
         </div>
     </li>

@@ -30,7 +30,7 @@
 										$settings=DB::table('settings')->get();
 									@endphp
 									<h4>Ponerse en contacto</h4>
-									<h3>Escríba un mensaje @auth @else<span style="font-size:12px;" class="text-danger">[Primero debe iniciar sesión]</span>@endauth</h3>
+									<h3>Escriba un mensaje @auth @else<span style="font-size:12px;" class="text-danger">[Primero debe iniciar sesión]</span>@endauth</h3>
 								</div>
 								<form class="form-contact form contact_form" method="post" action="{{route('contact.store')}}" id="contactForm" novalidate="novalidate">
 									@csrf

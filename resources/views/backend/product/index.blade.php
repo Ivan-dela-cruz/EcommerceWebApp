@@ -153,14 +153,11 @@
   <script>
 
       $('#product-dataTable').DataTable( {
-        "scrollX": false,
-        "columnDefs":[
-            {
-                "orderable":false,
-                "targets":[10,11,12]
-            }
-        ],
-        "language":data
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+        
         } );
 
         // Sweet alert

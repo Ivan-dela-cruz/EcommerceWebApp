@@ -11,9 +11,9 @@ class Product extends Model
 //    use SoftDeletes;
     protected $fillable=['title','slug','summary','description','cat_id','child_cat_id','price','brand_id','discount','status','photo','size','stock','is_featured','condition'];
 
-    public function cat_info(){
-        return $this->hasOne('App\Models\Category','id','cat_id');
-    }
+                public function cat_info(){
+                    return $this->hasOne('App\Models\Category','id','cat_id');
+                }
     public function sub_cat_info(){
         return $this->hasOne('App\Models\Category','id','child_cat_id');
     }

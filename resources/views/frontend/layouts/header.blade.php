@@ -172,14 +172,13 @@
                                                     href="{{route('about-us')}}">Nosotros</a></li>
                                             <li
                                                 class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif">
-                                                <a href="{{route('product-grids')}}">Productos</a><span
-                                                    class="new">Nuevo</span></li>
-                                            {{Helper::getHeaderCategory()}}
+                                                <a href="{{route('product-grids')}}">Productos</a></li>
+                                           {{--  {{Helper::getHeaderCategory()}} --}}
                                             <li class="{{Request::path()=='blog' ? 'active' : ''}}"><a
                                                     href="{{route('blog')}}">Blog</a></li>
 
                                             <li class="{{Request::path()=='contact' ? 'active' : ''}}"><a
-                                                    href="{{route('contact')}}">Contacto</a></li>
+                                                    href="{{route('contact')}}">Contactenos</a></li>
 
                                             @if (Route::has('login'))
                                             @auth
@@ -189,8 +188,10 @@
                                             @else
                                             <li class="{{Request::path()=='user/login' ? 'active' : ''}}"><a
                                                     href="{{route('login.form')}}">Iniciar Sesión</a></li>
-                                            <li class="{{Request::path()=='user/register' ? 'active' : ''}}"><a
+                                           {{-- 
+                                             <li class="{{Request::path()=='user/register' ? 'active' : ''}}"><a
                                                     href="{{route('register.form')}}">Registrarse</a></li>
+                                            --}}
                                             @endauth
                                             @endif
                                         </ul>

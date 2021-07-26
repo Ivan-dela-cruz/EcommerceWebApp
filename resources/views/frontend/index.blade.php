@@ -2,7 +2,7 @@
 @section('title','Aspralnues')
 @section('main-content')
 <!-- Slider Area -->
-<section  id="slider-single" class="hero-slider">
+<section id="slider-single" class="hero-slider">
     <!-- Single Slider -->
 
     <div class="single-slider">
@@ -146,8 +146,8 @@
                                         <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
                                         @if($product->stock<=0) <span class="out-of-stock">Sale out</span>
                                             @elseif($product->condition=='new')
-                                            <span class="new">New</span @elseif($product->condition=='hot')
-                                            <span class="hot">Hot</span>
+                                            <span class="new">Nuevo</span @elseif($product->condition=='hot')
+                                            <span class="hot">Promoción</span>
                                             @else
                                             <span class="price-dec">{{$product->discount}}% Desc</span>
                                             @endif
@@ -212,7 +212,8 @@
                     <img src="{{$photo[0]}}" alt="{{$photo[0]}}">
                     <div class="content">
                         <p>{{$data->cat_info['title']}}</p>
-                        <h3>{{$data->title}} <br><span> {{$data->discount}}%</span> <span style="text-transform: lowercase;"> de ahorro</span> </h3>
+                        <h3>{{$data->title}} <br><span> {{$data->discount}}%</span> <span
+                                style="text-transform: lowercase;"> de ahorro</span> </h3>
                         <a href="{{route('product-detail',$data->slug)}}">Comprar Ahora</a>
                     </div>
                 </div>
@@ -598,20 +599,26 @@
 @endsection
 
 @push('styles')
-<script type='text/javascript'
+{{-- 
+    <script type='text/javascript'
     src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons'
     async='async'></script>
 <script type='text/javascript'
     src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons'
     async='async'></script>
+    --}}
 <style>
     .hero-slider .single-slider {
         height: auto;
-        background-image: url({{ asset('images/banner.jpg') }});
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        height: 510px;
+        background-image: url({{ asset('images/banner.jpg')
+    }
+    }
+
+    );
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 510px;
     }
 
     /* Banner Sliding */
