@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
+use App\Notifications\UserResetPassword;
+
 
 class User extends Authenticatable implements JWTSubject
 {
