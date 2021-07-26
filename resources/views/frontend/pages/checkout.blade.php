@@ -171,13 +171,11 @@
                                         <input name="payment_method" type="radio" checked value="cod"> <label> Cancelar al Repartidor</label><br>
                                         {{-- <input name="payment_method" type="radio" value="paypal"> <label> PayPal</label> --}}
                                     </form-group>
-
                                 </div>
                             </div>
                         </div>
                         <!--/ End Order Widget -->
                         <!-- Payment Method Widget -->
-                        
                         <!--/ End Payment Method Widget -->
                         <!-- Button Widget -->
                         <div class="single-widget get-button">

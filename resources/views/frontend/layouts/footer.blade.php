@@ -69,7 +69,7 @@
 						</div>
 						<div class="col-lg-6 col-12">
 							<div class="right">
-								<img src="{{asset('backend/img/payments.png')}}" alt="#">
+								<img hidden src="{{asset('backend/img/payments.png')}}" alt="#">
 							</div>
 						</div>
 					</div>
@@ -111,7 +111,6 @@
 	<script src="{{asset('frontend/js/isotope/isotope.pkgd.min.js')}}"></script>
 	<!-- Easing JS -->
 	<script src="{{asset('frontend/js/easing.js')}}"></script>
-
 	<!-- Active JS -->
 	<script src="{{asset('frontend/js/active.js')}}"></script>
 

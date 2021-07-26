@@ -279,7 +279,7 @@ class OrderController extends Controller
     // Income chart
     public function incomeChart(Request $request){
         $year=\Carbon\Carbon::now()->year;
-        $items=Order::with(['cart_info'])->whereYear('created_at',$year)->where('status','delivered')->get()
+        $items=Order::with(['cart_info'])->whereYear('created_at',$year)->where('payment_status','paid')->get()
             ->groupBy(function($d){
                 return \Carbon\Carbon::parse($d->created_at)->format('m');
             });

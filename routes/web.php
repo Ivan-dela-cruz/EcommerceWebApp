@@ -149,6 +149,9 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
 
     Route::get('inventory-products','IventoryController@products')->name('inventory-products');
     Route::get('inventory-orders','IventoryController@ordenes')->name('inventory-orders');
+    Route::get('suplier-payment','PaymentSuplierController@index')->name('payment-index');
+    Route::get('suplier-payment-record','PaymentSuplierController@create')->name('payment-create');
+    Route::delete('suplier-payment/{id}','PaymentSuplierController@destroy')->name('payment-delete');
 });
 
 
