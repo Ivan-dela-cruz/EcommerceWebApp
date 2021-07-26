@@ -47,7 +47,7 @@
           @enderror
         </div>
         @php
-        $roles=DB::table('users')->select('role')->get();
+        $roles=DB::table('users')->select('role')->groupBy('role')->get();
         @endphp
         <div class="form-group">
             <label for="role" class="col-form-label">Rol</label>
