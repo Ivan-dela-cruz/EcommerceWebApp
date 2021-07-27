@@ -10,7 +10,9 @@
         </div>
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary float-left">Lista de Proveedores</h6>
+            <a href="{{route('suppliers.pdf')}}" class="btn btn-info btn-sm float-right ml-1" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-file-pdf"></i> Generar PDF</a>
             <a href="{{route('suppliers.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Agregar Proveedor</a>
+
         </div>
       @livewire('backend.suppliers.index')
     </div>
