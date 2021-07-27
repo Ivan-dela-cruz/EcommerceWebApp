@@ -58,7 +58,7 @@ class LoginController extends Controller
         // dd($users);
         if($users){
             auth()->login($users);
-			dd(Auth::user());
+			//dd(Auth::user());
 			//Auth::login($users);
             return redirect('/')->with('success','Usted está ingresando desde '.$provider);
         }else{
