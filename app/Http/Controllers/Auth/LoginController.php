@@ -57,7 +57,9 @@ class LoginController extends Controller
         $users      =   User::where(['email' => $userSocial->getEmail()])->first();
         // dd($users);
         if($users){
-            Auth::login($users);
+            auth()->login($users);
+			dd(Auth::user());
+			//Auth::login($users);
             return redirect('/')->with('success','Usted está ingresando desde '.$provider);
         }else{
             $user = User::create([
