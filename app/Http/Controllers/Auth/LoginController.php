@@ -62,7 +62,7 @@ class LoginController extends Controller
 			Session::put('user',$users->email);
 			//dd(Auth::user());
 			//Auth::login($users);
-            return redirect('/home')->with('success','Usted está ingresando desde '.$provider);
+            return redirect('/')->with('success','Usted está ingresando desde '.$provider);
         }else{
             $user = User::create([
                 'name'          => $userSocial->getName(),
