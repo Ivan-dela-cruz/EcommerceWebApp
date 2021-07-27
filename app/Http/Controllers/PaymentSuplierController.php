@@ -16,7 +16,7 @@ class PaymentSuplierController extends Controller
      */
     public function index()
     {
-        $payments = SuplierPay::orderBy('created_at','ASC')->paginate(10);
+        $payments = SuplierPay::orderBy('created_at','ASC')->paginate(100);
         return view('backend.suplierpay.index',compact('payments'));
     }
 

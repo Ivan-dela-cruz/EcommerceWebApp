@@ -16,7 +16,7 @@ class SuppliersController extends Controller
     }
 
     public function create(){
-        $users=User::orderBy('id','ASC')->paginate(10);
+        $users=User::orderBy('id','ASC')->paginate(100);
         return view('backend.suppliers.create')->with('users',$users);
     }
 
