@@ -12,21 +12,12 @@
                 <th>Acción</th>
             </tr>
             </thead>
-            <tfoot>
-            <tr>
-                <th>S.N.</th>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Foto</th>
-                <th>Fecha de Ingreso</th>
-                <th>Estado</th>
-                <th>Acción</th>
-            </tr>
-            </tfoot>
+            
             <tbody>
+              <p hidden>{{$cont = 1  }}</p>
             @foreach($suppliers as $data)
                 <tr>
-                    <td>{{$data->id}}</td>
+                    <td>{{$cont++}}</td>
                     <td>{{$data->name}}</td>
                     <td>{{$data->email}}</td>
                     <td>
