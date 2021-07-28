@@ -190,11 +190,7 @@ class ShopController extends Controller
     {
         $order = Order::find($id);
         $details = Cart::where('order_id',$order->id)->get();
-
-//        dd($details);
-
         $list = new Collection();
-
         foreach ($details as $data) {
             $item = [
                 'id' => $data->id,
@@ -211,11 +207,8 @@ class ShopController extends Controller
 
             $list->push($item);
         }
-//        dd($list);
         $client = $order->user;
-
         $pdf = \PDF::loadView('pdf.order', ['order' => $order, 'details' => $list,'client' => $client]);
-
         $nombrePdf = 'orden-' . $id . '.pdf';
         $path = public_path('docs/');
         $pdf->save($path . '/' . $nombrePdf);

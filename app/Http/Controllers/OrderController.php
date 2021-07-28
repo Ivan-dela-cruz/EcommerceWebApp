@@ -12,6 +12,8 @@ use Notification;
 use Helper;
 use Illuminate\Support\Str;
 use App\Notifications\StatusNotification;
+use Exception;
+use Illuminate\Support\Collection;
 
 class OrderController extends Controller
 {
@@ -146,6 +148,11 @@ class OrderController extends Controller
         }
         Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
+        try{
+            $this->savePdfStorage($order->id);
+        }catch(Exception $e){
+
+        }
         // dd($users);
         request()->session()->flash('success','Su producto se puso en orden con éxito');
         return redirect()->route('home');
@@ -297,5 +304,63 @@ class OrderController extends Controller
             $data[$monthName] = (!empty($result[$i]))? number_format((float)($result[$i]), 2, '.', '') : 0.0;
         }
         return $data;
+    }
+
+    public function savePdfStorage($id)
+    {
+        $order = Order::find($id);
+        $details = Cart::where('order_id',$order->id)->get();
+        $list = new Collection();
+        foreach ($details as $data) {
+            $item = [
+                'id' => $data->id,
+                'product_id' => $data->product_id,
+                'product_name' => $data->product->title,
+                'product_description' => $data->product->summary,
+                'order_id' => $data->order_id,
+                'user_id' => $data->user_id,
+                'price' => $data->price,
+                'status' => $data->status,
+                'quantity' => $data->quantity,
+                'amount' => $data->amount,
+            ];
+
+            $list->push($item);
+        }
+        $client = $order->user;
+        $pdf = \PDF::loadView('pdf.order', ['order' => $order, 'details' => $list,'client' => $client]);
+        $nombrePdf = 'orden-' . $id . '.pdf';
+        $path = public_path('docs/');
+        $pdf->save($path . '/' . $nombrePdf);
+        $order->url_file = "docs/orden-" . $order->id . '.pdf';
+        $order->save();
+    }
+    public function generatePdf($id)
+    {
+        $order = Order::find($id);
+        $details = Cart::where('order_id',$order->id)->get();
+        $list = new Collection();
+        foreach ($details as $data) {
+            $item = [
+                'id' => $data->id,
+                'product_id' => $data->product_id,
+                'product_name' => $data->product->title,
+                'product_description' => $data->product->summary,
+                'order_id' => $data->order_id,
+                'user_id' => $data->user_id,
+                'price' => $data->price,
+                'status' => $data->status,
+                'quantity' => $data->quantity,
+                'amount' => $data->amount,
+            ];
+
+            $list->push($item);
+        }
+        $client = $order->user;
+        $pdf = \PDF::loadView('pdf.order', ['order' => $order, 'details' => $list,'client' => $client]);
+        $nombrePdf = 'orden-' . $id . '.pdf';
+        return $pdf->download($nombrePdf);
+        //$path = public_path('docs/');
+        //$pdf->save($path . '/' . $nombrePdf);
     }
 }

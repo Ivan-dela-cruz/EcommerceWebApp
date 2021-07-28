@@ -32,7 +32,7 @@
 							@endphp
 							<h3>Bienvenidos a <span>Aspralnues</span></h3>
 							<p>@foreach($settings as $data) {!! $data->description!!} @endforeach</p>
-							<div class="button">
+							<div hidden class="button">
 								<a href="{{route('blog')}}" class="btn">Nuestro Blog</a>
 								<a href="{{route('contact')}}" class="btn primary">Contactos</a>
 							</div>

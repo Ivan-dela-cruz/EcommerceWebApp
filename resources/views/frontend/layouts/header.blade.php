@@ -178,7 +178,7 @@
                                                     href="{{route('blog')}}">Blog</a></li>
 
                                             <li class="{{Request::path()=='contact' ? 'active' : ''}}"><a
-                                                    href="{{route('contact')}}">Contactenos</a></li>
+                                                    href="{{route('contact')}}">Contáctenos</a></li>
 
                                             @if (Route::has('login'))
                                             @auth
