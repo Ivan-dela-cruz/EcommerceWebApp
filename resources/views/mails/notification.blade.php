@@ -44,7 +44,7 @@
                                                     <tr>
                                                         <td style="padding: 79px 80px 59px 80px">
                                                             <div>
-                                                                <p style="text-align: center; font-size: 18px; color: #5c5c5c;">Te haz Subscrito a nuestras notificaciones. Ahora podrás conocer  <span style="font-weight: bold">nuestros promociones </span>  y  descuentos                             
+                                                                <p style="text-align: center; font-size: 18px; color: #5c5c5c;">Te haz Subscrito a nuestras notificaciones. Ahora podrás conocer  <span style="font-weight: bold">nuestras promociones </span>  y  descuentos                             
                                                                 </p>
                                                                 <p style="color: #5c5c5c;text-align: center">
                                                                     Muchas gracia por participar 

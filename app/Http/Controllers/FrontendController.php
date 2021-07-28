@@ -18,6 +18,7 @@ use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\AccountMail;
+use App\Mail\NotificationMail;
 use Illuminate\Support\Facades\Mail;
 class FrontendController extends Controller
 {
@@ -423,6 +424,12 @@ class FrontendController extends Controller
     }
 
     public function subscribe(Request $request){
+        Mail::to($request->email)->send(new NotificationMail());
+
+        request()->session()->flash('success','Estimado usuario por favor revise su correo electrónico');
+        return redirect()->route('home');
+
+
         if(! Newsletter::isSubscribed($request->email)){
             Newsletter::subscribePending($request->email);
             if(Newsletter::lastActionSucceeded()){

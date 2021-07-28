@@ -44,7 +44,7 @@ class UserResetPassword extends Notification
     {
         return (new MailMessage)
             ->subject('Restablecer contraseña Aspralnues')
-            ->greeting('¡Hola que tal!')
+            ->greeting('Estimado usuario')
             ->line('Hemos recibido una petición para restablecer tu contraseña.')
             ->action('Restablecer contraseña', url('/password/reset/'.$this->token))
             ->line('Si tu no haz echo esta petición comunicate con el administrador')

@@ -98,6 +98,7 @@
                             </div>
                             <p class="mb-2 text-muted"><a href="{{ route('password.request') }}" class="f-w-400">¿Olvidó su contraseña?</a></p>
                             <p class="mb-0 text-muted">¿No tiene una cuenta? <a href="{{route('register.form')}}" class="f-w-400">Registrarse</a></p>
+                            <p class="mb-2 text-primary mt-2"><a href="{{ route('home') }}" class="f-w-400">Volver al Inicio</a></p>
                         </form>
                     </div>
                 </div>

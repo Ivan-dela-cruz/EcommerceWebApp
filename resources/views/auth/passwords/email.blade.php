@@ -6,7 +6,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
   <div class="container">
 
@@ -41,7 +41,7 @@
                             </span>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn btn-success btn-user btn-block">
                       Restablecer  Contraseña
                     </button>
                   </form>

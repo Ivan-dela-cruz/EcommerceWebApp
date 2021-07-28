@@ -7,7 +7,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
   <div class="container">
 
@@ -24,7 +24,7 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Bienvenidos!</h1>
+                    <h1 class="h4 text-gray-900 mb-4"> Aspralnues Administrador</h1>
                   </div>
                   <form class="user"  method="POST" action="{{ route('login') }}">
                     @csrf
@@ -54,7 +54,7 @@
                             </label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn btn-success btn-user btn-block">
                       Iniciar Sesión
                     </button>
                   </form>
