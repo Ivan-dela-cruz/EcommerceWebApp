@@ -391,6 +391,19 @@ class FrontendController extends Controller
         Mail::to($user->email)->send(new AccountMail($data_send));
         //Session::put('user',$data['email']);
         if($user){
+            $customer =  Customer::where('user_id',$user->id)->first();
+            if(is_null($customer)){
+                $customer = Customer::create([
+                    'user_id' => $user->id,
+                    'name' => $user->name,
+                    'last_name' => "",
+                    'type_document' => null,
+                    'num_document' => null,
+                    'address' => null,
+                    'email' => $user->email,
+                    'phone' => null
+                ]);
+            }
             request()->session()->flash('success','Cuenta creada exitosamente revisa tu correo para activar tu cuenta');
             return redirect()->route('home');
         }
