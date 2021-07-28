@@ -17,6 +17,8 @@ use DB;
 use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\AccountMail;
+use Illuminate\Support\Facades\Mail;
 class FrontendController extends Controller
 {
 
@@ -380,11 +382,15 @@ class FrontendController extends Controller
             'password'=>'required|min:6|confirmed',
         ]);
         $data=$request->all();
-        dd($data);
-        $check=$this->create($data);
-        Session::put('user',$data['email']);
-        if($check){
-            request()->session()->flash('success','Registrado exitosamente');
+        $user=$this->create($data);
+        $data_send = [
+            'email' => $user->email,
+            'id' => $user->id,
+        ];
+        Mail::to($user->email)->send(new AccountMail($data_send));
+        //Session::put('user',$data['email']);
+        if($user){
+            request()->session()->flash('success','Cuenta creada exitosamente revisa tu correo para activar tu cuenta');
             return redirect()->route('home');
         }
         else{
@@ -392,12 +398,23 @@ class FrontendController extends Controller
             return back();
         }
     }
+    public function session($id){
+        $user = User::find($id);
+        if($user){
+            $user->status = "active";
+            $user->save();
+            auth()->login($user);
+            Session::put('user',$user->email);
+            request()->session()->flash('success','Cuenta activada exitosamente');
+            return redirect()->route('home');
+        }
+    }
     public function create(array $data){
         return User::create([
             'name'=>$data['name'],
             'email'=>$data['email'],
             'password'=>Hash::make($data['password']),
-            'status'=>'active'
+            'status'=>'inactive'
         ]);
     }
     // Reset password

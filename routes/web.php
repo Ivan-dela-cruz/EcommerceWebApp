@@ -21,6 +21,7 @@ Route::get('user/logout','FrontendController@logout')->name('user.logout');
 
 Route::get('user/register','FrontendController@register')->name('register.form');
 Route::post('user/register','FrontendController@registerSubmit')->name('register.submit');
+Route::get('user/activate/{id}','FrontendController@session')->name('register.activate');
 // Reset password
 Route::post('password-reset', 'FrontendController@showResetForm')->name('password.reset');
 // Socialite
