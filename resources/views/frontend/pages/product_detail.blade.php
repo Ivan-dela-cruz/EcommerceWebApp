@@ -100,7 +100,8 @@
 											</div> --}}
 											<!--/ End Color -->
 											<!-- Size -->
-											@if($product_detail->size)
+											{{-- 
+												@if($product_detail->size)
 												<div class="size mt-4">
 													<h4>Tamaño</h4>
 													<ul>
@@ -132,6 +133,7 @@
 													</ul>
 												</div>
 											@endif
+												--}}
 											<!--/ End Size -->
 											<!-- Product Buy -->
 											<div class="product-buy">
