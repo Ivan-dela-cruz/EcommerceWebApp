@@ -73,36 +73,36 @@
                                 <label class="floating-label" for="name">Nombre</label>
                                 <input type="text" name="name" placeholder="" class="form-control @error('name ') is-invalid @enderror" required="required" value="{{old('name')}}">
                                 @error('name')
-                                <span class="invalid-feedback" role="alert">
+                                <small class="text-danger text-left" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                </small>
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label class="floating-label" for="Email">Correo</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  required autocomplete="email" placeholder="">
                                 @error('email')
-                                <span class="invalid-feedback" role="alert">
+                                <small class="text-danger text-left" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                    </small>
                                 @enderror
                             </div>
                             <div class="form-group mb-4">
                                 <label class="floating-label" for="Password">Contraseña</label>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="">
                                 @error('password')
-                                <span class="invalid-feedback" role="alert">
+                                <small class="text-danger text-left" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                    </small>
                                 @enderror
                             </div>
                             <div class="form-group mb-4">
                                 <label class="floating-label" for="Password">Confirmar Contraseña</label>
                                 <input  type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required  placeholder="">
                                 @error('password_confirmation')
-                                <span class="invalid-feedback" role="alert">
+                                <small class="text-danger text-left" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                    </small>
                                 @enderror
                             </div>
 

@@ -375,12 +375,12 @@ class FrontendController extends Controller
     public function registerSubmit(Request $request){
         // return $request->all();
         $this->validate($request,[
-            'name'=>'string|required|min:2',
+            'name'=>'string|required|min:2|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'email'=>'string|required|unique:users,email',
             'password'=>'required|min:6|confirmed',
         ]);
         $data=$request->all();
-        // dd($data);
+        dd($data);
         $check=$this->create($data);
         Session::put('user',$data['email']);
         if($check){
