@@ -52,7 +52,11 @@ $(document).ready(function(){
                 message: {
                     required: "Ingresa un mensaje",
                     minlength: "El mensaje de contener al menos 15 caracteres"
-                }
+                },
+                phone: {
+                    required: "El número es obligatorio",
+                    minlength: "El número de contener al menos 10 caracteres"
+                },
             },
             submitHandler: function(form) {
                 $.ajaxSetup({
