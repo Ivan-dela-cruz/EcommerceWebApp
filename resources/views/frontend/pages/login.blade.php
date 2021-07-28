@@ -96,7 +96,7 @@
                                 <a href="{{route('login.redirect','facebook')}}" data-toggle="tooltip" title="Facebook"  class="btn btn-sm btn-facebook"><i class="feather icon-facebook text-white"></i></a>
                                 <a href="{{route('login.redirect','google')}}" data-toggle="tooltip" title="Google"  class="btn btn-sm btn-google"><i class="feather icon-plus text-white"></i></a>
                             </div>
-                            <p class="mb-2 text-muted"><a href="{{route('password.reset')}}" class="f-w-400">¿Olvidó su contraseña?</a></p>
+                            <p class="mb-2 text-muted"><a href="{{ route('password.request') }}" class="f-w-400">¿Olvidó su contraseña?</a></p>
                             <p class="mb-0 text-muted">¿No tiene una cuenta? <a href="{{route('register.form')}}" class="f-w-400">Registrarse</a></p>
                         </form>
                     </div>
