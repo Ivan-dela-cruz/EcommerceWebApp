@@ -14,7 +14,7 @@
     <div class="card-body">
       <div class="table-responsive">
         @if(count($orders)>0)
-        <p hidden>{{$cont = 0  }}</p>
+        <p hidden>{{$cont = 1 }}</p>
         <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>

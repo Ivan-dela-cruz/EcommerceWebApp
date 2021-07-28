@@ -27,7 +27,7 @@
           </thead>
           
           <tbody>
-            <p hidden>{{$cont = 0  }}</p>
+            <p hidden>{{$cont = 1  }}</p>
             @foreach($brands as $brand)
                 <tr>
                     <td>{{$cont++}}</td>

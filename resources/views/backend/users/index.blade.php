@@ -29,7 +29,7 @@
                 </thead>
                 
                 <tbody>
-                    <p hidden>{{$cont = 0  }}</p>
+                    <p hidden>{{$cont = 1  }}</p>
                     @foreach($users as $user)
                     <tr>
                         <td>{{$cont ++}}</td>

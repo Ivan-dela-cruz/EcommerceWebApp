@@ -30,7 +30,7 @@
           </thead>
 
           <tbody>
-            <p hidden>{{$cont = 0  }}</p>
+            <p hidden>{{$cont = 1  }}</p>
             @foreach($categories as $category)
               @php
               $parent_cats=DB::table('categories')->select('title')->where('id',$category->parent_id)->get();

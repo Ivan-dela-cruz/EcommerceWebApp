@@ -28,20 +28,8 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-                <th>Título</th>
-                <th>Categoría</th>
-                <th>Etiqueta</th>
-                <th>Autor</th>
-                <th>Foto</th>
-                <th>estado</th>
-                <th>Acción</th>
-            </tr>
-          </tfoot>
           <tbody>
-
+            <p hidden>{{$cont = 1  }}</p>
             @foreach($posts as $post)
               @php
               $author_info=DB::table('users')->select('name')->where('id',$post->added_by)->get();
@@ -50,7 +38,7 @@
 
               @endphp
                 <tr>
-                    <td>{{$post->id}}</td>
+                    <td>{{$cont++}}</td>
                     <td>{{$post->title}}</td>
                     <td>{{$post->cat_info->title}}</td>
                     <td>{{$post->tags}}</td>

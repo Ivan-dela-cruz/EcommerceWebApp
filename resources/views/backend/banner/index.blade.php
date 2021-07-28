@@ -28,7 +28,7 @@
           </thead>
 
           <tbody>
-            <p hidden>{{$cont = 0  }}</p>
+            <p hidden>{{$cont = 1  }}</p>
             @foreach($banners as $banner)
                 <tr>
                     <td>{{$cont++}}</td>
