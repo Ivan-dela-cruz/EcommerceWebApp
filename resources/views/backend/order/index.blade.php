@@ -14,6 +14,7 @@
     <div class="card-body">
       <div class="table-responsive">
         @if(count($orders)>0)
+        <p hidden>{{$cont = 0  }}</p>
         <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
@@ -28,26 +29,14 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-                <th>No. Pedido</th>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Cantidad</th>
-                <th>Cargo</th>
-                <th>Total</th>
-                <th>Estado</th>
-                <th>Acción</th>
-              </tr>
-          </tfoot>
+          
           <tbody>
             @foreach($orders as $order)
             @php
                 $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->pluck('price');
             @endphp
                 <tr>
-                    <td>{{$order->id}}</td>
+                    <td>{{$cont++}}</td>
                     <td>{{$order->order_number}}</td>
                     <td>{{$order->first_name}} {{$order->last_name}}</td>
                     <td>{{$order->email}}</td>

@@ -25,19 +25,12 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-                <th>Título</th>
-                <th>Slug</th>
-                <th>Estado</th>
-                <th>Acción</th>
-              </tr>
-          </tfoot>
+          
           <tbody>
+            <p hidden>{{$cont = 0  }}</p>
             @foreach($brands as $brand)
                 <tr>
-                    <td>{{$brand->id}}</td>
+                    <td>{{$cont++}}</td>
                     <td>{{$brand->title}}</td>
                     <td>{{$brand->slug}}</td>
                     <td>

@@ -30,7 +30,7 @@
           </thead>
 
           <tbody>
-
+            <p hidden>{{$cont = 0  }}</p>
             @foreach($categories as $category)
               @php
               $parent_cats=DB::table('categories')->select('title')->where('id',$category->parent_id)->get();
@@ -38,7 +38,7 @@
 
               @endphp
                 <tr>
-                    <td>{{$category->id}}</td>
+                    <td>{{$cont++}}</td>
                     <td>{{$category->title}}</td>
                     <td>{{$category->slug}}</td>
                     <td>{{(($category->is_parent==1)? 'SI': 'No')}}</td>

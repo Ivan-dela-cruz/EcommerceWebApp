@@ -1,198 +1,203 @@
 @extends('backend.layouts.master')
 
 @section('main-content')
- <!-- DataTales Example -->
- <div class="card shadow mb-4">
-     <div class="row">
-         <div class="col-md-12">
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="row">
+        <div class="col-md-12">
             @include('backend.layouts.notification')
-         </div>
-     </div>
+        </div>
+    </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Lista de Productos</h6>
-      <a href="{{route('product.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" ><i class="fas fa-plus"></i> Agregar Producto</a>
+        <h6 class="m-0 font-weight-bold text-primary float-left">Lista de Productos</h6>
+        <a href="{{route('product.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-plus"></i> Agregar Producto</a>
     </div>
     <div class="card-body">
-      <div class="table-responsive">
-        @if(count($products)>0)
-        <table class="table table-bordered" id="product-dataTable" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th>N°</th>
-              <th>Título</th>
-              <th>Categoría</th>
-              <th>Visible</th>
-              <th>Precio</th>
-              <th>Descuento</th>
-              <th>Tamaño</th>
-              <th>Condición</th>
-              <th>Plataforma</th>
-              <th>Cantidad</th>
-              <th>Foto</th>
-              <th>Estado</th>
-              <th>Acción</th>
-            </tr>
-          </thead>
+        <div class="table-responsive">
+            <p hidden>{{$cont = 0  }}</p>
+            @if(count($products)>0)
+            <table class="table table-bordered" id="product-dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Título</th>
+                        <th>Categoría</th>
+                        <th>Visible</th>
+                        <th>Precio</th>
+                        <th>Descuento</th>
+                        <th>Tamaño</th>
+                        <th>Condición</th>
+                        <th>Plataforma</th>
+                        <th>Cantidad</th>
+                        <th>Foto</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
 
-          <tbody>
+                <tbody>
 
-            @foreach($products as $product)
-              @php
-              $sub_cat_info=DB::table('categories')->select('title')->where('id',$product->child_cat_id)->get();
-              // dd($sub_cat_info);
-              $brands=DB::table('brands')->select('title')->where('id',$product->brand_id)->get();
-              @endphp
-                <tr>
-                    <td>{{$product->id}}</td>
-                    <td>{{$product->title}}</td>
-                    <td>{{$product->cat_info['title']}}
-                      <sub>
-                        @foreach($sub_cat_info as $data)
-                          {{$data->title}}
-                        @endforeach
-                      </sub>
-                    </td>
-                    <td>{{(($product->is_featured==1)? 'Si': 'No')}}</td>
-                    <td>$ {{$product->price}}</td>
-                    <td>  {{$product->discount}}% </td>
-                    <td>{{$product->size}}</td>
-                    <td>{{$product->condition}}</td>
-                    <td>@foreach($brands as $brand) {{$brand->title}} @endforeach</td>
-                    <td>
-                      @if($product->stock>0)
-                      <span class="badge badge-primary">{{$product->stock}}</span>
-                      @else
-                      <span class="badge badge-danger">{{$product->stock}}</span>
-                      @endif
-                    </td>
-                    <td>
-                        @if($product->photo)
+                    @foreach($products as $product)
+                    @php
+                    $sub_cat_info=DB::table('categories')->select('title')->where('id',$product->child_cat_id)->get();
+                    // dd($sub_cat_info);
+                    $brands=DB::table('brands')->select('title')->where('id',$product->brand_id)->get();
+                    @endphp
+                    <tr>
+                        <td>{{$cont++  }}</td>
+                        <td>{{$product->title}}</td>
+                        <td>{{$product->cat_info['title']}}
+                            <sub>
+                                @foreach($sub_cat_info as $data)
+                                {{$data->title}}
+                                @endforeach
+                            </sub>
+                        </td>
+                        <td>{{(($product->is_featured==1)? 'Si': 'No')}}</td>
+                        <td>$ {{$product->price}}</td>
+                        <td> {{$product->discount}}% </td>
+                        <td>{{$product->size}}</td>
+                        <td>{{$product->condition}}</td>
+                        <td>@foreach($brands as $brand) {{$brand->title}} @endforeach</td>
+                        <td>
+                            @if($product->stock>0)
+                            <span class="badge badge-primary">{{$product->stock}}</span>
+                            @else
+                            <span class="badge badge-danger">{{$product->stock}}</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($product->photo)
                             @php
-                              $photo=explode(',',$product->photo);
-                              // dd($photo);
+                            $photo=explode(',',$product->photo);
+                            // dd($photo);
                             @endphp
                             <img src="{{$photo[0]}}" class="img-fluid zoom" style="max-width:80px" alt="{{$product->photo}}">
-                        @else
+                            @else
                             <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
-                        @endif
-                    </td>
-                    <td>
-                        @if($product->status=='active')
+                            @endif
+                        </td>
+                        <td>
+                            @if($product->status=='active')
                             <span class="badge badge-success">Activo</span>
-                        @else
+                            @else
                             <span class="badge badge-warning">Inactivo</span>
-                        @endif
-                    </td>
-                    <td>
-                        <a href="{{route('product.edit',$product->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Editar" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                    <form method="POST" action="{{route('product.destroy',[$product->id])}}">
-                      @csrf
-                      @method('delete')
-                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$product->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-                        </form>
-                    </td>
-                    {{-- Delete Modal --}}
-                    {{-- <div class="modal fade" id="delModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="#delModal{{$user->id}}Label" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="#delModal{{$user->id}}Label">Delete user</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <form method="post" action="{{ route('categorys.destroy',$user->id) }}">
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{route('product.edit',$product->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Editar" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                            <form method="POST" action="{{route('product.destroy',[$product->id])}}">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger" style="margin:auto; text-align:center">Parmanent delete user</button>
-                              </form>
+                                <button class="btn btn-danger btn-sm dltBtn" data-id={{$product->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                        </td>
+                        {{-- Delete Modal --}}
+                        {{-- <div class="modal fade" id="delModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="#delModal{{$user->id}}Label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="#delModal{{$user->id}}Label">Delete user</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="{{ route('categorys.destroy',$user->id) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger" style="margin:auto; text-align:center">Parmanent delete user</button>
+                                    </form>
+                                </div>
                             </div>
-                          </div>
                         </div>
-                    </div> --}}
-                </tr>
-            @endforeach
-          </tbody>
+        </div> --}}
+        </tr>
+        @endforeach
+        </tbody>
         </table>
         <span style="float:right">{{$products->links()}}</span>
         @else
-          <h6 class="text-center">¡No se han encontrado productos! Por favor registre productos</h6>
+        <h6 class="text-center">¡No se han encontrado productos! Por favor registre productos</h6>
         @endif
-      </div>
     </div>
+</div>
 </div>
 @endsection
 
 @push('styles')
-  <link href="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
-  <style>
-      div.dataTables_wrapper div.dataTables_paginate{
-          display: none;
-      }
-      .zoom {
-        transition: transform .2s; /* Animation */
-      }
+<link href="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<style>
+    div.dataTables_wrapper div.dataTables_paginate {
+        display: none;
+    }
 
-      .zoom:hover {
+    .zoom {
+        transition: transform .2s;
+        /* Animation */
+    }
+
+    .zoom:hover {
         transform: scale(5);
-      }
-  </style>
+    }
+
+</style>
 @endpush
 
 @push('scripts')
 
-  <!-- Page level plugins -->
-  <script src="{{asset('backend/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-  <script src="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<!-- Page level plugins -->
+<script src="{{asset('backend/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
-  <script>
-
-      $('#product-dataTable').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
+<!-- Page level custom scripts -->
+<script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
+<script>
+    $('#product-dataTable').DataTable({
+        dom: 'Bfrtip'
+        , buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
-        
-        } );
 
-        // Sweet alert
+    });
 
-        function deleteData(id){
+    // Sweet alert
 
-        }
-  </script>
-  <script>
-      $(document).ready(function(){
+    function deleteData(id) {
+
+    }
+
+</script>
+<script>
+    $(document).ready(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-          $('.dltBtn').click(function(e){
-            var form=$(this).closest('form');
-              var dataID=$(this).data('id');
-              // alert(dataID);
-              e.preventDefault();
-              swal({
-                  title: "¿Estas seguro?",
-                  text: "Una vez eliminados, ¡no podrá recuperar estos datos!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
+        $('.dltBtn').click(function(e) {
+            var form = $(this).closest('form');
+            var dataID = $(this).data('id');
+            // alert(dataID);
+            e.preventDefault();
+            swal({
+                    title: "¿Estas seguro?"
+                    , text: "Una vez eliminados, ¡no podrá recuperar estos datos!"
+                    , icon: "warning"
+                    , buttons: true
+                    , dangerMode: true
+                , })
                 .then((willDelete) => {
                     if (willDelete) {
-                       form.submit();
+                        form.submit();
                     } else {
                         swal("¡Sus datos están seguros!");
                     }
                 });
-          })
-      })
-  </script>
+        })
+    })
+
+</script>
 @endpush

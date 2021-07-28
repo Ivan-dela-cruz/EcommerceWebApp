@@ -28,9 +28,10 @@
           </thead>
 
           <tbody>
+            <p hidden>{{$cont = 0  }}</p>
             @foreach($banners as $banner)
                 <tr>
-                    <td>{{$banner->id}}</td>
+                    <td>{{$cont++}}</td>
                     <td>{{$banner->title}}</td>
                     <td>{{$banner->slug}}</td>
                     <td>
