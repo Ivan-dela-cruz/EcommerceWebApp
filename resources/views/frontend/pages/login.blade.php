@@ -93,8 +93,8 @@
                             </div>
                             <button type="submit" class="btn btn-block btn-primary mb-2">Entrar</button>
                             <div class="align-content-center mb-2">
-                                <a href="{{route('login.redirect','facebook')}}" data-toggle="tooltip" title="Facebook"  class="btn btn-sm btn-facebook"><i class="feather icon-facebook text-white"></i></a>
-                                <a href="{{route('login.redirect','google')}}" data-toggle="tooltip" title="Google"  class="btn btn-sm btn-google"><i class="feather icon-plus text-white"></i></a>
+                                <a hidden href="{{route('login.redirect','facebook')}}" data-toggle="tooltip" title="Facebook"  class="btn btn-sm btn-facebook"><i class="feather icon-facebook text-white"></i></a>
+                                <a href="{{route('login.redirect','google')}}" data-toggle="tooltip" title="Google"  class="btn btn-block"> <img height="25" src="{{ asset('images/google.png') }}" alt=""> Inicar con Google</a>
                             </div>
                             <p class="mb-2 text-muted"><a href="{{ route('password.request') }}" class="f-w-400">¿Olvidó su contraseña?</a></p>
                             <p class="mb-0 text-muted">¿No tiene una cuenta? <a href="{{route('register.form')}}" class="f-w-400">Registrarse</a></p>
