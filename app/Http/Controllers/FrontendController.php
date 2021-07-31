@@ -380,6 +380,7 @@ class FrontendController extends Controller
         // return $request->all();
         $this->validate($request,[
             'name'=>'string|required|min:2|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'last_name'=>'string|required|min:2|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'email'=>'string|required|unique:users,email',
             'password'=>'required|min:6|confirmed',
         ]);
@@ -397,12 +398,12 @@ class FrontendController extends Controller
                 $customer = Customer::create([
                     'user_id' => $user->id,
                     'name' => $user->name,
-                    'last_name' => "",
-                    'type_document' => null,
-                    'num_document' => null,
-                    'address' => null,
+                    'last_name' => $request->last_name,
+                    'type_document' => "",
+                    'num_document' => "",
+                    'address' => "",
                     'email' => $user->email,
-                    'phone' => null
+                    'phone' => ""
                 ]);
             }
             request()->session()->flash('success','Cuenta creada exitosamente revisa tu correo para activar tu cuenta');

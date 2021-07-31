@@ -103,7 +103,7 @@
 					<div class="total-amount">
 						<div class="row">
 							<div class="col-lg-8 col-md-5 col-12">
-								<div class="left">
+								<div hidden class="left">
 									<div class="coupon">
 									<form action="{{route('coupon-store')}}" method="POST">
 											@csrf

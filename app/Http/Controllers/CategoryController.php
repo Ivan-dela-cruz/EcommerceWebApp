@@ -114,10 +114,10 @@ class CategoryController extends Controller
         // return $data;
         $status=$category->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Category successfully updated');
+            request()->session()->flash('success','Categoría actualizada exitosamente');
         }
         else{
-            request()->session()->flash('error','Error occurred, Please try again!');
+            request()->session()->flash('error','Ocurrío un error intetelo otra vez!');
         }
         return redirect()->route('category.index');
     }

@@ -23,5 +23,8 @@ class MilkRecord extends Model
 
     public function supplier(){
         return $this->belongsTo(Supplier::class, 'supplier_id');
-}
+    }
+    public function income(){
+        return $this->belongsTo(Income::class, 'income_id');
+    }
 }

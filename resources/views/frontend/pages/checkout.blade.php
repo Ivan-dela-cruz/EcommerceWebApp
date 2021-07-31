@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>Código Postal</label>
+                                    <label>Referencias del lugar</label>
                                     <input type="text" name="post_code" placeholder="" value="{{old('post_code')}}">
                                     @error('post_code')
                                     <span class='text-danger'>{{$message}}</span>

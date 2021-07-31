@@ -128,7 +128,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     {{-- pie chart --}}
     <script type="text/javascript">
-        var analytics = < ? php echo $users; ? >
+        var analytics = <?php echo$users ; ?>
 
         google.charts.load('current', {
             'packages': ['corechart']

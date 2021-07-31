@@ -70,19 +70,28 @@
                         <form class="form" method="post" action="{{route('register.submit')}}">
                             @csrf
                             <div class="form-group mb-3">
-                                <label class="floating-label" for="name">Nombre</label>
-                                <input type="text" name="name" placeholder="" class="form-control @error('name ') is-invalid @enderror" required="required" value="{{old('name')}}">
+                                <label class="floating-label" for="name">Nombres</label>
+                                <input type="text" name="name" placeholder="" class="form-control @error('name') is-invalid @enderror" required="required" value="{{old('name')}}">
                                 @error('name')
-                                <small class="text-danger text-left" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                </small>
+                                    <small class="text-danger text-left" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                    </small>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="floating-label" for="name">Apellidos</label>
+                                <input type="text" name="last_name" placeholder="" class="form-control @error('last_name') is-invalid @enderror" required="required" value="{{old('name')}}">
+                                @error('last_name')
+                                    <small class="text-danger text-left" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                    </small>
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label class="floating-label" for="Email">Correo</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  required autocomplete="email" placeholder="">
                                 @error('email')
-                                <small class="text-danger text-left" role="alert">
+                                    <small class="text-danger text-left" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                 @enderror
