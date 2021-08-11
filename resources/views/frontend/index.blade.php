@@ -324,7 +324,7 @@
 										@php
                                         $after_discount2=($product->price-($product->price*$product->discount)/100);
                                         @endphp
-                                        <p class="price with-discount">{{number_format($after_discount2,2)}}% DESC</p>
+                                        <p class="price with-discount">$ {{number_format($after_discount2,2)}}</p>
                                     </div>
                                 </div>
                             </div>
